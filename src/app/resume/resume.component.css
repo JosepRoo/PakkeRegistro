@@ -1,0 +1,26 @@
+.tittle {
+  font-weight: 700;
+  color: black;
+  padding-left: 0px !important;
+  size: .8rem !important;
+}
+
+.service {
+  font-weight: 700;
+  color: gray;
+  padding-left: 0px !important;
+  size: 1.2rem !important;
+}
+
+.mat-icon {
+  color: gray;
+  fill: gray;
+}
+
+.vertical-align-middle {
+    vertical-align: middle;
+}
+
+.padding-bottom-3 {
+    padding-bottom: 5px;
+}

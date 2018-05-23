@@ -1,0 +1,159 @@
+.mat-form-field.mat-form-field {
+  width         : 100%;
+}
+
+.mat-horizontal-stepper-header{
+    pointer-events: none !important;
+}
+
+.mat-radio-group {
+  width         : 100%;
+}
+
+.tittle {
+  color: gray;
+  font-weight: 700;
+}
+
+.form-tittle {
+  font-weight: 700;
+  color: rgb(255,89,89);
+  padding-left: 0px !important;
+  size: 1.2rem !important;
+}
+
+.mat-checkbox-layout {
+  display: inline !important;
+}
+
+.mat-radio-label>.mat-radio-label-content {
+    white-space: normal !important;
+}
+
+.checkbox-text-wrap {
+    white-space: normal !important;
+}
+
+.form-data {
+  margin-top:15px;
+}
+
+.registerCheck {
+  font-weight: 700;
+  color: rgb(255,89,89);
+}
+
+.mat-radio-label {
+  width: 100% !important;
+}
+
+.mat-radio-label>.mat-radio-label-content {
+    white-space: normal !important;
+    margin-left: 30px !important;
+}
+
+.mat-icon {
+  color: gray;
+  fill: gray;
+}
+
+.conditions {
+  color: gray;
+}
+
+.mat-radio-label>.mat-radio-container {
+    position: absolute !important;
+}
+
+.btn-sm {
+  height: 25px;
+  padding-top: 0px;
+}
+
+.space {
+  margin-top    :10px;
+}
+
+.space2x {
+  margin-top    :20px;
+}
+
+.service-group {
+  display       : inline-flex;
+  flex-direction: column;
+}
+
+.priceOption {
+  font-weight: 700;
+  font-size: 1rem;
+  color: black;
+  margin-bottom: 5px;
+}
+
+.iva {
+  font-weight: 100;
+  font-size: .8rem;
+}
+
+.no-bottom {
+  margin-bottom: 5px;
+
+}
+
+.service-button {
+  width: 100%;
+  margin        : 5px;
+  white-space: normal;
+}
+
+.vertical-align-middle {
+    vertical-align: middle;
+}
+
+.padding-bottom-3 {
+    padding-bottom: 5px;
+}
+
+.selected-value {
+  margin        : 15px 0;
+}
+
+.daysOption{
+  font-weight: 400;
+  color: gray;
+  padding-left: 30px;
+}
+
+.mat-icon {
+  margin-right:5px;
+}
+
+.dateOption {
+  font-weight: 700;
+  color: rgb(255,89,89);
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+.form-tittle {
+  font-weight   : 800;
+  font-size     : 1em;
+  padding-left  : 15px;
+  padding-right : 15px;
+  margin        : 0px;
+}
+
+.loader {
+  margin        :0 auto;
+  margin-top    : 70px;
+  margin-bottom : 40px;
+}
+
+.back {
+  border-color  : black;
+}
+
+.header {
+  color         : gray;
+  font-weight   : 100;
+  font-size     : .8rem;
+}
