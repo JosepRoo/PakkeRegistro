@@ -10,6 +10,13 @@
   width         : 100%;
 }
 
+.anyService {
+  font-weight: 700;
+  color: gray;
+  padding-left: 0px !important;
+  size: .85rem !important;
+}
+
 .tittle {
   color: gray;
   font-weight: 700;
@@ -63,11 +70,6 @@
 
 .mat-radio-label>.mat-radio-container {
     position: absolute !important;
-}
-
-.btn-sm {
-  height: 25px;
-  padding-top: 0px;
 }
 
 .space {

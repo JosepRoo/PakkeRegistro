@@ -37,6 +37,16 @@ export class PakkeService {
     return this.http.post<any>(this.api+'Shipments', data, {headers: this.headers});
   }
 
+  signUpUser(email, name, password):Observable<any> {
+    var data = {
+      email: email,
+      name: name,
+      password: password,
+      confirm: password
+    }
+    return this.http.post<any>(this.api+'Users/signUp', data, {headers: this.headers});
+  }
+
 
 
 }

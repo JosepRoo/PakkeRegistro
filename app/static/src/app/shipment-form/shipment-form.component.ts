@@ -86,7 +86,7 @@ export class ShipmentFormComponent implements OnInit {
       email            : ['', [Validators.required, Validators.email]],
       package          : ['', Validators.required],
       register         : [''],
-      password         : ['', Validators.minLength(8)],
+      password         : ['', [Validators.minLength(8), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
       confirmPassword  : [''],
       originName       : ['', Validators.required],
       originCompany    : [''],
@@ -228,6 +228,7 @@ export class ShipmentFormComponent implements OnInit {
     this.loading = true;
     this.error = false;
     if (this.payment.valid){
+      this.registerUser();
       this.etomin.getSessionId().subscribe(
       res => {
         self.payment.controls.session.setValue(res.session_id);
@@ -369,6 +370,39 @@ export class ShipmentFormComponent implements OnInit {
       self.editable = false;
       self.stepper.next();
     })
+  }
+
+
+  createPdf(b64Data) {
+    var contentType = 'pdf';
+    var sliceSize = 512;
+
+    var byteCharacters = atob(b64Data);
+    var byteArrays = [];
+
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      var byteNumbers = new Array(slice.length);
+      for (var i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      var byteArray = new Uint8Array(byteNumbers);
+
+      byteArrays.push(byteArray);
+    }
+
+    var blob = new Blob(byteArrays, {type: contentType});
+    var blobUrl = URL.createObjectURL(blob);
+
+    var newWindow = window.open(blobUrl);
+  }
+
+  registerUser(){
+    if (this.data.controls.register.value){
+      this.pakkeService.signUpUser(this.data.controls.email.value, this.data.controls.name.value + " " + this.data.controls.lastName.value, this.data.controls.password.value ).subscribe(res => {});
+    }
   }
 
 }

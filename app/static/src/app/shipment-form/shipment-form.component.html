@@ -1,4 +1,6 @@
-<div class="container-fluid">
+<app-navbar></app-navbar>
+
+<div class="container-fluid" style="padding-top:100px; padding-bottom:50px;">
   <div class="row justify-content-center">
     <div class="col-12 col-sm-10">
       <h3 class="tittle">Configura tu envío</h3>
@@ -96,7 +98,7 @@
                   <form [hidden]="calculatingRates" [formGroup]="service">
                     <ng-template matStepLabel>Selecciona un servicio</ng-template>
                     <div *ngIf="!rates?.length">
-                        <h5>Ningún servicio encontrado con esa guia</h5>
+                        <span class="anyService">Ningún servicio encontrado con esa guia</span>
                     </div>
                     <div *ngIf="rates?.length">
                       <div class="row">
@@ -137,7 +139,7 @@
                             <span class="priceOption">MX {{rate.TotalCost | currency}}</span><span class="iva"> incl. IVA</span>
                           </p>
                           <p>
-                            <button class="btn btn-success btn-sm btn-block" (click)="selectService(rate, stepper)">Seleccionar</button>
+                            <button type="button" class="btn btn-outline-success btn-rounded btn-sm" (click)="selectService(rate, stepper)">Seleccionar</button>
                           </p>
                         </div>
                       </div>
@@ -195,14 +197,14 @@
                       </div>
                       <div class="col-12 col-sm-6">
                         <mat-form-field>
-                          <input matInput placeholder="Contraseña" formControlName="password" required>
-                          <mat-error *ngIf="data.controls.password.hasError('minlength')">Tu contraseña debe tener minimo 8 caracteres, al menos una letra y un numero</mat-error>
+                          <input type="password" matInput placeholder="Contraseña" formControlName="password" required>
+                          <mat-error *ngIf="data.controls.password.hasError('pattern')">Tu contraseña debe tener minimo 8 caracteres, al menos una letra, un número y un caracter especial</mat-error>
                           <mat-icon matPrefix>lock</mat-icon>
                         </mat-form-field>
                       </div>
                       <div class="col-12 col-sm-6">
                         <mat-form-field>
-                          <input matInput placeholder="Repetir contraseña" formControlName="confirmPassword" required>
+                          <input matInput type="password" placeholder="Repetir contraseña" formControlName="confirmPassword" required>
                           <mat-error *ngIf="data.controls.confirmPassword.hasError('MatchPassword')">Las contraseñas no coinciden</mat-error>
                           <mat-icon matPrefix>lock</mat-icon>
                         </mat-form-field>
@@ -449,12 +451,12 @@
                       <h4 class="form-tittle">Tu guía se ha registrado con éxito</h4>
                       <br />
                     </div>
-                    <div class="col-12 col-sm-6 col-md-4">
-                      <button mat-raised-button color="primary" class="btn btn-block" mat-button>Imprimir Guia</button>
+                    <div class="col-12 col-sm-6 col-md-5">
+                      <button mat-raised-button color="primary" class="btn btn-block" (click)="createPdf(this.pakkeResponse.Label)" mat-button>Imprimir Guia</button>
                     </div>
                   </div>
                   <div class="row justify-content-center">
-                    <div class="col-12 col-sm-6 col-md-4">
+                    <div class="col-12 col-sm-6 col-md-5">
                       <br />
                       <a href="/" mat-button color="primary" class="btn btn-block back" mat-button>Registrar otro envío</a>
                     </div>
@@ -486,3 +488,5 @@
     </div>
   </div>
 </div>
+
+<app-footer></app-footer>

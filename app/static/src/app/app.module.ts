@@ -17,6 +17,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { MatSelectModule } from '@angular/material/select';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MatDividerModule } from '@angular/material/divider';
 
 // services
 import { LocationService } from './services/location/location.service';
@@ -26,6 +29,8 @@ import { EtominService } from './services/etomin/etomin.service';
 import { AppComponent } from './app.component';
 import { ShipmentFormComponent } from './shipment-form/shipment-form.component';
 import { ResumeComponent } from './resume/resume.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 const appRoutes: Routes = [
   { path: '', component: ShipmentFormComponent },
@@ -36,13 +41,16 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     ShipmentFormComponent,
-    ResumeComponent
+    ResumeComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(
       appRoutes
     ),
+    MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     MatStepperModule,
     FormsModule,
@@ -59,8 +67,10 @@ const appRoutes: Routes = [
     MatProgressSpinnerModule,
     MatCardModule,
     MatCheckboxModule,
-    Angular2FontawesomeModule
+    Angular2FontawesomeModule,
+    MatDividerModule
   ],
+  schemas: [ NO_ERRORS_SCHEMA ],
   providers: [
     LocationService,
     PakkeService,
