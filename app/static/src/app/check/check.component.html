@@ -1,0 +1,85 @@
+<div class="row" style="margin-top:30px;">
+  <div class="col-12 col-md-6">
+    <mat-card style="padding:0px !important;">
+      <mat-card-content style="font-size: 15px !important;">
+        <div class="row padding" style="padding-top:25px;">
+          <div class="col text-center">
+            <h5 class="success-header">Muchas gracias, tu pago se ha confirmado y tu guía se ha generado.</h5>
+            <mat-icon class="success-icon">check_circle</mat-icon>
+          </div>
+        </div>
+        <br />
+        <div class="col-12">
+          <div class="row banner-label">
+            <div style="padding-left:25px; padding-right:25px; padding-top:7px; padding-bottom:7px; width:100% !important;">
+              <div class="col text-center">
+                <span style="color: gray; font-weight:600; font-size: 15px;">En breve te llegará un correo electrónico con tu recibo y guia generada.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="padding-top:20px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;">
+          <div class="col-5">
+            <i class="fas fa-money vertical-align-middle padding-bottom-3"></i>&nbsp;&nbsp;Nº de operación
+          </div>
+          <div class="col-7 text-right" style="color:black; font-weight:700; ">
+            {{shipment.ShipmentId}}
+          </div>
+        </div>
+        <div class="row" style="padding-top:10px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;">
+          <div class="col-6">
+            <fa class="fas fa-weight vertical-align-middle padding-bottom-3"></fa>&nbsp;Peso total
+          </div>
+          <div class="col-6 text-right" style="color:black; font-weight:700; ">
+            {{ shipment.detail.QuotedWeight }} kg
+          </div>
+        </div>
+        <div class="row" style="padding-top:10px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;">
+          <div class="col-6">
+            <fa class="fas fa-money vertical-align-middle padding-bottom-3"></fa>&nbsp;Subtotal
+          </div>
+          <div class="col-6 text-right" style="color:black; font-weight:700; ">
+            {{ (shipment.detail.TotalAmount) - (shipment.detail.TotalAmount * .16) | currency}}
+          </div>
+        </div>
+        <div class="row" style="padding-top:10px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;">
+          <div class="col-6">
+            <fa class="vertical-align-middle padding-bottom-3" [name]="'balance-scale '"></fa>&nbsp;IVA
+          </div>
+          <div class="col-6 text-right" style="color:black; font-weight:700; ">
+            {{(shipment.detail.TotalAmount * .16) | currency}}
+          </div>
+        </div>
+        <div class="row padding">
+          <div class="col">
+            <hr />
+          </div>
+        </div>
+        <div class="row" style="padding-top:10px; color:rgb(255,89,89); font-weight:700; padding-right:30px; padding-left:30px;  padding-bottom:20px;">
+          <div class="col-6">
+            <i class="fas fa-money vertical-align-middle padding-bottom-3"></i>&nbsp;Cobrado a: * * * *
+          </div>
+          <div class="col-6 text-right" style="color:rgb(255,89,89); font-weight:700; font-size: 1.2rem;">
+            MXN {{shipment.detail.TotalAmount | currency}}
+          </div>
+        </div>
+        <div class="row padding">
+          <div class="col-12 col-sm-12 col-md-8 col-lg-6">
+            <button mat-raised-button color="primary" class="btn btn-block" mat-button>Imprimir recibo</button>
+          </div>
+        </div>
+        <br />
+        <br />
+        <div class="col-12">
+          <div class="row banner-label">
+            <div style="padding-left:15px; padding-right:15px; padding-top:10px; padding-bottom:10px; width:100% !important;">
+              <div class="col">
+                <span style="color: gray; font-weight:600; font-size: 15px;">Recuerda que si ya eres un usuario de Pakke podrás hacer tus envíos más rapidos, ya que puedes agregar saldo a tu cuenta y generar tus envíos de manera más veloz. <a style="color: rgb(255,89,89);" href="https://seller.pakke.mx/login" target="_blank">Quiero registrarme</a>.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

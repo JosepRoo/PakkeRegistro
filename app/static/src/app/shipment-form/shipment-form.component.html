@@ -1,386 +1,504 @@
 <app-navbar></app-navbar>
 
-<div class="container-fluid" style="padding-top:100px; padding-bottom:50px;">
+<div class="container-fluid" style="padding-top:100px; padding-bottom:50px; background-color:#F0F0F0;  min-height:600px;">
   <div class="row justify-content-center">
     <div class="col-12 col-sm-10">
-      <h3 class="tittle">Configura tu envío</h3>
-      <div class="row">
-        <div style="margin-top:15px;" class="col-12 col-md-8 order-2 order-md-1">
-          <mat-card>
-            <mat-card-content>
-              <mat-vertical-stepper [hidden]="loading" [linear]="isLinear" #stepper>
-                <!-- start guide data -->
-                <mat-step [stepControl]="guide" [editable]="editable">
-                  <form [formGroup]="guide">
-                    <ng-template matStepLabel>Selecciona la guía</ng-template>
-                    <div class="row">
-                      <div class="col-12 col-sm-6">
-                        <mat-form-field>
-                          <input (keyup)="autocompleteLocations(guide.controls.origin.value)" matInput placeholder="Origen Desde (C.P. ó colonia)" [matAutocomplete]="auto" formControlName="origin" required>
-                          <mat-error *ngIf="guide.controls.origin.hasError('required')">La dirección de origen es necesaria</mat-error>
-                          <mat-error *ngIf="guide.controls.origin.hasError('valid')">El código postal es inválido</mat-error>
-                          <mat-autocomplete #auto="matAutocomplete">
-                            <mat-option *ngFor="let location of locations" [value]="location.postalcode + ' - ' +location.placeName + ' - ' + location.adminName2 + ' (' + location.adminCode1 + ')'">
-                              <b>{{location.postalcode}}</b> - {{location.placeName}} - {{location.adminName2}} ({{location.adminCode1}})
-                            </mat-option>
-                          </mat-autocomplete>
-                          <mat-icon matPrefix>place </mat-icon>
-                        </mat-form-field>
+      <h3 class="tittle">Cotiza tu envío</h3>
+
+      <div class="row justify-content-center" style="margin-top:20px !important; margin-bottom:10px;">
+        <div class="col-3" *ngIf="service.valid">
+          <mat-icon class="success-icon header-icon">check_circle</mat-icon>
+          <label class="header-valid">Elige un servicio</label>
+        </div>
+        <div class="col-3" *ngIf="!service.valid">
+          <span class="actual-icon">
+            <mat-icon class="header-icon" svgIcon="one-active"></mat-icon>
+            <label class="header-actual">Elige un servicio</label>
+          </span>
+        </div>
+        <div class="col-3" *ngIf="data.valid">
+          <mat-icon class="success-icon header-icon">check_circle</mat-icon>
+          <label class="header-valid">Datos y direcciones</label>
+        </div>
+        <div class="col-3" *ngIf="!data.valid && service.valid">
+          <span class="actual-icon">
+            <mat-icon class="header-icon" svgIcon="two-active"></mat-icon>
+            <label class="header-actual">Datos y direcciones</label>
+          </span>
+        </div>
+        <div class="col-3" *ngIf="!data.valid && !service.valid">
+          <mat-icon class="header-icon" svgIcon="two"></mat-icon>
+          <label class="header-invalid">Datos y direcciones</label>
+        </div>
+        <div class="col-3" *ngIf="!pakkeResponse && !data.valid">
+          <mat-icon class="header-icon" svgIcon="three"></mat-icon>
+          <label class="header-invalid">Pago</label>
+        </div>
+        <div class="col-3" *ngIf="!pakkeResponse && data.valid">
+          <span class="actual-icon">
+            <mat-icon class="header-icon" svgIcon="three-active"></mat-icon>
+            <label class="header-actual">Pago</label>
+          </span>
+        </div>
+        <div class="col-3" *ngIf="pakkeResponse">
+          <mat-icon class="success-icon header-icon">check_circle</mat-icon>
+          <label class="header-valid">Pago</label>
+        </div>
+        <div class="col-3" *ngIf="!pakkeResponse">
+          <mat-icon class="header-icon" svgIcon="four">error_outline</mat-icon>
+          <label class="header-invalid">Imprime tu guía</label>
+        </div>
+        <div class="col-3" *ngIf="pakkeResponse">
+          <span class="actual-icon">
+            <mat-icon class="header-icon" svgIcon="four-active"></mat-icon>
+            <label class="header-actual">Imprime tu guía</label>
+          </span>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="!pakkeResponse">
+        <div style="margin-top:15px;" class="col-12 col-sm-12 col-md-8 order-2 order-md-1">
+          <mat-horizontal-stepper [hidden]="loading" [linear]="isLinear" #stepper>
+            <!-- start guide data -->
+            <mat-step [stepControl]="guide" [editable]="editable">
+              <form [formGroup]="guide">
+                <div class="card-div">
+                  <mat-card class="mat-elevation-z1 card-own">
+                    <mat-card-content>
+                      <h4 class="form-tittle" style="padding-bottom:15px;">Datos de envío</h4>
+                      <div class="row block">
+                        <div class="col-12 col-sm-6">
+                          <mat-form-field>
+                            <mat-label>Origen Desde</mat-label>
+                            <input (keyup)="autocompleteLocations(guide.controls.origin.value)" matInput placeholder="C.P. ó colonia" [matAutocomplete]="auto" formControlName="origin" required>
+                            <mat-error *ngIf="guide.controls.origin.hasError('required')">La dirección de origen es necesaria</mat-error>
+                            <mat-error *ngIf="guide.controls.origin.hasError('valid')">El código postal es inválido</mat-error>
+                            <mat-autocomplete #auto="matAutocomplete">
+                              <mat-option *ngFor="let location of locations" [value]="location.postalcode + ' - ' +location.placeName + ' - ' + location.adminName2 + ' (' + location.adminCode1 + ')'">
+                                <b>{{location.postalcode}}</b> - {{location.placeName}} - {{location.adminName2}} ({{location.adminCode1}})
+                              </mat-option>
+                            </mat-autocomplete>
+                            <mat-icon matPrefix svgIcon="mexico"> </mat-icon>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                          <mat-form-field>
+                            <mat-label>Destino Hacia</mat-label>
+                            <input (keyup)="autocompleteLocations(guide.controls.destiny.value)" matInput [matAutocomplete]="auto2" placeholder="C.P. ó colonia" formControlName="destiny" required>
+                            <mat-error *ngIf="guide.controls.destiny.hasError('valid')">El código postal es inválido</mat-error>
+                            <mat-error *ngIf="guide.controls.destiny.hasError('required')">La dirección de destino es necesaria</mat-error>
+                            <mat-autocomplete #auto2="matAutocomplete">
+                              <mat-option *ngFor="let location of locations" [value]="location.postalcode + ' - ' +location.placeName + ' - ' + location.adminName2 + ' (' + location.adminCode1 + ')'">
+                                <b>{{location.postalcode}}</b> - {{location.placeName}} - {{location.adminName2}} ({{location.adminCode1}})
+                              </mat-option>
+                            </mat-autocomplete>
+                            <mat-icon matPrefix svgIcon="mexico"> </mat-icon>
+                          </mat-form-field>
+                        </div>
                       </div>
-                      <div class="col-12 col-sm-6">
-                        <mat-form-field>
-                          <input (keyup)="autocompleteLocations(guide.controls.destiny.value)" matInput [matAutocomplete]="auto2" placeholder="Destino Hacia (C.P. ó colonia)" formControlName="destiny" required>
-                          <mat-error *ngIf="guide.controls.destiny.hasError('valid')">El código postal es inválido</mat-error>
-                          <mat-error *ngIf="guide.controls.destiny.hasError('required')">La dirección de destino es necesaria</mat-error>
-                          <mat-autocomplete #auto2="matAutocomplete">
-                            <mat-option *ngFor="let location of locations" [value]="location.postalcode + ' - ' +location.placeName + ' - ' + location.adminName2 + ' (' + location.adminCode1 + ')'">
-                              <b>{{location.postalcode}}</b> - {{location.placeName}} - {{location.adminName2}} ({{location.adminCode1}})
-                            </mat-option>
-                          </mat-autocomplete>
-                          <mat-icon matPrefix>place </mat-icon>
-                        </mat-form-field>
+                      <div class="row space block">
+                        <div class="col-6 col-sm-3">
+                          <mat-form-field>
+                            <input matInput placeholder="Peso" formControlName="weight" type="text" required>
+                            <mat-error *ngIf="guide.controls.weight.hasError('required')">El peso del paquete es necesario</mat-error>
+                            <mat-error *ngIf="guide.controls.weight.hasError('value') && !guide.controls.weight.hasError('required')">Solo se permite insertar números enteros o decimales</mat-error>
+                            <span matSuffix>kg </span>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                          <mat-form-field>
+                            <input matInput placeholder="Ancho" formControlName="width" required>
+                            <mat-error *ngIf="guide.controls.width.hasError('required')">El ancho del paquete es necesario</mat-error>
+                            <mat-error *ngIf="guide.controls.width.hasError('value') && !guide.controls.width.hasError('required')">Solo se permite insertar números enteros o decimales</mat-error>
+                            <span matSuffix>cm </span>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                          <mat-form-field>
+                            <input matInput placeholder="Alto" formControlName="height" required>
+                            <mat-error *ngIf="guide.controls.height.hasError('required')">El alto del paquete es necesario</mat-error>
+                            <mat-error *ngIf="guide.controls.height.hasError('value') && !guide.controls.height.hasError('required')">Solo se permite insertar números enteros o decimales</mat-error>
+                            <span matSuffix>cm </span>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                          <mat-form-field>
+                            <input matInput placeholder="Largo" formControlName="deep" required>
+                            <mat-error *ngIf="guide.controls.deep.hasError('required')">El largo del paquete es necesario</mat-error>
+                            <mat-error *ngIf="guide.controls.deep.hasError('value') && !guide.controls.deep.hasError('required')">Solo se permite insertar números enteros o decimales</mat-error>
+                            <span matSuffix>cm </span>
+                          </mat-form-field>
+                        </div>
                       </div>
-                    </div>
-                    <div class="row space">
-                      <div class="col-6 col-sm-3">
-                        <mat-form-field>
-                          <input matInput placeholder="Peso" formControlName="weight" type="text" required>
-                          <mat-error *ngIf="guide.controls.weight.hasError('required')">El peso del paquete es necesario</mat-error>
-                          <mat-error *ngIf="guide.controls.weight.hasError('value') && !guide.controls.weight.hasError('required')">Solo se permite insertar números enteros o decimales</mat-error>
-                          <span matSuffix>kg </span>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-6 col-sm-3">
-                        <mat-form-field>
-                          <input matInput placeholder="Ancho" formControlName="width" required>
-                          <mat-error *ngIf="guide.controls.width.hasError('required')">El ancho del paquete es necesario</mat-error>
-                          <mat-error *ngIf="guide.controls.width.hasError('value') && !guide.controls.width.hasError('required')">Solo se permite insertar números enteros o decimales</mat-error>
-                          <span matSuffix>cm </span>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-6 col-sm-3">
-                        <mat-form-field>
-                          <input matInput placeholder="Alto" formControlName="height" required>
-                          <mat-error *ngIf="guide.controls.height.hasError('required')">El alto del paquete es necesario</mat-error>
-                          <mat-error *ngIf="guide.controls.height.hasError('value') && !guide.controls.height.hasError('required')">Solo se permite insertar números enteros o decimales</mat-error>
-                          <span matSuffix>cm </span>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-6 col-sm-3">
-                        <mat-form-field>
-                          <input matInput placeholder="Largo" formControlName="deep" required>
-                          <mat-error *ngIf="guide.controls.deep.hasError('required')">El largo del paquete es necesario</mat-error>
-                          <mat-error *ngIf="guide.controls.deep.hasError('value') && !guide.controls.deep.hasError('required')">Solo se permite insertar números enteros o decimales</mat-error>
-                          <span matSuffix>cm </span>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="row space2x justify-content-end">
-                      <div class="col-12 col-sm-6 col-md-3">
-                        <button mat-raised-button color="primary" class="btn btn-block" (click)="getRates(stepper);" mat-button>Continuar</button>
-                      </div>
-                    </div>
-                  </form>
-                </mat-step>
-                <!-- start guide data -->
-                <mat-step [stepControl]="service" [editable]="editable">
-                  <div [hidden]="!calculatingRates">
-                    <div class="row justify-content-center">
-                      <div class="col-12 col-md-4 text-center">
-                        <mat-spinner class="loader">
-                        </mat-spinner>
-                        <p class="form-tittle text-center">
-                          Cotizando envío
-                        </p>
-                      </div>
-                    </div>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+                <div class="row space2x justify-content-start block" style="padding-bottom: 0px;">
+                  <div class="col-12 col-sm-6 col-md-3">
+                    <button mat-raised-button color="primary" class="btn btn-block" (click)="getRates(stepper);" mat-button>Continuar</button>
                   </div>
-                  <form [hidden]="calculatingRates" [formGroup]="service">
-                    <ng-template matStepLabel>Selecciona un servicio</ng-template>
-                    <div *ngIf="!rates?.length">
-                        <span class="anyService">Ningún servicio encontrado con esa guia</span>
-                    </div>
-                    <div *ngIf="rates?.length">
+                </div>
+              </form>
+            </mat-step>
+            <!-- start guide data -->
+            <mat-step [stepControl]="service" [editable]="editable">
+              <div [hidden]="!calculatingRates">
+                <div class="card-div">
+                  <mat-card class="mat-elevation-z1 card-own">
+                    <mat-card-content>
+                      <div class="row justify-content-center">
+                        <div class="col-12 col-md-4 text-center">
+                          <mat-spinner class="loader">
+                          </mat-spinner>
+                          <p class="form-tittle text-center">
+                            Cotizando envío
+                          </p>
+                        </div>
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+              </div>
+              <form [hidden]="calculatingRates" [formGroup]="service">
+                <div class="card-div">
+                  <mat-card class="mat-elevation-z1 card-own">
+                    <mat-card-content>
+                      <div *ngIf="!rates?.length">
+                          <span class="anyService">Ningún servicio encontrado con esa guia</span>
+                      </div>
+                      <div *ngIf="rates?.length">
+                        <div class="row">
+                          <div class="col text-left" style="padding-left:25px;">
+                            <label class="header">Servicio</label>
+                          </div>
+                          <div class="col text-left">
+                            <label class="header">Entrega Estimada</label>
+                          </div>
+                          <div class="col text-center">
+                            <label class="header">Precio</label>
+                          </div>
+                        </div>
+                        <div class="row" style="padding-top: 10px; border-top: 1px solid rgba(150, 150, 150, 0.3);" *ngFor="let rate of rates; let i = index;">
+                          <div class="col-12 col-sm-4" style="padding-left:25px;">
+                            <p style="margin-bottom:5px; padding-top: 10px;">
+                              <img width="30%" *ngIf="rate.CourierCode == 'FDX'" class="img-fluid" src="http://pakke.mx/img/socios/fedex-logo_poster.png"/>
+                              <img width="30%" *ngIf="rate.CourierCode == 'STF'" class="img-fluid" src="http://pakke.mx/img/socios/estafeta-logo_poster.png"/>
+                              <img width="30%" *ngIf="rate.CourierCode == 'DHL'" class="img-fluid" src="http://www.rawcorporatehealth.com/wp-content/uploads/2017/01/dhl-logo.png"/>
+                            </p>
+                            <p class="header">
+                              {{rate.CourierServiceName}}
+                            </p>
+                          </div>
+                          <div class="col-12 col-sm-4">
+                            <p class="dateOption">
+                              <mat-icon class="vertical-align-middle padding-bottom-3" svgIcon="calendar"></mat-icon>
+                              <span class="inline-block">{{setEstimatedDate(rate.DeliveryDays[0]) | date}}</span>
+                            </p>
+                            <p class="daysOption" *ngIf="rate.DeliveryDays[0] > 1">
+                              {{rate.DeliveryDays[0]}} días
+                            </p>
+                            <p class="daysOption" *ngIf="rate.DeliveryDays[0] <= 1">
+                              {{rate.DeliveryDays[0]}} día
+                            </p>
+                          </div>
+                          <div class="col-12 col-sm-4 text-center">
+                            <p class="no-bottom">
+                              <span class="priceOption">MX {{rate.TotalPrice | currency}}</span><span class="iva"> incl. IVA</span>
+                            </p>
+                            <p>
+                              <button mat-raised-button type="button" style="font-weight:600 !important; letter-spacing: 0rem !important; font-size: .80rem;" class="btn btn-success btn-rounded btn-sm" (click)="selectService(rate, stepper)">Seleccionar</button>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+                <div class="row space2x justify-content-between block">
+                  <div class="col-12 col-sm-6 col-md-3">
+                    <button mat-button color="primary" class="btn btn-block back mat-elevation-z0 no-hover-effect" matStepperPrevious>Regresar</button>
+                  </div>
+                </div>
+              </form>
+            </mat-step>
+
+            <mat-step [stepControl]="data" [editable]="editable">
+              <form [formGroup]="data">
+                <div class="card-div">
+                  <mat-card class="mat-elevation-z1 card-own" style="padding:0px;">
+                    <mat-card-content>
+                      <div class="col-12">
+                        <div class="row banner-label">
+                          <div class="row" style="padding-left:25px; padding-right:25px; padding-top:20px; padding-bottom:10px;">
+                            <div class="col" style="">
+                              <label style="color: gray;">Te invitamos a que te registres en <b>Pakke</b> para que realices tus envíos más rápidos, solo da click abajo en: <b>quiero registrarme</b> y completa tu contraseña</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row" style="padding:24px;">
+                        <div class="col-12">
+                          <h4 class="form-tittle">Datos personales y detalle del paquete</h4>
+                          <div class="row">
+                            <div class="col-12 col-sm-6 form-data">
+                              <mat-form-field>
+                                <mat-label>Nombres</mat-label>
+                                <input matInput placeholder="Ej. Ana Paula" formControlName="name" required>
+                                <mat-error *ngIf="data.controls.name.hasError('required')">El nombre es necesario para el registro</mat-error>
+                                <mat-icon matPrefix>person</mat-icon>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-12 col-sm-6 form-data">
+                              <mat-form-field>
+                                <mat-label>Apellidos</mat-label>
+                                <input matInput placeholder="Ej. Chavéz Sanchéz" formControlName="lastName" required>
+                                <mat-error *ngIf="data.controls.lastName.hasError('required')">El apellido es necesario para el registro</mat-error>
+                                <mat-icon matPrefix>person</mat-icon>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-12 col-sm-6 form-data">
+                              <mat-form-field>
+                                <mat-label>Correo Electrónico</mat-label>
+                                <input matInput placeholder="Ej. ana.chavez@gamil.com" formControlName="email" required>
+                                <mat-error *ngIf="data.controls.email.hasError('required')">El correo electrónico es necesario para el registro</mat-error>
+                                <mat-error *ngIf="data.controls.email.errors?.email && !data.controls.email.hasError('required')">No es un correo eléctronico válido</mat-error>
+                                <mat-icon matPrefix>email</mat-icon>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-12 col-sm-6 form-data">
+                              <mat-form-field>
+                                <mat-label>Contenido del paquete </mat-label>
+                                <input matInput placeholder="Ej. Ropa" formControlName="package" required>
+                                <mat-error *ngIf="data.controls.package.hasError('required')">El contenido del paquete es necesario para el registro</mat-error>
+                                <mat-icon matPrefix svgIcon="box"></mat-icon>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="row form-data">
+                            <div class="col">
+                              <mat-checkbox color="primary" class="registerCheck" formControlName="register"><span class="registerCheck">Quiero registrarme de una vez</span></mat-checkbox>
+                            </div>
+                          </div>
+                          <div class="row fomr-data" *ngIf="data.controls.register.value">
+                            <div class="col-12">
+                              <label style="color:gray;">* Tu usuario de acceso será tu correo electrónico</label>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                              <mat-form-field>
+                                <input type="password" matInput placeholder="Contraseña" formControlName="password" required>
+                                <mat-error *ngIf="data.controls.password.hasError('pattern')">Tu contraseña debe tener minimo 8 caracteres, al menos una letra, un número y un caracter especial</mat-error>
+                                <mat-icon matPrefix>lock</mat-icon>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                              <mat-form-field>
+                                <input matInput type="password" placeholder="Repetir contraseña" formControlName="confirmPassword" required>
+                                <mat-error *ngIf="data.controls.confirmPassword.hasError('MatchPassword')">Las contraseñas no coinciden</mat-error>
+                                <mat-icon matPrefix>lock</mat-icon>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+                <div class="card-div">
+                  <mat-card class="mat-elevation-z1 card-own">
+                    <mat-card-content>
+                      <h4 class="form-tittle">Dirección de origen</h4>
                       <div class="row">
-                        <div class="col">
-                          <label class="header">Servicio</label>
+                        <div class="col-12 col-sm-6 form-data">
+                          <mat-form-field>
+                            <mat-label>Nombre Completo</mat-label>
+                            <input matInput placeholder="Ej. Ana Chavéz" formControlName="originName" required>
+                            <mat-error *ngIf="data.controls.originName.hasError('required')">El nombre es necesario para el envío</mat-error>
+                            <mat-icon matPrefix>person</mat-icon>
+                          </mat-form-field>
                         </div>
-                        <div class="col">
-                          <label class="header">Entrega Estimada</label>
+                        <div class="col-12 col-sm-6 form-data">
+                          <mat-form-field>
+                            <mat-label>Empresa</mat-label>
+                            <input matInput placeholder="Nombre opcional" formControlName="originCompany">
+                            <mat-icon matPrefix svgIcon="company"></mat-icon>
+                          </mat-form-field>
                         </div>
-                        <div class="col text-center">
-                          <label class="header">Precio</label>
+                        <div class="col-12 col-sm-6 form-data">
+                          <mat-form-field>
+                            <mat-label>Teléfono</mat-label>
+                            <input matInput placeholder="10 digitos con lada" maxlength="10" formControlName="originPhone" required>
+                            <mat-error *ngIf="data.controls.originPhone.hasError('required')">El télefono es necesario para el registro</mat-error>
+                            <mat-error *ngIf="data.controls.originPhone.errors?.pattern">Solo se permiten 10 digitos incluyendo lada</mat-error>
+                            <mat-icon matPrefix>phone</mat-icon>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-12 col-sm-6 form-data">
+                          <mat-form-field>
+                            <mat-label>Correo electrónico</mat-label>
+                            <input matInput placeholder="Ej. ana.chavez@gamil.com" formControlName="originEmail" required>
+                            <mat-error *ngIf="data.controls.originEmail.hasError('required')">El correo electrónico es necesario para el registro</mat-error>
+                            <mat-error *ngIf="data.controls.originEmail.errors?.email && !data.controls.originEmail.hasError('required')">No es un correo eléctronico válido</mat-error>
+
+                            <mat-icon matPrefix>email</mat-icon>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-4 form-data">
+                          <mat-form-field>
+                            <input matInput placeholder="Código postal" formControlName="originZipCode" required>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-4 form-data">
+                          <mat-form-field>
+                            <input matInput placeholder="Estado" formControlName="originState" required>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-4 form-data">
+                          <mat-form-field>
+                            <input matInput placeholder="Municipio" formControlName="originCity" required>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-4 form-data">
+                          <mat-form-field>
+                            <input matInput placeholder="Colonia" formControlName="originColony" required>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-4 form-data">
+                          <mat-form-field>
+                            <input matInput placeholder="Calle y número" formControlName="originStreet" required>
+                            <mat-error *ngIf="data.controls.originStreet.hasError('required')">La calle del origen es necesaria para el registro</mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-4 form-data">
+                          <mat-form-field>
+                            <input matInput placeholder="Nº interior / referencias" formControlName="originReferences" required>
+                            <mat-error *ngIf="data.controls.originStreet.hasError('required')">La referencia del origen es necesaria para el registro</mat-error>
+                          </mat-form-field>
                         </div>
                       </div>
-                      <div class="row" style="margin-top: 10px;" *ngFor="let rate of rates; let i = index;">
-                        <div class="col-12 col-sm-4">
-                          <p style="margin-bottom:5px; padding-top: 10px;">
-                            <img width="30%" *ngIf="rate.CourierCode == 'FDX'" class="img-fluid" src="http://pakke.mx/img/socios/fedex-logo_poster.png"/>
-                            <img width="30%" *ngIf="rate.CourierCode == 'STF'" class="img-fluid" src="http://pakke.mx/img/socios/estafeta-logo_poster.png"/>
-                          </p>
-                          <p class="header">
-                            {{rate.CourierServiceName}}
-                          </p>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+                <div class="card-div">
+                  <mat-card class="mat-elevation-z1 card-own">
+                    <mat-card-content>
+                      <h4 class="form-tittle">Dirección de destino</h4>
+                      <div class="row">
+                        <div class="col-12 col-sm-6 form-data">
+                          <mat-form-field>
+                            <mat-label>Nombre Completo</mat-label>
+                            <input matInput placeholder="Ej. Ana Chavéz" formControlName="destinyName" required>
+                            <mat-error *ngIf="data.controls.destinyName.hasError('required')">El nombre es necesario para el envío</mat-error>
+                            <mat-icon matPrefix>person</mat-icon>
+                          </mat-form-field>
                         </div>
-                        <div class="col-12 col-sm-4">
-                          <p class="dateOption">
-                            <mat-icon class="vertical-align-middle padding-bottom-3">calendar_today</mat-icon>
-                            <span class="inline-block">{{setEstimatedDate(rate.DeliveryDays[0]) | date}}</span>
-                          </p>
-                          <p class="daysOption" *ngIf="rate.DeliveryDays[0] > 1">
-                            {{rate.DeliveryDays[0]}} días
-                          </p>
-                          <p class="daysOption" *ngIf="rate.DeliveryDays[0] <= 1">
-                            {{rate.DeliveryDays[0]}} día
-                          </p>
+                        <div class="col-12 col-sm-6 form-data">
+                          <mat-form-field>
+                            <mat-label>Empresa</mat-label>
+                            <input matInput placeholder="Nombre opcional" formControlName="destinyCompany">
+                            <mat-icon matPrefix svgIcon="company"></mat-icon>
+                          </mat-form-field>
                         </div>
-                        <div class="col-12 col-sm-4 text-center">
-                          <p class="no-bottom">
-                            <span class="priceOption">MX {{rate.TotalCost | currency}}</span><span class="iva"> incl. IVA</span>
-                          </p>
-                          <p>
-                            <button type="button" class="btn btn-outline-success btn-rounded btn-sm" (click)="selectService(rate, stepper)">Seleccionar</button>
-                          </p>
+                        <div class="col-12 col-sm-6 form-data">
+                          <mat-form-field>
+                            <mat-label>Teléfono</mat-label>
+                            <input matInput placeholder="10 digitos con lada" maxlength="10" formControlName="destinyPhone" required>
+                            <mat-error *ngIf="data.controls.destinyPhone.hasError('required')">El télefono es necesario para el registro</mat-error>
+                            <mat-error *ngIf="data.controls.destinyPhone.errors?.pattern">Solo se permiten 10 digitos incluyendo lada</mat-error>
+                            <mat-icon matPrefix>phone</mat-icon>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-12 col-sm-6 form-data">
+                          <mat-form-field>
+                            <mat-label>Correo electrónico</mat-label>
+                            <input matInput placeholder="Ej. ana.chavez@gamil.com" formControlName="destinyEmail" required>
+                            <mat-error *ngIf="data.controls.destinyEmail.hasError('required')">El correo electrónico es necesario para el registro</mat-error>
+                            <mat-error *ngIf="data.controls.destinyEmail.errors?.email && !data.controls.destinyEmail.hasError('required')">No es un correo eléctronico válido</mat-error>
+                            <mat-icon matPrefix>email</mat-icon>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-4 form-data">
+                          <mat-form-field>
+                            <input matInput placeholder="Código postal" formControlName="destinyZipCode" required>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-4 form-data">
+                          <mat-form-field>
+                            <input matInput placeholder="Estado" formControlName="destinyState" required>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-4 form-data">
+                          <mat-form-field>
+                            <input matInput placeholder="Municipio" formControlName="destinyCity" required>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-4 form-data">
+                          <mat-form-field>
+                            <input matInput placeholder="Colonia" formControlName="destinyColony" required>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-4 form-data">
+                          <mat-form-field>
+                            <input matInput placeholder="Calle y número" formControlName="destinyStreet" required>
+                            <mat-error *ngIf="data.controls.destinyStreet.hasError('required')">La calle del origen es necesaria para el registro</mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-6 col-sm-4 form-data">
+                          <mat-form-field>
+                            <input matInput placeholder="Nº interior / referencias" formControlName="destinyReferences" required>
+                            <mat-error *ngIf="data.controls.destinyStreet.hasError('required')">La referencia del origen es necesaria para el registro</mat-error>
+                          </mat-form-field>
                         </div>
                       </div>
-                    </div>
-                    <div class="row space2x justify-content-between">
-                      <div class="col-12 col-sm-6 col-md-3">
-                        <button mat-button color="primary" class="btn btn-block back" mat-button matStepperPrevious>Regresar</button>
+                      <br />
+                      <div class="row" style="padding-top:5px;">
+                        <div class="col-12">
+                          <mat-checkbox color="primary" class="conditions" formControlName="confirm" required="true"><span class="checkbox-text-wrap">Confirmo que las dimensiones y el peso del paquete o documento son correctos (Datos incorrectos pueden generar cargos adicionales o el mensajero puede abstenerse de recolectar el envío)</span></mat-checkbox>
+                        </div>
+                        <div class="col-12">
+                          <mat-checkbox color="primary" class="conditions" formControlName="conditions" required="true"><span class="checkbox-text-wrap">He leido la lista de Articulos Prohibidos, acepto los Términos y Condiciones de Pakke asi como el Avíso de privacidad.</span></mat-checkbox>
+                        </div>
                       </div>
-                    </div>
-                  </form>
-                </mat-step>
-                <mat-step [stepControl]="data" [editable]="editable">
-                  <form [formGroup]="data">
-                    <ng-template matStepLabel>Datos y direcciones</ng-template>
-                    <h4 class="form-tittle">Datos personales y detalle del paquete</h4>
-                    <div class="row">
-                      <div class="col-12 col-sm-6 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Nombres" formControlName="name" required>
-                          <mat-error *ngIf="data.controls.name.hasError('required')">El nombre es necesario para el registro</mat-error>
-                          <mat-icon matPrefix>person</mat-icon>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-12 col-sm-6 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Apellidos" formControlName="lastName" required>
-                          <mat-error *ngIf="data.controls.lastName.hasError('required')">El apellido es necesario para el registro</mat-error>
-                          <mat-icon matPrefix>person</mat-icon>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-12 col-sm-6 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Correo Electrónico" formControlName="email" required>
-                          <mat-error *ngIf="data.controls.email.hasError('required')">El correo electrónico es necesario para el registro</mat-error>
-                          <mat-error *ngIf="data.controls.email.errors?.email && !data.controls.email.hasError('required')">No es un correo eléctronico válido</mat-error>
-                          <mat-icon matPrefix>email</mat-icon>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-12 col-sm-6 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Contenido del paquete (Ej. Ropa)" formControlName="package" required>
-                          <mat-error *ngIf="data.controls.package.hasError('required')">El contenido del paquete es necesario para el registro</mat-error>
-                          <mat-icon matPrefix>work</mat-icon>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="row form-data">
-                      <div class="col">
-                        <mat-checkbox color="primary" class="registerCheck" formControlName="register">Quiero registrarme de una vez</mat-checkbox>
-                      </div>
-                    </div>
-                    <div class="row fomr-data" *ngIf="data.controls.register.value">
-                      <div class="col-12">
-                        <label style="color:gray;">* Tu usuario de acceso será tu correo electrónico</label>
-                      </div>
-                      <div class="col-12 col-sm-6">
-                        <mat-form-field>
-                          <input type="password" matInput placeholder="Contraseña" formControlName="password" required>
-                          <mat-error *ngIf="data.controls.password.hasError('pattern')">Tu contraseña debe tener minimo 8 caracteres, al menos una letra, un número y un caracter especial</mat-error>
-                          <mat-icon matPrefix>lock</mat-icon>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-12 col-sm-6">
-                        <mat-form-field>
-                          <input matInput type="password" placeholder="Repetir contraseña" formControlName="confirmPassword" required>
-                          <mat-error *ngIf="data.controls.confirmPassword.hasError('MatchPassword')">Las contraseñas no coinciden</mat-error>
-                          <mat-icon matPrefix>lock</mat-icon>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <hr />
-                    <h4 class="form-tittle">Dirección de origen</h4>
-                    <div class="row">
-                      <div class="col-12 col-sm-6 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Nombre Completo" formControlName="originName" required>
-                          <mat-error *ngIf="data.controls.originName.hasError('required')">El nombre es necesario para el envío</mat-error>
-                          <mat-icon matPrefix>person</mat-icon>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-12 col-sm-6 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Empresa" formControlName="originCompany">
-                          <mat-icon matPrefix>domain</mat-icon>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-12 col-sm-6 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Teléfono" maxlength="10" formControlName="originPhone" required>
-                          <mat-error *ngIf="data.controls.originPhone.hasError('required')">El télefono es necesario para el registro</mat-error>
-                          <mat-error *ngIf="data.controls.originPhone.errors?.pattern">Solo se permiten 10 digitos incluyendo lada</mat-error>
-                          <mat-icon matPrefix>phone</mat-icon>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-12 col-sm-6 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Correo electrónico" formControlName="originEmail" required>
-                          <mat-error *ngIf="data.controls.originEmail.hasError('required')">El correo electrónico es necesario para el registro</mat-error>
-                          <mat-icon matPrefix>email</mat-icon>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-6 col-sm-4 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Código postal" formControlName="originZipCode" required>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-6 col-sm-4 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Estado" formControlName="originState" required>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-6 col-sm-4 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Municipio" formControlName="originCity" required>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-6 col-sm-4 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Colonia" formControlName="originColony" required>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-6 col-sm-4 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Calle y número" formControlName="originStreet" required>
-                          <mat-error *ngIf="data.controls.originStreet.hasError('required')">La calle del origen es necesaria para el registro</mat-error>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-6 col-sm-4 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Nº interior / referencias" formControlName="originReferences" required>
-                          <mat-error *ngIf="data.controls.originStreet.hasError('required')">La referencia del origen es necesaria para el registro</mat-error>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <hr />
-                    <h4 class="form-tittle">Dirección de destino</h4>
-                    <div class="row">
-                      <div class="col-12 col-sm-6 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Nombre Completo" formControlName="destinyName" required>
-                          <mat-error *ngIf="data.controls.destinyName.hasError('required')">El nombre es necesario para el envío</mat-error>
-                          <mat-icon matPrefix>person</mat-icon>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-12 col-sm-6 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Empresa" formControlName="destinyCompany">
-                          <mat-icon matPrefix>domain</mat-icon>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-12 col-sm-6 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Telefono" maxlength="10" formControlName="destinyPhone" required>
-                          <mat-error *ngIf="data.controls.destinyPhone.hasError('required')">El télefono es necesario para el registro</mat-error>
-                          <mat-error *ngIf="data.controls.destinyPhone.errors?.pattern">Solo se permiten 10 digitos incluyendo lada</mat-error>
-                          <mat-icon matPrefix>phone</mat-icon>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-12 col-sm-6 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Correo electrónico" formControlName="destinyEmail" required>
-                          <mat-error *ngIf="data.controls.destinyEmail.hasError('required')">El correo electrónico es necesario para el registro</mat-error>
-                          <mat-icon matPrefix>email</mat-icon>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-6 col-sm-4 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Código postal" formControlName="destinyZipCode" required>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-6 col-sm-4 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Estado" formControlName="destinyState" required>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-6 col-sm-4 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Municipio" formControlName="destinyCity" required>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-6 col-sm-4 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Colonia" formControlName="destinyColony" required>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-6 col-sm-4 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Calle y número" formControlName="destinyStreet" required>
-                          <mat-error *ngIf="data.controls.destinyStreet.hasError('required')">La calle del origen es necesaria para el registro</mat-error>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-6 col-sm-4 form-data">
-                        <mat-form-field>
-                          <input matInput placeholder="Nº interior / referencias" formControlName="destinyReferences" required>
-                          <mat-error *ngIf="data.controls.destinyStreet.hasError('required')">La referencia del origen es necesaria para el registro</mat-error>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <br />
-                    <div class="row" style="padding-top:5px;">
-                      <div class="col-12">
-                        <mat-checkbox color="primary" class="conditions" formControlName="confirm"><span class="checkbox-text-wrap">Confirmo que las dimensiones y el peso del paquete o documento son correctos (Datos incorrectos pueden generar cargos adicionales o el mensajero puede abstenerse de recolectar el envío)</span></mat-checkbox>
-                      </div>
-                      <div class="col-12">
-                        <mat-checkbox color="primary" class="conditions" formControlName="conditions"><span class="checkbox-text-wrap">He leido la lista de Articulos Prohibidos, acepto los Términos y Condiciones de Pakke asi como el Avíso de privacidad.</span></mat-checkbox>
-                      </div>
-                    </div>
-                    <div class="row justify-content-between space2x">
-                      <div class="col-12 col-sm-6 col-md-3">
-                        <button mat-button color="primary" class="btn btn-block back" mat-button matStepperPrevious>Regresar</button>
-                      </div>
-                      <div class="col-12 col-sm-6 col-md-3">
-                        <button mat-raised-button color="primary" class="btn btn-block" mat-button matStepperNext>Continuar</button>
-                      </div>
-                    </div>
-                  </form>
-                </mat-step>
-                <mat-step [stepControl]="payment" [editable]="editable">
-                  <form [formGroup]="payment">
-                    <ng-template matStepLabel>Pago</ng-template>
-                    <div>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+                <div class="row justify-content-start space2x block">
+                  <div class="col-12 col-sm-6 col-md-3">
+                    <button mat-button color="primary" class="btn btn-block back mat-elevation-z0 no-hover-effect" matStepperPrevious>Regresar</button>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-3">
+                    <button mat-raised-button color="primary" class="btn btn-block" mat-button matStepperNext>Continuar</button>
+                  </div>
+                </div>
+              </form>
+            </mat-step>
+
+            <mat-step [stepControl]="payment" [editable]="editable">
+              <form [formGroup]="payment">
+                <div class="card-div">
+                  <mat-card class="mat-elevation-z1 card-own">
+                    <mat-card-content>
                       <h4 class="form-tittle">Forma de Pago</h4>
                       <div class="row">
                         <div class="col-12 col-sm-6" style="margin-top:15px;">
                           <mat-form-field>
-                            <input matInput placeholder="Nombre del tarjetahabiente" formControlName="name" required>
+                            <mat-label>Nombre del tarjetahabiente</mat-label>
+                            <input matInput placeholder="Nombre como aparece en la tarjeta" formControlName="name" required>
                             <mat-error *ngIf="payment.controls.name.hasError('required')">El nombre es necesario para el pago</mat-error>
                             <mat-icon matPrefix>person</mat-icon>
                           </mat-form-field>
                         </div>
                         <div class="col-12 col-sm-6" style="margin-top:15px;">
                           <mat-form-field>
-                            <input matInput placeholder="Código postal" maxlength="5" formControlName="zipCode" required>
+                            <mat-label>Código postal</mat-label>
+                            <input matInput placeholder="C.P. de la tarjeta" maxlength="5" formControlName="zipCode" required>
                             <mat-error *ngIf="payment.controls.zipCode.hasError('required')">El código postal es necesario para el pago</mat-error>
                             <mat-error *ngIf="payment.controls.zipCode.errors?.pattern">El código postal es incorrecto</mat-error>
-                            <mat-icon matPrefix>person</mat-icon>
+                            <mat-icon matPrefix>place</mat-icon>
                           </mat-form-field>
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-12 col-sm-8 " style="margin-top:15px;">
+                        <div class="col-12 col-sm-4 " style="margin-top:15px;">
                           <mat-form-field>
                             <input (keyup)="getCardType()" matInput placeholder="Número de la tarjeta" formControlName="number" required>
                             <mat-error *ngIf="payment.controls.number.hasError('required')">El número de la tarjeta es necesario para el pago</mat-error>
@@ -391,27 +509,19 @@
                             <mat-icon matPrefix>credit_card</mat-icon>
                           </mat-form-field>
                         </div>
-                        <div class="col-12 col-sm-4" style="margin-top:15px;">
+                        <div class="col-12 col-sm-3" style="margin-top:15px;">
                           <mat-form-field>
-                            <input type="password" maxlength="4" matInput placeholder="CVV" formControlName="cvv" required>
-                            <mat-error *ngIf="payment.controls.cvv.hasError('required')">El CVV de la tarjeta es necesario para el pago</mat-error>
-                            <mat-error *ngIf="payment.controls.cvv.errors?.pattern">El CVV es inválido</mat-error>
-                            <mat-icon matPrefix>lock</mat-icon>
-                          </mat-form-field>
-                        </div>
-                        <div class="col-12 col-sm-4" style="margin-top:15px;">
-                          <mat-form-field>
-                            <mat-select class="input-own" placeholder="Mes" formControlName="month">
+                            <mat-select class="input-own" placeholder="Mes de vencimiento" formControlName="month">
                               <mat-option>--</mat-option>
                               <mat-option *ngFor="let month of months" [value]="month">
                                 {{month}}
                               </mat-option>
                             </mat-select>
                             <mat-error *ngIf="payment.controls.month.hasError('required')">El mes de vencimiento es necesario para el pago</mat-error>
-                            <mat-icon matPrefix>calendar_today</mat-icon>
+                            <mat-icon matPrefix svgIcon="calendar"></mat-icon>
                           </mat-form-field>
                         </div>
-                        <div class="col-12 col-sm-4" style="margin-top:15px;">
+                        <div class="col-12 col-sm-3" style="margin-top:15px;">
                           <mat-form-field>
                             <mat-select class="input-own" placeholder="Año de vencimiento" formControlName="year">
                               <mat-option>--</mat-option>
@@ -420,71 +530,87 @@
                               </mat-option>
                             </mat-select>
                             <mat-error *ngIf="payment.controls.year.hasError('required')">El año de vencimiento es necesario para el pago</mat-error>
-                            <mat-icon matPrefix>calendar_today</mat-icon>
+                            <mat-icon matPrefix svgIcon="calendar"></mat-icon>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-12 col-sm-2" style="margin-top:15px;">
+                          <mat-form-field>
+                            <input type="password" maxlength="4" matInput placeholder="CVV" formControlName="cvv" required>
+                            <mat-error *ngIf="payment.controls.cvv.hasError('required')">El CVV de la tarjeta es necesario para el pago</mat-error>
+                            <mat-error *ngIf="payment.controls.cvv.hasError('error') && !payment.controls.cvv.hasError('required')">El CVV es inválido</mat-error>
+                            <mat-icon matPrefix>lock</mat-icon>
                           </mat-form-field>
                         </div>
                       </div>
-                    </div>
-                    <div class="row" *ngIf="error">
-                      <div class="col-12">
-                        <br />
-                        <label style="color:#D7244C; font-weight:700;">Tuvimos problemas para procesar el pago, revisa de nuevo tu información e intenta de nuevo, de lo contrario ingresa un nuevo método de pago.</label>
+                      <div class="row" *ngIf="error">
+                        <div class="col-12">
+                          <br />
+                          <label style="color:#D7244C; font-weight:700;">Tuvimos problemas para procesar el pago, revisa de nuevo tu información e intenta de nuevo, de lo contrario ingresa un nuevo método de pago.</label>
+                        </div>
                       </div>
-                    </div>
-                    <br />
-                    <div class="row justify-content-between">
-                      <div class="col-12 col-sm-6 col-md-3">
-                        <button mat-button color="primary" class="btn btn-block back" mat-button matStepperPrevious>Regresar</button>
-                      </div>
-                      <div class="col-12 col-sm-6 col-md-3">
-                        <button mat-raised-button color="primary" class="btn btn-block" (click)="generateSession(stepper)" mat-button>Finalizar</button>
-                      </div>
-                    </div>
-                  </form>
-                </mat-step>
-                <mat-step>
-                  <ng-template matStepLabel>Imprime tu guía</ng-template>
-                  <div class="row justify-content-center">
-                    <div class="col-12 text-center">
                       <br />
-                      <i style="color:rgb(255,89,89); margin-bottom:15px;" class="fas fa-check-circle fa-5x"></i>
-                      <h4 class="form-tittle">Tu guía se ha registrado con éxito</h4>
-                      <br />
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-5">
-                      <button mat-raised-button color="primary" class="btn btn-block" (click)="createPdf(this.pakkeResponse.Label)" mat-button>Imprimir Guia</button>
-                    </div>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+                <div class="row justify-content-start block" style="padding-top:15px;">
+                  <div class="col-12 col-sm-6 col-md-3">
+                    <button mat-button color="primary" class="btn btn-block back mat-elevation-z0 no-hover-effect" mat-button matStepperPrevious>Regresar</button>
                   </div>
-                  <div class="row justify-content-center">
-                    <div class="col-12 col-sm-6 col-md-5">
-                      <br />
-                      <a href="/" mat-button color="primary" class="btn btn-block back" mat-button>Registrar otro envío</a>
-                    </div>
-                  </div>
-                </mat-step>
-              </mat-vertical-stepper>
-              <div [hidden]="!loading">
-                <div class="row justify-content-center">
-                  <div class="col-12 col-md-4 text-center">
-                    <mat-spinner class="loader">
-                    </mat-spinner>
-                    <p class="form-tittle text-center">
-                      Procesando Pago
-                    </p>
+                  <div class="col-12 col-sm-6 col-md-3">
+                    <button mat-raised-button color="primary" class="btn btn-block" (click)="generateSession(stepper)" mat-button>Finalizar</button>
                   </div>
                 </div>
+              </form>
+            </mat-step>
+
+            <mat-step>
+              <ng-template matStepLabel>Imprime</ng-template>
+              <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                  <br />
+                  <i style="color:rgb(255,89,89); margin-bottom:15px;" class="fas fa-check-circle fa-5x"></i>
+                  <h4 class="form-tittle">Tu guía se ha registrado con éxito</h4>
+                  <br />
+                </div>
+                <div class="col-12 col-sm-6 col-md-5">
+                  <button mat-raised-button color="primary" class="btn btn-block" (click)="createPdf(this.pakkeResponse.Label)" mat-button>Imprimir Guia</button>
+                </div>
               </div>
-            </mat-card-content>
-          </mat-card>
+              <div class="row justify-content-center">
+                <div class="col-12 col-sm-6 col-md-5">
+                  <br />
+                  <a href="/" mat-button color="primary" class="btn btn-block back mat-elevation-z0" mat-button>Registrar otro envío</a>
+                </div>
+              </div>
+            </mat-step>
+          </mat-horizontal-stepper>
+          <div [hidden]="!loading">
+            <div class="card-div">
+              <mat-card class="mat-elevation-z1 card-own">
+                <mat-card-content>
+                  <div class="row justify-content-center">
+                    <div class="col-12 col-md-4 text-center">
+                      <mat-spinner class="loader">
+                      </mat-spinner>
+                      <p class="form-tittle text-center" style="margin-bottom:30px;">
+                        Procesando Pago
+                      </p>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
         </div>
-        <div style="margin-top:15px;" class="col-12 col-md-4 order-1 order-md-2">
-          <mat-card>
+        <div style="margin-top:15px;" class="col-12 col-sm-12 col-md-4 order-1 order-md-2">
+          <mat-card style="padding:0px !important;">
             <mat-card-content>
               <app-resume [service]="service.controls.service.value" [origin]="guide.controls.origin.value" [destiny]="guide.controls.destiny.value" [product]="guide.getRawValue()"></app-resume>
             </mat-card-content>
           </mat-card>
         </div>
       </div>
+      <app-check *ngIf="pakkeResponse" [response]="pakkeResponse"></app-check>
     </div>
   </div>
 </div>

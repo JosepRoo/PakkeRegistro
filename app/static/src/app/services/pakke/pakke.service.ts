@@ -13,7 +13,7 @@ export class PakkeService {
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
     'Accept':​ 'application/json',
-    'x-api-key': '7710b94e651b6b1b2de4995cae07f03e6e240a85'
+    'Authorization': 'NJYc54geWEqW2WDR7BiXoSPk7ThfujFirNKdgISJ2I0Qqb7H7ZrzX7zscR5LKcIl'
   });
 
   constructor(

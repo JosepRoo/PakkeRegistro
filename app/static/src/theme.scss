@@ -2,8 +2,61 @@
 
 @include mat-core();
 
+.mat-horizontal-content-container {
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}
+
+.mat-step-label {
+  display: inline-block !important;
+  white-space: normal !important;
+  overflow: initial !important;
+  text-overflow: ellipsis !important;
+  vertical-align: middle !important;
+}
+
+.mat-raised-button {
+  font-weight: 600 !important;
+  letter-spacing: 0px !important;
+}
+
+.mat-step-text-label {
+  text-overflow: ellipsis !important;
+  overflow: initial !important;
+}
+
+.mat-horizontal-stepper-header-container {
+  height: 0px !important;
+  visibility: hidden !important;
+}
+
+.mat-horizontal-content-container {
+  background-color: #F0F0F0 !important;
+}
+
+.mat-checkbox-label {
+  font-weight: 700 !important;
+}
+
+.no-hover-effect.mat-button.mat-primary .mat-button-focus-overlay,
+.no-hover-effect.mat-button.mat-accent .mat-button-focus-overlay,
+.no-hover-effect.mat-button.mat-warn .mat-button-focus-overlay
+{
+  background-color: transparent;
+  box-shadow: none !important;
+}
+
+.success-icon {
+    color: #2FB059 !important;
+}
+/* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
+.success-icon svg {
+    fill: #2FB059 !important;
+}
+
+
 $custom-typography: mat-typography-config(
-    $font-family: 'Open Sans, , monospace'
+    $font-family: 'Open Sans'
 );
 
 $bv-brand: (

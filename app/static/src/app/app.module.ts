@@ -31,6 +31,7 @@ import { ShipmentFormComponent } from './shipment-form/shipment-form.component';
 import { ResumeComponent } from './resume/resume.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { CheckComponent } from './check/check.component';
 
 const appRoutes: Routes = [
   { path: '', component: ShipmentFormComponent },
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
     ShipmentFormComponent,
     ResumeComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    CheckComponent
   ],
   imports: [
     BrowserModule,

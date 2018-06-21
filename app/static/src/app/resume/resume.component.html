@@ -1,83 +1,90 @@
-<h5 class="tittle" style="margin-bottom:20px;">Tu pedido</h5>
+<div class="row" style="margin-bottom:10px; padding: 40px; padding-bottom:0px !important; padding-top:20px !important;">
+  <h5 class="tittle" style="font-weight: 600 !important; font-size:1rem;">Tu pedido</h5>
+</div>
 <div *ngIf="service">
-  <div class="row" style="margin-bottom:20px;">
+  <div class="row" style="margin-bottom:20px; padding-right:30px; padding-left:30px;">
     <div class="col-4">
       <img *ngIf="service.CourierCode == 'FDX'" class="img-fluid" src="http://pakke.mx/img/socios/fedex-logo_poster.png"/>
       <img *ngIf="service.CourierCode == 'STF'" class="img-fluid" src="http://pakke.mx/img/socios/estafeta-logo_poster.png"/>
+      <img *ngIf="service.CourierCode == 'DHL'" class="img-fluid" src="http://www.rawcorporatehealth.com/wp-content/uploads/2017/01/dhl-logo.png"/>
     </div>
     <div class="col-8 service text-right">
       {{service.CourierServiceName}} ({{service.DeliveryDays[0]}} días)
     </div>
   </div>
-  <div class="row">
-    <div class="col-8" style="color:gray; font-weight:300; ">
-      <mat-icon class="vertical-align-middle padding-bottom-3">calendar_today</mat-icon>&nbsp;Entrega apróx.
+  <div class="row" style="padding-right:30px; padding-left:30px;">
+    <div class="col-8" style="color:gray; font-weight:300;">
+      <mat-icon class="vertical-align-middle padding-bottom-3" svgIcon="calendar"></mat-icon>&nbsp;Entrega apróx.
     </div>
     <div class="col-4" style="color:black; font-weight:700; ">
       <span class="inline-block">{{setEstimatedDate(service.DeliveryDays[0]) | date}}</span>
     </div>
   </div>
   <br />
-  <div class="row">
-    <div class="col-3 text-center" style="color:gray; font-weight:300;">
-      <mat-icon class="vertical-align-middle padding-bottom-3" matPrefix>place &nbsp;</mat-icon>&nbsp;Desde
-    </div>
-    <div class="col-9" style="color:black; font-weight:700; ">
-      {{origin}}
+  <div class="col-12">
+    <div class="row" style="background-color:#F2F2F2;">
+      <div class="row" style="padding-left:25px; padding-right:25px; padding-top:20px; padding-bottom:10px;">
+        <div class="col-3 text-center" style="color:gray; font-weight:300; vertical-align: middle;">
+          <mat-icon class="vertical-align-middle padding-bottom-3" matPrefix svgIcon="mexico">&nbsp;</mat-icon>&nbsp;<span style="font-weight:500;">Desde</span>
+        </div>
+        <div class="col-9" style="color:black; font-weight:700; ">
+          {{origin}}
+        </div>
+      </div>
+      <div class="row" style="padding-left:25px; padding-right:25px; padding-bottom:20px; padding-top:10px;">
+        <div class="col-3 text-center" style="color:gray; font-weight:300; vertical-align: middle;">
+          <mat-icon class="vertical-align-middle padding-bottom-3" matPrefix svgIcon="mexico">&nbsp;</mat-icon>&nbsp;<span style="font-weight:500;">Hacia</span>
+        </div>
+        <div class="col-9" style="color:black; font-weight:700; ">
+          {{destiny}}
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row" style="padding-top:20px;">
-    <div class="col-3 text-center" style="color:gray; font-weight:300; ">
-      <mat-icon class="vertical-align-middle padding-bottom-3" matPrefix>place &nbsp;</mat-icon>&nbsp;Hacia
-    </div>
-    <div class="col-9" style="color:black; font-weight:700; ">
-      {{destiny}}
-    </div>
-  </div>
-  <div class="row" style="padding-top:20px; color:gray; font-weight:300;">
+  <div class="row" style="padding-top:20px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;">
     <div class="col-8">
-      <i class="fas fa-weight ertical-align-middle padding-bottom-3"></i>&nbsp;Peso Total
+      <mat-icon svgIcon="scale"></mat-icon>&nbsp;Peso Total
     </div>
     <div class="col-4 text-right" style="color:black; font-weight:700; ">
        {{getWeight(product)}} kg
     </div>
   </div>
-  <div class="row" style="padding-top:10px; color:gray; font-weight:300;" *ngIf="service.OverWeightCost">
+  <div class="row" style="padding-top:10px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;" *ngIf="service.OverWeightPrice">
     <div class="col-8">
       <i class="fas fa-coins ertical-align-middle padding-bottom-3"></i>&nbsp;Costo Sobrepeso
     </div>
     <div class="col-4 text-right" style="color:black; font-weight:700; ">
-      {{service.OverWeightCost - (service.OverWeightCost * .16) | currency}}
+      {{service.OverWeightPrice - (service.OverWeightPrice * .16) | currency}}
     </div>
   </div>
-  <div class="row" style="padding-top:10px; color:gray; font-weight:300;">
+  <div class="row" style="padding-top:10px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;">
     <div class="col-8">
-      <i class="fas fa-money ertical-align-middle padding-bottom-3"></i>&nbsp;Subtotal
+      <i class="fas fa-money vertical-align-middle padding-bottom-3"></i>&nbsp;Subtotal
     </div>
     <div class="col-4 text-right" style="color:black; font-weight:700; ">
-      {{service.TotalCost - (service.TotalCost * .16) | currency}}
+      {{service.TotalPrice - (service.TotalPrice * .16) | currency}}
     </div>
   </div>
-  <div class="row" style="padding-top:10px; color:gray; font-weight:300;">
+  <div class="row" style="padding-top:10px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;">
     <div class="col-8">
       <fa class="vertical-align-middle padding-bottom-3" [name]="'balance-scale '"></fa>&nbsp;IVA
     </div>
     <div class="col-4 text-right" style="color:black; font-weight:700; ">
-      {{(service.TotalCost * .16) | currency}}
+      {{(service.TotalPrice * .16) | currency}}
     </div>
   </div>
   <hr />
-  <div class="row" style="padding-top:10px; color:rgb(255,89,89); font-weight:700;">
+  <div class="row" style="padding-top:10px; color:rgb(255,89,89); font-weight:700; padding-right:30px; padding-left:30px;  padding-bottom:20px;">
     <div class="col-6">
-      <i class="fas fa-money ertical-align-middle padding-bottom-3"></i>&nbsp;Total a pagar
+      <i class="fas fa-money vertical-align-middle padding-bottom-3"></i>&nbsp;Total a pagar
     </div>
     <div class="col-6 text-right" style="color:rgb(255,89,89); font-weight:700; font-size: 1.2rem;">
-      MXN {{service.TotalCost | currency}}
+      MXN {{service.TotalPrice | currency}}
     </div>
   </div>
 </div>
 <div *ngIf="!service">
-  <div class="row">
+  <div class="row" style="padding-right:30px; padding-left:30px; padding-bottom:20px;">
     <div class="col-12">
       <span class="service">Aún no has seleccionado ningún servicio</span>
     </div>

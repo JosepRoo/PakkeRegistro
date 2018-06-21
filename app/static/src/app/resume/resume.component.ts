@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-resume',
@@ -12,7 +14,15 @@ export class ResumeComponent implements OnInit {
   @Input('destiny') destiny: any;
   @Input('product') product: any;
 
-  constructor() { }
+  constructor(
+    private iconRegistry   : MatIconRegistry,
+    private sanitizer      : DomSanitizer,
+  ) {
+    this.iconRegistry
+    .addSvgIcon('calendar', sanitizer.bypassSecurityTrustResourceUrl('./assets/calendar.svg'))
+    .addSvgIcon('mexico', sanitizer.bypassSecurityTrustResourceUrl('./assets/mexico.svg'))
+    .addSvgIcon('scale', sanitizer.bypassSecurityTrustResourceUrl('./assets/scale.svg'))
+  }
 
   ngOnInit() {
   }

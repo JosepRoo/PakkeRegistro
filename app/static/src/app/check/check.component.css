@@ -1,0 +1,25 @@
+.success-header {
+  font-weight: 700;
+  color: #2FB059;
+  padding-right: 50px;
+  padding-left: 50px;
+  margin-bottom: 20px;
+}
+
+.mat-icon.success-icon {
+  width: 70px !important;
+  height: 70px !important;
+}
+
+.material-icons {
+  font-size: 70px !important;
+}
+
+.banner-label {
+  background-color: #f5f5f5
+}
+
+.padding {
+  padding-left: 25px;
+  padding-right: 25px;
+}

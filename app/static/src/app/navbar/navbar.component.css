@@ -1,4 +1,23 @@
 .link {
   font-size: .875rem !important;
   color: #888888 !important;
+  margin-top: 8px;
+}
+
+.navbar {
+  padding:50px !important;
+}
+
+.divide {
+  border-right: 1px solid rgba(150, 150, 150, 0.3);
+  line-height: 2px;
+}
+
+.last {
+  border-right: 0px solid rgba(150, 150, 150, 0.3);
+  line-height: 2px;
+}
+
+.mat-raised-button {
+  font-weight: 500 !important;
 }
