@@ -22,6 +22,12 @@ export class ResumeComponent implements OnInit {
     .addSvgIcon('calendar', sanitizer.bypassSecurityTrustResourceUrl('./assets/calendar.svg'))
     .addSvgIcon('mexico', sanitizer.bypassSecurityTrustResourceUrl('./assets/mexico.svg'))
     .addSvgIcon('scale', sanitizer.bypassSecurityTrustResourceUrl('./assets/scale.svg'))
+    .addSvgIcon('clock', sanitizer.bypassSecurityTrustResourceUrl('./assets/clock.svg'))
+    .addSvgIcon('dollar', sanitizer.bypassSecurityTrustResourceUrl('./assets/dollar-coins.svg'))
+    .addSvgIcon('bank', sanitizer.bypassSecurityTrustResourceUrl('./assets/bank.svg'))
+    .addSvgIcon('dollar-pink', sanitizer.bypassSecurityTrustResourceUrl('./assets/money-bag.svg'))
+    .addSvgIcon('kilo', sanitizer.bypassSecurityTrustResourceUrl('./assets/kilogram.svg'))
+
   }
 
   ngOnInit() {

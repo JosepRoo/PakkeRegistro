@@ -21,3 +21,33 @@
 .mat-raised-button {
   font-weight: 500 !important;
 }
+
+.contact-row {
+  background-color: #671289;
+}
+
+.first-header{
+  color:#E3B2FF;
+  font-size: 14px !important;
+}
+
+.vertical-align-middle {
+    vertical-align: middle;
+}
+
+.padding-bottom-3 {
+  padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.upper-link{
+  border-right: 1px solid #E3B2FF !important;
+  line-height: 2px !important;
+  padding-right:10px !important;
+  padding-left:10px !important;
+}
+
+.upper-link-last{
+  line-height: 2px !important;
+  padding-left:10px !important;
+}

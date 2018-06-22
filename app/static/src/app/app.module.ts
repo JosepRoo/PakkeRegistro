@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MatDividerModule } from '@angular/material/divider';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 // services
 import { LocationService } from './services/location/location.service';
@@ -70,7 +71,8 @@ const appRoutes: Routes = [
     MatCardModule,
     MatCheckboxModule,
     Angular2FontawesomeModule,
-    MatDividerModule
+    MatDividerModule,
+    PdfViewerModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [

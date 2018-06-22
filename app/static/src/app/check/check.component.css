@@ -23,3 +23,22 @@
   padding-left: 25px;
   padding-right: 25px;
 }
+
+.tittle {
+  font-weight: 600;
+  color: black;
+  padding-left: 0px !important;
+  font-size: 1rem !important;
+}
+
+.service {
+  font-weight: 700;
+  color: gray;
+  padding-left: 0px !important;
+  size: 1.2rem !important;
+}
+
+.mat-icon.small-icon {
+  width: 17px !important;
+  height: 17px !important;
+}

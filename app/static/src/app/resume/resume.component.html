@@ -13,8 +13,8 @@
     </div>
   </div>
   <div class="row" style="padding-right:30px; padding-left:30px;">
-    <div class="col-8" style="color:gray; font-weight:300;">
-      <mat-icon class="vertical-align-middle padding-bottom-3" svgIcon="calendar"></mat-icon>&nbsp;Entrega apróx.
+    <div class="col-8" style="color:gray; font-weight:400;">
+      <mat-icon class="vertical-align-middle padding-bottom-3" svgIcon="clock"></mat-icon>&nbsp;Entrega apróx.
     </div>
     <div class="col-4" style="color:black; font-weight:700; ">
       <span class="inline-block">{{setEstimatedDate(service.DeliveryDays[0]) | date}}</span>
@@ -24,7 +24,7 @@
   <div class="col-12">
     <div class="row" style="background-color:#F2F2F2;">
       <div class="row" style="padding-left:25px; padding-right:25px; padding-top:20px; padding-bottom:10px;">
-        <div class="col-3 text-center" style="color:gray; font-weight:300; vertical-align: middle;">
+        <div class="col-3 text-center" style="color:gray; font-weight:400; vertical-align: middle;">
           <mat-icon class="vertical-align-middle padding-bottom-3" matPrefix svgIcon="mexico">&nbsp;</mat-icon>&nbsp;<span style="font-weight:500;">Desde</span>
         </div>
         <div class="col-9" style="color:black; font-weight:700; ">
@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="row" style="padding-left:25px; padding-right:25px; padding-bottom:20px; padding-top:10px;">
-        <div class="col-3 text-center" style="color:gray; font-weight:300; vertical-align: middle;">
+        <div class="col-3 text-center" style="color:gray; font-weight:400; vertical-align: middle;">
           <mat-icon class="vertical-align-middle padding-bottom-3" matPrefix svgIcon="mexico">&nbsp;</mat-icon>&nbsp;<span style="font-weight:500;">Hacia</span>
         </div>
         <div class="col-9" style="color:black; font-weight:700; ">
@@ -41,33 +41,33 @@
       </div>
     </div>
   </div>
-  <div class="row" style="padding-top:20px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;">
+  <div class="row" style="padding-top:20px; color:gray; font-weight:400; padding-right:30px; padding-left:30px;">
     <div class="col-8">
-      <mat-icon svgIcon="scale"></mat-icon>&nbsp;Peso Total
+      <mat-icon class="vertical-align-middle padding-bottom-3" matPrefix svgIcon="kilo"></mat-icon>&nbsp;Peso Total
     </div>
     <div class="col-4 text-right" style="color:black; font-weight:700; ">
        {{getWeight(product)}} kg
     </div>
   </div>
-  <div class="row" style="padding-top:10px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;" *ngIf="service.OverWeightPrice">
+  <div class="row" style="padding-top:10px; color:gray; font-weight:400; padding-right:30px; padding-left:30px;" *ngIf="service.OverWeightPrice">
     <div class="col-8">
-      <i class="fas fa-coins ertical-align-middle padding-bottom-3"></i>&nbsp;Costo Sobrepeso
+      <mat-icon class="vertical-align-middle padding-bottom-3" matPrefix svgIcon="dollar"></mat-icon>&nbsp;Costo Sobrepeso
     </div>
     <div class="col-4 text-right" style="color:black; font-weight:700; ">
       {{service.OverWeightPrice - (service.OverWeightPrice * .16) | currency}}
     </div>
   </div>
-  <div class="row" style="padding-top:10px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;">
+  <div class="row" style="padding-top:10px; color:gray; font-weight:400; padding-right:30px; padding-left:30px;">
     <div class="col-8">
-      <i class="fas fa-money vertical-align-middle padding-bottom-3"></i>&nbsp;Subtotal
+      <mat-icon class="vertical-align-middle padding-bottom-3" matPrefix svgIcon="dollar"></mat-icon>&nbsp;Subtotal
     </div>
     <div class="col-4 text-right" style="color:black; font-weight:700; ">
       {{service.TotalPrice - (service.TotalPrice * .16) | currency}}
     </div>
   </div>
-  <div class="row" style="padding-top:10px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;">
+  <div class="row" style="padding-top:10px; color:gray; font-weight:400; padding-right:30px; padding-left:30px;">
     <div class="col-8">
-      <fa class="vertical-align-middle padding-bottom-3" [name]="'balance-scale '"></fa>&nbsp;IVA
+      <mat-icon class="vertical-align-middle padding-bottom-3" matPrefix svgIcon="bank"></mat-icon>&nbsp;IVA
     </div>
     <div class="col-4 text-right" style="color:black; font-weight:700; ">
       {{(service.TotalPrice * .16) | currency}}
@@ -76,7 +76,7 @@
   <hr />
   <div class="row" style="padding-top:10px; color:rgb(255,89,89); font-weight:700; padding-right:30px; padding-left:30px;  padding-bottom:20px;">
     <div class="col-6">
-      <i class="fas fa-money vertical-align-middle padding-bottom-3"></i>&nbsp;Total a pagar
+      <mat-icon class="vertical-align-middle padding-bottom-3" matPrefix svgIcon="dollar-pink" color="primary"></mat-icon>&nbsp;Total a pagar
     </div>
     <div class="col-6 text-right" style="color:rgb(255,89,89); font-weight:700; font-size: 1.2rem;">
       MXN {{service.TotalPrice | currency}}

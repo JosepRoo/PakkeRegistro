@@ -78,7 +78,7 @@
                                 <b>{{location.postalcode}}</b> - {{location.placeName}} - {{location.adminName2}} ({{location.adminCode1}})
                               </mat-option>
                             </mat-autocomplete>
-                            <mat-icon matPrefix svgIcon="mexico"> </mat-icon>
+                            <mat-icon class="small-icon" matPrefix svgIcon="mexico"> </mat-icon>
                           </mat-form-field>
                         </div>
                         <div class="col-12 col-sm-6">
@@ -92,7 +92,7 @@
                                 <b>{{location.postalcode}}</b> - {{location.placeName}} - {{location.adminName2}} ({{location.adminCode1}})
                               </mat-option>
                             </mat-autocomplete>
-                            <mat-icon matPrefix svgIcon="mexico"> </mat-icon>
+                            <mat-icon class="small-icon" matPrefix svgIcon="mexico"> </mat-icon>
                           </mat-form-field>
                         </div>
                       </div>
@@ -231,7 +231,7 @@
                         <div class="row banner-label">
                           <div class="row" style="padding-left:25px; padding-right:25px; padding-top:20px; padding-bottom:10px;">
                             <div class="col" style="">
-                              <label style="color: gray;">Te invitamos a que te registres en <b>Pakke</b> para que realices tus envíos más rápidos, solo da click abajo en: <b>quiero registrarme</b> y completa tu contraseña</label>
+                              <label style="color: gray; font-weight: 400;">Te invitamos a que te registres en <b>Pakke</b> para que realices tus envíos más rápidos, solo da click abajo en: <b>quiero registrarme</b> y completa tu contraseña</label>
                             </div>
                           </div>
                         </div>
@@ -270,7 +270,7 @@
                                 <mat-label>Contenido del paquete </mat-label>
                                 <input matInput placeholder="Ej. Ropa" formControlName="package" required>
                                 <mat-error *ngIf="data.controls.package.hasError('required')">El contenido del paquete es necesario para el registro</mat-error>
-                                <mat-icon matPrefix svgIcon="box"></mat-icon>
+                                <mat-icon class="small-icon" matPrefix svgIcon="box"></mat-icon>
                               </mat-form-field>
                             </div>
                           </div>
@@ -320,7 +320,7 @@
                           <mat-form-field>
                             <mat-label>Empresa</mat-label>
                             <input matInput placeholder="Nombre opcional" formControlName="originCompany">
-                            <mat-icon matPrefix svgIcon="company"></mat-icon>
+                            <mat-icon class="small-icon" matPrefix svgIcon="company"></mat-icon>
                           </mat-form-field>
                         </div>
                         <div class="col-12 col-sm-6 form-data">
@@ -395,7 +395,7 @@
                           <mat-form-field>
                             <mat-label>Empresa</mat-label>
                             <input matInput placeholder="Nombre opcional" formControlName="destinyCompany">
-                            <mat-icon matPrefix svgIcon="company"></mat-icon>
+                            <mat-icon class="small-icon" matPrefix svgIcon="company"></mat-icon>
                           </mat-form-field>
                         </div>
                         <div class="col-12 col-sm-6 form-data">
@@ -452,10 +452,10 @@
                       <br />
                       <div class="row" style="padding-top:5px;">
                         <div class="col-12">
-                          <mat-checkbox color="primary" class="conditions" formControlName="confirm" required="true"><span class="checkbox-text-wrap">Confirmo que las dimensiones y el peso del paquete o documento son correctos (Datos incorrectos pueden generar cargos adicionales o el mensajero puede abstenerse de recolectar el envío)</span></mat-checkbox>
+                          <mat-checkbox color="primary" class="conditions" formControlName="confirm" required="true"><span class="checkbox-text-wrap" style="font-weight: 400 !important;">Confirmo que las dimensiones y el peso del paquete o documento son correctos (Datos incorrectos pueden generar cargos adicionales o el mensajero puede abstenerse de recolectar el envío)</span></mat-checkbox>
                         </div>
                         <div class="col-12">
-                          <mat-checkbox color="primary" class="conditions" formControlName="conditions" required="true"><span class="checkbox-text-wrap">He leido la lista de Articulos Prohibidos, acepto los Términos y Condiciones de Pakke asi como el Avíso de privacidad.</span></mat-checkbox>
+                          <mat-checkbox color="primary" class="conditions" formControlName="conditions" required="true"><span class="checkbox-text-wrap" style="font-weight: 400 !important;">He leido la lista de Articulos Prohibidos, acepto los Términos y Condiciones de Pakke asi como el Avíso de privacidad.</span></mat-checkbox>
                         </div>
                       </div>
                     </mat-card-content>
@@ -518,7 +518,7 @@
                               </mat-option>
                             </mat-select>
                             <mat-error *ngIf="payment.controls.month.hasError('required')">El mes de vencimiento es necesario para el pago</mat-error>
-                            <mat-icon matPrefix svgIcon="calendar"></mat-icon>
+                            <mat-icon class="small-icon" matPrefix svgIcon="calendar"></mat-icon>
                           </mat-form-field>
                         </div>
                         <div class="col-12 col-sm-3" style="margin-top:15px;">
@@ -530,7 +530,7 @@
                               </mat-option>
                             </mat-select>
                             <mat-error *ngIf="payment.controls.year.hasError('required')">El año de vencimiento es necesario para el pago</mat-error>
-                            <mat-icon matPrefix svgIcon="calendar"></mat-icon>
+                            <mat-icon class="small-icon" matPrefix svgIcon="calendar"></mat-icon>
                           </mat-form-field>
                         </div>
                         <div class="col-12 col-sm-2" style="margin-top:15px;">
@@ -572,9 +572,6 @@
                   <h4 class="form-tittle">Tu guía se ha registrado con éxito</h4>
                   <br />
                 </div>
-                <div class="col-12 col-sm-6 col-md-5">
-                  <button mat-raised-button color="primary" class="btn btn-block" (click)="createPdf(this.pakkeResponse.Label)" mat-button>Imprimir Guia</button>
-                </div>
               </div>
               <div class="row justify-content-center">
                 <div class="col-12 col-sm-6 col-md-5">
@@ -610,7 +607,7 @@
           </mat-card>
         </div>
       </div>
-      <app-check *ngIf="pakkeResponse" [response]="pakkeResponse"></app-check>
+      <app-check *ngIf="pakkeResponse" [response]="pakkeResponse" [order]="payment.controls.order.value" [service]="service.controls.service.value" [card]="payment.controls.number.value"></app-check>
     </div>
   </div>
 </div>

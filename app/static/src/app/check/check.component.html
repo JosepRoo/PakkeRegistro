@@ -13,38 +13,38 @@
           <div class="row banner-label">
             <div style="padding-left:25px; padding-right:25px; padding-top:7px; padding-bottom:7px; width:100% !important;">
               <div class="col text-center">
-                <span style="color: gray; font-weight:600; font-size: 15px;">En breve te llegará un correo electrónico con tu recibo y guia generada.</span>
+                <span style="color: gray; font-weight:400; font-size: 15px;">En breve te llegará un correo electrónico con tu recibo y guia generada.</span>
               </div>
             </div>
           </div>
         </div>
         <div class="row" style="padding-top:20px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;">
-          <div class="col-5">
-            <i class="fas fa-money vertical-align-middle padding-bottom-3"></i>&nbsp;&nbsp;Nº de operación
+          <div class="col-5" style="font-weight:400;">
+            <mat-icon class="vertical-align-middle small-icon padding-bottom-3" matPrefix svgIcon="folder"></mat-icon>&nbsp;&nbsp;Nº de operación
           </div>
           <div class="col-7 text-right" style="color:black; font-weight:700; ">
-            {{shipment.ShipmentId}}
+            {{shipment.ResellerReference}}
           </div>
         </div>
         <div class="row" style="padding-top:10px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;">
-          <div class="col-6">
-            <fa class="fas fa-weight vertical-align-middle padding-bottom-3"></fa>&nbsp;Peso total
+          <div class="col-6" style="font-weight:400;">
+            <mat-icon class="vertical-align-middle small-icon padding-bottom-3" matPrefix svgIcon="kilo"></mat-icon>&nbsp;&nbsp;Peso total
           </div>
           <div class="col-6 text-right" style="color:black; font-weight:700; ">
             {{ shipment.detail.QuotedWeight }} kg
           </div>
         </div>
         <div class="row" style="padding-top:10px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;">
-          <div class="col-6">
-            <fa class="fas fa-money vertical-align-middle padding-bottom-3"></fa>&nbsp;Subtotal
+          <div class="col-6" style="font-weight:400;">
+            <mat-icon class="vertical-align-middle small-icon padding-bottom-3" matPrefix svgIcon="dollar"></mat-icon>&nbsp;&nbsp;Subtotal
           </div>
           <div class="col-6 text-right" style="color:black; font-weight:700; ">
             {{ (shipment.detail.TotalAmount) - (shipment.detail.TotalAmount * .16) | currency}}
           </div>
         </div>
         <div class="row" style="padding-top:10px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;">
-          <div class="col-6">
-            <fa class="vertical-align-middle padding-bottom-3" [name]="'balance-scale '"></fa>&nbsp;IVA
+          <div class="col-6" style="font-weight:400;">
+            <mat-icon class="vertical-align-middle small-icon padding-bottom-3" matPrefix svgIcon="bank"></mat-icon>&nbsp;&nbsp;IVA
           </div>
           <div class="col-6 text-right" style="color:black; font-weight:700; ">
             {{(shipment.detail.TotalAmount * .16) | currency}}
@@ -57,7 +57,7 @@
         </div>
         <div class="row" style="padding-top:10px; color:rgb(255,89,89); font-weight:700; padding-right:30px; padding-left:30px;  padding-bottom:20px;">
           <div class="col-6">
-            <i class="fas fa-money vertical-align-middle padding-bottom-3"></i>&nbsp;Cobrado a: * * * *
+            <mat-icon class="vertical-align-middle small-icon padding-bottom-3" matPrefix svgIcon="dollar-pink"></mat-icon>&nbsp;&nbsp;Cobrado a: * * * * {{card.substring(card.length - 3)}}
           </div>
           <div class="col-6 text-right" style="color:rgb(255,89,89); font-weight:700; font-size: 1.2rem;">
             MXN {{shipment.detail.TotalAmount | currency}}
@@ -65,7 +65,7 @@
         </div>
         <div class="row padding">
           <div class="col-12 col-sm-12 col-md-8 col-lg-6">
-            <button mat-raised-button color="primary" class="btn btn-block" mat-button>Imprimir recibo</button>
+            <a *ngIf="order" href="https://seller.etomin.com/voucher.html#/print/{{order}}" target="_blank" mat-raised-button color="primary" class="btn btn-block" mat-button>Imprimir recibo</a>
           </div>
         </div>
         <br />
@@ -74,11 +74,84 @@
           <div class="row banner-label">
             <div style="padding-left:15px; padding-right:15px; padding-top:10px; padding-bottom:10px; width:100% !important;">
               <div class="col">
-                <span style="color: gray; font-weight:600; font-size: 15px;">Recuerda que si ya eres un usuario de Pakke podrás hacer tus envíos más rapidos, ya que puedes agregar saldo a tu cuenta y generar tus envíos de manera más veloz. <a style="color: rgb(255,89,89);" href="https://seller.pakke.mx/login" target="_blank">Quiero registrarme</a>.</span>
+                <span style="color: gray; font-weight:400; font-size: 15px;">Recuerda que si ya eres un usuario de Pakke podrás hacer tus envíos más rapidos, ya que puedes agregar saldo a tu cuenta y generar tus envíos de manera más veloz. <a style="color: rgb(255,89,89); font-weight: 400;" href="https://seller.pakke.mx/login" target="_blank">Quiero registrarme</a>.</span>
               </div>
             </div>
           </div>
         </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <mat-card style="padding:0px !important;">
+      <mat-card-content style="font-size: 15px !important;">
+        <div class="row padding" style="padding-top:25px;">
+          <div class="col">
+            <span class="tittle">Tu guía</span>
+          </div>
+        </div>
+        <div class="row padding">
+          <div class="col-4 col-sm-3" style="margin-top:15px;">
+            <img *ngIf="shipment.CourierCode == 'FDX'" class="img-fluid" src="http://pakke.mx/img/socios/fedex-logo_poster.png"/>
+            <img *ngIf="shipment.CourierCode == 'STF'" class="img-fluid" src="http://pakke.mx/img/socios/estafeta-logo_poster.png"/>
+            <img *ngIf="shipment.CourierCode == 'DHL'" class="img-fluid" src="http://www.rawcorporatehealth.com/wp-content/uploads/2017/01/dhl-logo.png"/>
+          </div>
+          <div class="col-8 col-sm-4 service" style="margin-top:20px;" *ngIf="service">
+            {{service.CourierServiceName}} ({{service.DeliveryDays[0]}} días)
+          </div>
+          <div class="col-12 col-sm-5" style="margin-top:10px;">
+            <button style="margin-top:0px;" mat-raised-button color="primary" class="btn btn-block" (click)="printPdf(shipment.Label)" mat-button>Imprimir Guia</button>
+          </div>
+        </div>
+        <br />
+        <div class="row" style="padding-top:10px; color:gray; font-weight:400; padding-right:30px; padding-left:30px;" *ngIf="service">
+          <div class="col">
+            <mat-icon class="vertical-align-middle padding-bottom-3 small-icon" svgIcon="clock"></mat-icon>&nbsp;&nbsp;Entrega apróx &nbsp;&nbsp;<span style="color:black; font-weight:700;">{{setEstimatedDate(service.DeliveryDays[0]) | date}}</span>
+          </div>
+        </div>
+        <div class="row" style="padding-top:10px; color:gray; font-weight:400; padding-right:30px; padding-left:30px;">
+          <div class="col">
+            <mat-icon class="vertical-align-middle padding-bottom-3 small-icon" svgIcon="box"></mat-icon>&nbsp;&nbsp;Nº de pedido &nbsp;&nbsp;<span style="color:black; font-weight:700;">{{ shipment.ShipmentId}}</span>
+          </div>
+        </div>
+        <div class="row" style="padding-top:10px; color:gray; font-weight:400; padding-right:30px; padding-left:30px;">
+          <div class="col">
+            <mat-icon class="vertical-align-middle padding-bottom-3 small-icon" svgIcon="truck"></mat-icon>&nbsp;&nbsp;Guía de rastreo &nbsp;&nbsp;<span style="color:black; font-weight:700;">{{ shipment.TrackingNumber}}</span>
+          </div>
+        </div>
+        <br />
+        <div class="col-12">
+          <div class="row" style="background-color:#F2F2F2;">
+            <div class="row" style="padding-left:25px; padding-right:25px; padding-top:20px; padding-bottom:10px;">
+              <div class="col-3 text-left" style="color:gray; font-weight:400; vertical-align: middle;">
+                <mat-icon class="vertical-align-middle padding-bottom-3" matPrefix svgIcon="mexico">&nbsp;&nbsp;</mat-icon>&nbsp;&nbsp;<span style="font-weight:500;">Desde</span>
+              </div>
+              <div class="col-9 text-left" style="color:black; font-weight:700; ">
+                {{shipment.AddressFrom.ZipCode}} - {{shipment.AddressFrom.Neighborhood}} - {{shipment.AddressFrom.City}}
+              </div>
+            </div>
+            <div class="row" style="padding-left:25px; padding-right:25px; padding-bottom:20px; padding-top:10px;">
+              <div class="col-3 text-left" style="color:gray; font-weight:400; vertical-align: middle;">
+                <mat-icon class="vertical-align-middle padding-bottom-3" matPrefix svgIcon="mexico">&nbsp;&nbsp;</mat-icon>&nbsp;&nbsp;<span style="font-weight:500;">Hacia</span>
+              </div>
+              <div class="col-9 text-left" style="color:black; font-weight:700; ">
+                {{shipment.AddressTo.ZipCode}} - {{shipment.AddressTo.Neighborhood}} - {{shipment.AddressTo.City}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row justify-content-center">
+          <div class="col-8 text-center">
+            <pdf-viewer [src]="pdfUrl" max-width="100%"
+              [original-size]="false"
+              [fit-to-page]="true"
+              [zoom]="2"
+              [autoresize]="true"
+              [external-link-target]="pdfUrl"
+            ></pdf-viewer>
+          </div>
+        </div> -->
       </mat-card-content>
     </mat-card>
   </div>
