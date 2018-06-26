@@ -11,10 +11,10 @@
           <label class="header-valid">Elige un servicio</label>
         </div>
         <div class="col-3" *ngIf="!service.valid">
-          <span class="actual-icon">
-            <mat-icon class="header-icon" svgIcon="one-active"></mat-icon>
-            <label class="header-actual">Elige un servicio</label>
-          </span>
+					<span class="actual-icon">
+          	<mat-icon class="header-icon" svgIcon="one-active"></mat-icon>
+          	<label class="header-actual actual-icon-label">Elige un servicio</label>
+					</span>
         </div>
         <div class="col-3" *ngIf="data.valid">
           <mat-icon class="success-icon header-icon">check_circle</mat-icon>
@@ -23,7 +23,7 @@
         <div class="col-3" *ngIf="!data.valid && service.valid">
           <span class="actual-icon">
             <mat-icon class="header-icon" svgIcon="two-active"></mat-icon>
-            <label class="header-actual">Datos y direcciones</label>
+            <label class="header-actual actual-icon-label">Datos y direcciones</label>
           </span>
         </div>
         <div class="col-3" *ngIf="!data.valid && !service.valid">
@@ -37,7 +37,7 @@
         <div class="col-3" *ngIf="!pakkeResponse && data.valid">
           <span class="actual-icon">
             <mat-icon class="header-icon" svgIcon="three-active"></mat-icon>
-            <label class="header-actual">Pago</label>
+            <label class="header-actual actual-icon-label">Pago</label>
           </span>
         </div>
         <div class="col-3" *ngIf="pakkeResponse">
@@ -51,7 +51,7 @@
         <div class="col-3" *ngIf="pakkeResponse">
           <span class="actual-icon">
             <mat-icon class="header-icon" svgIcon="four-active"></mat-icon>
-            <label class="header-actual">Imprime tu guía</label>
+            <label class="header-actual actual-icon-label">Imprime tu guía</label>
           </span>
         </div>
       </div>
