@@ -8,9 +8,12 @@
       <img *ngIf="service.CourierCode == 'STF'" class="img-fluid" src="http://pakke.mx/img/socios/estafeta-logo_poster.png"/>
       <img *ngIf="service.CourierCode == 'DHL'" class="img-fluid" src="http://www.rawcorporatehealth.com/wp-content/uploads/2017/01/dhl-logo.png"/>
     </div>
-    <div class="col-8 service text-right">
+    <div class="col-8 service text-right" *ngIf="service.DeliveryDays[0] > 1">
       {{service.CourierServiceName}} ({{service.DeliveryDays[0]}} días)
     </div>
+		<div class="col-8 service text-right" *ngIf="service.DeliveryDays[0] <= 1">
+      {{service.CourierServiceName}} ({{service.DeliveryDays[0]}} día)
+		</div>
   </div>
   <div class="row" style="padding-right:30px; padding-left:30px;">
     <div class="col-8" style="color:gray; font-weight:400;">

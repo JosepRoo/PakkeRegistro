@@ -151,10 +151,20 @@
   padding-right:20px;
 }
 
-.actual-icon{
-  padding-bottom:20px;
-  border-bottom: 1px solid #ff5959;
+@media (min-width:1214px){
+	.actual-icon{
+	  padding-bottom:20px;
+	  border-bottom: 1px solid #ff5959;
+	}
 }
+
+@media(max-width:1213px){
+	.actual-icon-label{
+		padding-bottom:20px;
+		border-bottom: 1px solid #ff5959;
+	}
+}
+
 
 .header-icon{
   vertical-align: middle !important; margin-left:15px;
