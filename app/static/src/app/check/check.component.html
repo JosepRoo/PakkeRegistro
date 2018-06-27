@@ -31,7 +31,7 @@
             <mat-icon class="vertical-align-middle small-icon padding-bottom-3" matPrefix svgIcon="kilo"></mat-icon>&nbsp;&nbsp;Peso total
           </div>
           <div class="col-6 text-right" style="color:black; font-weight:700; ">
-            {{ shipment.detail.QuotedWeight }} kg
+            {{ shipment.QuotedWeight }} kg
           </div>
         </div>
         <div class="row" style="padding-top:10px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;">
@@ -39,7 +39,7 @@
             <mat-icon class="vertical-align-middle small-icon padding-bottom-3" matPrefix svgIcon="dollar"></mat-icon>&nbsp;&nbsp;Subtotal
           </div>
           <div class="col-6 text-right" style="color:black; font-weight:700; ">
-            {{ (shipment.detail.TotalAmount) - (shipment.detail.TotalAmount * .16) | currency}}
+            {{ (shipment.TotalAmount) - (shipment.TotalAmount * .16) | currency}}
           </div>
         </div>
         <div class="row" style="padding-top:10px; color:gray; font-weight:300; padding-right:30px; padding-left:30px;">
@@ -47,7 +47,7 @@
             <mat-icon class="vertical-align-middle small-icon padding-bottom-3" matPrefix svgIcon="bank"></mat-icon>&nbsp;&nbsp;IVA
           </div>
           <div class="col-6 text-right" style="color:black; font-weight:700; ">
-            {{(shipment.detail.TotalAmount * .16) | currency}}
+            {{(shipment.TotalAmount * .16) | currency}}
           </div>
         </div>
         <div class="row padding">
@@ -60,7 +60,7 @@
             <mat-icon class="vertical-align-middle small-icon padding-bottom-3" matPrefix svgIcon="dollar-pink"></mat-icon>&nbsp;&nbsp;Cobrado a: * * * * {{card.substring(card.length - 3)}}
           </div>
           <div class="col-6 text-right" style="color:rgb(255,89,89); font-weight:700; font-size: 1.2rem;">
-            MXN {{shipment.detail.TotalAmount | currency}}
+            MXN {{shipment.TotalAmount | currency}}
           </div>
         </div>
         <div class="row padding">
