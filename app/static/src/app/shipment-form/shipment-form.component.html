@@ -6,49 +6,49 @@
       <h3 class="tittle">Cotiza tu envío</h3>
 
       <div class="row justify-content-center" style="margin-top:20px !important; margin-bottom:10px;">
-        <div class="col-3" *ngIf="service.valid">
+        <div class="col-3 text-center" *ngIf="service.valid">
           <mat-icon class="success-icon header-icon">check_circle</mat-icon>
           <label class="header-valid">Elige un servicio</label>
         </div>
-        <div class="col-3" *ngIf="!service.valid">
+        <div class="col-3 text-center" *ngIf="!service.valid">
 					<span class="actual-icon">
           	<mat-icon class="header-icon" svgIcon="one-active"></mat-icon>
           	<label class="header-actual actual-icon-label">Elige un servicio</label>
 					</span>
         </div>
-        <div class="col-3" *ngIf="data.valid">
+        <div class="col-3 text-center" *ngIf="data.valid">
           <mat-icon class="success-icon header-icon">check_circle</mat-icon>
           <label class="header-valid">Datos y direcciones</label>
         </div>
-        <div class="col-3" *ngIf="!data.valid && service.valid">
+        <div class="col-3 text-center" *ngIf="!data.valid && service.valid">
           <span class="actual-icon">
             <mat-icon class="header-icon" svgIcon="two-active"></mat-icon>
             <label class="header-actual actual-icon-label">Datos y direcciones</label>
           </span>
         </div>
-        <div class="col-3" *ngIf="!data.valid && !service.valid">
+        <div class="col-3 text-center" *ngIf="!data.valid && !service.valid">
           <mat-icon class="header-icon" svgIcon="two"></mat-icon>
           <label class="header-invalid">Datos y direcciones</label>
         </div>
-        <div class="col-3" *ngIf="!pakkeResponse && !data.valid">
+        <div class="col-3 text-center" *ngIf="!pakkeResponse && !data.valid">
           <mat-icon class="header-icon" svgIcon="three"></mat-icon>
           <label class="header-invalid">Pago</label>
         </div>
-        <div class="col-3" *ngIf="!pakkeResponse && data.valid">
+        <div class="col-3 text-center" *ngIf="!pakkeResponse && data.valid">
           <span class="actual-icon">
             <mat-icon class="header-icon" svgIcon="three-active"></mat-icon>
             <label class="header-actual actual-icon-label">Pago</label>
           </span>
         </div>
-        <div class="col-3" *ngIf="pakkeResponse">
+        <div class="col-3 text-center" *ngIf="pakkeResponse">
           <mat-icon class="success-icon header-icon">check_circle</mat-icon>
           <label class="header-valid">Pago</label>
         </div>
-        <div class="col-3" *ngIf="!pakkeResponse">
+        <div class="col-3 text-center" *ngIf="!pakkeResponse">
           <mat-icon class="header-icon" svgIcon="four">error_outline</mat-icon>
           <label class="header-invalid">Imprime tu guía</label>
         </div>
-        <div class="col-3" *ngIf="pakkeResponse">
+        <div class="col-3 text-center" *ngIf="pakkeResponse">
           <span class="actual-icon">
             <mat-icon class="header-icon" svgIcon="four-active"></mat-icon>
             <label class="header-actual actual-icon-label">Imprime tu guía</label>
@@ -455,7 +455,7 @@
                           <mat-checkbox color="primary" class="conditions" formControlName="confirm" required="true"><span class="checkbox-text-wrap" style="font-weight: 400 !important;">Confirmo que las dimensiones y el peso del paquete o documento son correctos (Datos incorrectos pueden generar cargos adicionales o el mensajero puede abstenerse de recolectar el envío)</span></mat-checkbox>
                         </div>
                         <div class="col-12">
-                          <mat-checkbox color="primary" class="conditions" formControlName="conditions" required="true"><span class="checkbox-text-wrap" style="font-weight: 400 !important;">He leido la lista de Articulos Prohibidos, acepto los Términos y Condiciones de Pakke asi como el Avíso de privacidad.</span></mat-checkbox>
+                          <mat-checkbox color="primary" class="conditions" formControlName="conditions" required="true"><span class="checkbox-text-wrap" style="font-weight: 400 !important;">He leido la lista de <a target="_blank" href="http://help.pakke.mx/articulos-prohibidos/">Articulos Prohibidos</a>, acepto los <a target="_blank" href="http://help.pakke.mx/terminos-y-condiciones/">Términos y Condiciones</a> de Pakke asi como el Avíso de privacidad.</span></mat-checkbox>
                         </div>
                       </div>
                     </mat-card-content>
