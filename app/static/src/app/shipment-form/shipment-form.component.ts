@@ -62,7 +62,7 @@ export class ShipmentFormComponent implements OnInit {
   //         "Sender":{
   //           "Name":"Josep",
   //           "CompanyName":"",
-  //           "Phone1":"5555555555",
+  //           "Phone1":"5555555c555",
   //           "Email":"josepromll@gmail.com"},
   //           "Recipient":{
   //             "Name":"JosepRom",
@@ -200,8 +200,6 @@ export class ShipmentFormComponent implements OnInit {
     }, {
 
     });
-
-    console.log(this.pakkeResponse);
 
   }
 
