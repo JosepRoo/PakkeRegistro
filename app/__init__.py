@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from flask_compress import Compress
 from flask_jwt_extended import JWTManager
 from flask_restful import Api
 
@@ -9,6 +10,7 @@ from config import config
 
 def create_app(config_name):
     app = Flask(__name__)
+    Compress(app)
     api = Api(app)
     jwt = JWTManager(app)
     app.config.from_object(config[config_name])
