@@ -21,6 +21,12 @@ class Config:
     JWT_SECRET_KEY = SECRET_KEY
     JWT_BLACKLIST_ENABLED = True
     JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
+    COMPRESS_MIMETYPE = ['text/html',
+                         'text/css',
+                         'text/xml',
+                         'application/json',
+                         'application/javascript',
+                         'text/javascript']
 
 
 class DevelopmentConfig(Config):
