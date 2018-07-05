@@ -26,7 +26,8 @@ class Config:
                          'text/xml',
                          'application/json',
                          'application/javascript',
-                         'text/javascript']
+                         'text/javascript'
+                         ]
 
 
 class DevelopmentConfig(Config):
