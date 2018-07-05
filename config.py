@@ -21,11 +21,11 @@ class Config:
     JWT_SECRET_KEY = SECRET_KEY
     JWT_BLACKLIST_ENABLED = True
     JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
-    COMPRESS_MIMETYPE = ['text/html',
+    COMPRESS_MIMETYPES = ['text/html',
                          'text/css',
                          'text/xml',
                          'application/json',
-                         'application/javascript',
+                         #'application/javascript',
                          'text/javascript',
                          'text/javascript; charset=utf-8'
                          ]

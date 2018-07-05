@@ -17,8 +17,7 @@ def create_app(config_name):
     # Register our blueprints
     from .default import default as default_blueprint
     app.register_blueprint(default_blueprint)
-
-
+    print(app.config['COMPRESS_MIMETYPES'])
     @app.after_request
     def after_request(response):
         response.headers.add('Access-Control-Allow-Origin', '*')
