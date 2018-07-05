@@ -25,7 +25,7 @@ class Config:
                          'text/css',
                          'text/xml',
                          'application/json',
-                         #'application/javascript',
+                         'application/javascript',
                          'text/javascript',
                          'text/javascript; charset=utf-8'
                          ]
