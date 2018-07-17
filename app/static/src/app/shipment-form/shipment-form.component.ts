@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { LocationService } from '../services/location/location.service';
 import { PakkeService } from '../services/pakke/pakke.service';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 import { PasswordValidation } from './password-validation';
-import { MatIconRegistry } from '@angular/material';
+import { MatIconRegistry, MatStepper } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CreditCardValidator } from 'ngx-credit-cards';
 import { environment } from '../../environments/environment';
-import { MatStepper } from '@angular/material';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ElementRef } from '@angular/core';
 
 // services
 import { EtominService } from '../services/etomin/etomin.service';
@@ -18,8 +19,8 @@ import { EtominService } from '../services/etomin/etomin.service';
   templateUrl: './shipment-form.component.html',
   styleUrls: ['./shipment-form.component.scss']
 })
-export class ShipmentFormComponent implements OnInit {
-  isLinear                  = true;
+export class ShipmentFormComponent implements OnInit, AfterViewInit {
+  isLinear;
   guide: FormGroup;
   service: FormGroup;
   data: FormGroup;
@@ -27,120 +28,131 @@ export class ShipmentFormComponent implements OnInit {
   locations: any[];
   rates: any[];
   calculatingRates: boolean = false;
-  months : any;
-  years : any;
-  loading: boolean          = false;
-  error: boolean            = false;
+  months: any;
+  years: any;
+  loading: boolean = false;
+  error: boolean = false;
   pakkeResponse: any;
-  // = {
-  //   "CourierCode":"FDX",
-  //   "CourierServiceId":"FEDEX_EXPRESS_SAVER",
-  //   "ResellerReference":"REF-WHGQZXMAVEYUNLT",
-  //   "AddressFrom":{
-  //     "ZipCode":"53125",
-  //     "State":"MX-MEX",
-  //     "City":"Naucalpan de Juárez (MEX)",
-  //     "Neighborhood":"Lomas Verdes 3a Sección",
-  //     "Address1":"calle",
-  //     "Address2":"numero",
-  //     "Residential":true,
-  //     "UserState":"MX-MEX"},
-  //     "AddressTo":{
-  //       "ZipCode":"53126",
-  //       "State":"MX-MEX",
-  //       "City":"Naucalpan de Juárez (MEX)",
-  //       "Neighborhood":"Lomas Verdes 5a Sección (La Concor",
-  //       "Address1":"calle",
-  //       "Address2":"numero",
-  //       "Residential":true,
-  //       "UserState":"MX-MEX"},
-  //       "Parcel":{
-  //         "Height":"12",
-  //         "Width":"12",
-  //         "Length":"12",
-  //         "Weight":"12"},
-  //         "Sender":{
-  //           "Name":"Josep",
-  //           "CompanyName":"",
-  //           "Phone1":"5555555c555",
-  //           "Email":"josepromll@gmail.com"},
-  //           "Recipient":{
-  //             "Name":"JosepRom",
-  //             "CompanyName":"",
-  //             "Phone1":"5555555555",
-  //             "Email":"josepromll@gmail.com"},
-  //             "ShipmentId":"26457d00-7503-11e8-b9a8-c538beae1bfd",
-  //             "ResellerId":"e6f43b43-7c9d-42fb-afdb-5126548c74ff",
-  //             "OwnerId":"4e5e6494-5656-4919-8db4-1bfd258e97d7",
-  //             "ZipCodeFrom":"53125",
-  //             "ZipCodeTo":"53126",
-  //             "CreatedAt":"2018-06-20T22:28:22.227",
-  //             "UpdatedAt":"2018-06-20T22:28:22.227",
-  //             "detail":{
-  //               "QuotedWeight":12,
-  //               "CoveredWeight":5,
-  //               "OverWeight":7,
-  //               "CoveredAmount":99,
-  //               "ExtrasAmount":42,
-  //               "OverWeightPrice":6,
-  //               "TotalAmount":141},
-  //               "RequestAt":"2018-06-20T22:28:22.237",
-  //               "Status":"SUCCESS",
-  //               "Label":"JVBERi0xLjQKMSAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwovUGFnZXMgMyAwIFIKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL1R5cGUgL091dGxpbmVzCi9Db3VudCAwCj4+CmVuZG9iagozIDAgb2JqCjw8Ci9UeXBlIC9QYWdlcwovQ291bnQgMQovS2lkcyBbMTggMCBSXQo+PgplbmRvYmoKNCAwIG9iagpbL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSV0KZW5kb2JqCjUgMCBvYmoKPDwKL1R5cGUgL0ZvbnQKL1N1YnR5cGUgL1R5cGUxCi9CYXNlRm9udCAvSGVsdmV0aWNhCi9FbmNvZGluZyAvTWFjUm9tYW5FbmNvZGluZwo+PgplbmRvYmoKNiAwIG9iago8PAovVHlwZSAvRm9udAovU3VidHlwZSAvVHlwZTEKL0Jhc2VGb250IC9IZWx2ZXRpY2EtQm9sZAovRW5jb2RpbmcgL01hY1JvbWFuRW5jb2RpbmcKPj4KZW5kb2JqCjcgMCBvYmoKPDwKL1R5cGUgL0ZvbnQKL1N1YnR5cGUgL1R5cGUxCi9CYXNlRm9udCAvSGVsdmV0aWNhLU9ibGlxdWUKL0VuY29kaW5nIC9NYWNSb21hbkVuY29kaW5nCj4+CmVuZG9iago4IDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9TdWJ0eXBlIC9UeXBlMQovQmFzZUZvbnQgL0hlbHZldGljYS1Cb2xkT2JsaXF1ZQovRW5jb2RpbmcgL01hY1JvbWFuRW5jb2RpbmcKPj4KZW5kb2JqCjkgMCBvYmoKPDwKL1R5cGUgL0ZvbnQKL1N1YnR5cGUgL1R5cGUxCi9CYXNlRm9udCAvQ291cmllcgovRW5jb2RpbmcgL01hY1JvbWFuRW5jb2RpbmcKPj4KZW5kb2JqCjEwIDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9TdWJ0eXBlIC9UeXBlMQovQmFzZUZvbnQgL0NvdXJpZXItQm9sZAovRW5jb2RpbmcgL01hY1JvbWFuRW5jb2RpbmcKPj4KZW5kb2JqCjExIDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9TdWJ0eXBlIC9UeXBlMQovQmFzZUZvbnQgL0NvdXJpZXItT2JsaXF1ZQovRW5jb2RpbmcgL01hY1JvbWFuRW5jb2RpbmcKPj4KZW5kb2JqCjEyIDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9TdWJ0eXBlIC9UeXBlMQovQmFzZUZvbnQgL0NvdXJpZXItQm9sZE9ibGlxdWUKL0VuY29kaW5nIC9NYWNSb21hbkVuY29kaW5nCj4+CmVuZG9iagoxMyAwIG9iago8PAovVHlwZSAvRm9udAovU3VidHlwZSAvVHlwZTEKL0Jhc2VGb250IC9UaW1lcy1Sb21hbgovRW5jb2RpbmcgL01hY1JvbWFuRW5jb2RpbmcKPj4KZW5kb2JqCjE0IDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9TdWJ0eXBlIC9UeXBlMQovQmFzZUZvbnQgL1RpbWVzLUJvbGQKL0VuY29kaW5nIC9NYWNSb21hbkVuY29kaW5nCj4+CmVuZG9iagoxNSAwIG9iago8PAovVHlwZSAvRm9udAovU3VidHlwZSAvVHlwZTEKL0Jhc2VGb250IC9UaW1lcy1JdGFsaWMKL0VuY29kaW5nIC9NYWNSb21hbkVuY29kaW5nCj4+CmVuZG9iagoxNiAwIG9iago8PAovVHlwZSAvRm9udAovU3VidHlwZSAvVHlwZTEKL0Jhc2VGb250IC9UaW1lcy1Cb2xkSXRhbGljCi9FbmNvZGluZyAvTWFjUm9tYW5FbmNvZGluZwo+PgplbmRvYmoKMTcgMCBvYmogCjw8Ci9DcmVhdGlvbkRhdGUgKEQ6MjAwMykKL1Byb2R1Y2VyIChGZWRFeCBTZXJ2aWNlcykKL1RpdGxlIChGZWRFeCBTaGlwcGluZyBMYWJlbCkNL0NyZWF0b3IgKEZlZEV4IEN1c3RvbWVyIEF1dG9tYXRpb24pDS9BdXRob3IgKENMUyBWZXJzaW9uIDUxMjAxMzUpCj4+CmVuZG9iagoxOCAwIG9iago8PAovVHlwZSAvUGFnZQ0vUGFyZW50IDMgMCBSCi9SZXNvdXJjZXMgPDwgL1Byb2NTZXQgNCAwIFIgCiAvRm9udCA8PCAvRjEgNSAwIFIgCi9GMiA2IDAgUiAKL0YzIDcgMCBSIAovRjQgOCAwIFIgCi9GNSA5IDAgUiAKL0Y2IDEwIDAgUiAKL0Y3IDExIDAgUiAKL0Y4IDEyIDAgUiAKL0Y5IDEzIDAgUiAKL0YxMCAxNCAwIFIgCi9GMTEgMTUgMCBSIAovRjEyIDE2IDAgUiAKID4+Ci9YT2JqZWN0IDw8IC9GZWRFeEV4cHJlc3MgMjAgMCBSCi9FeHByZXNzRSAyMSAwIFIKL2JhcmNvZGUwIDIyIDAgUgo+Pgo+PgovTWVkaWFCb3ggWzAgMCA2MTIgNzkyXQovVHJpbUJveFswIDAgNjEyIDc5Ml0KL0NvbnRlbnRzIDE5IDAgUgovUm90YXRlIDA+PgplbmRvYmoKMTkgMCBvYmoKPDwgL0xlbmd0aCAyNTUwCi9GaWx0ZXIgWy9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZV0gCj4+CnN0cmVhbQpHYXQ9Lj8jTnErJnEoUlhzJDB0IT4kdV4lWThJaUFWRldYUFxbTFYtUFU5VyxBW2JBVU0/YElGZlBbcS5JTGYiQVFHbE1PUGdDYm5lW108UApoYTo7ZSYnZXA7OUpGXTFNJGZbVlhfXVxEKC1MLmtRcEFZQU5NbCg1YTRack1YNTc4cG5pTGdzcHFrclYzZEFQNDA6PFhdbUk6Z3EkUF0tKApPPGpUXjVzLTYuRG1tITFbbWw1LnJdQ1JhW2Y7Z0dVT140UmhALFkxSDQjM0QjOFA+PmBVMFJrcUooR25cbTQna2VhaUNYXT9AYl1ITWJtJQpnY2lcaE4janIxI2VHNmNiJSE9UjZVazk1cDNFQmhBVTJ1Qz8qLSdHU1tyMWNiVi5TO3EscTVcbWBCPyJjPUFvdW9tVGxrU10sI19jWidEKgoyWDdwRUlROzsxUyNhZkQ9S0wpX0I8ZG0xaDwrL0FvQlgkYVhdZ2JNbEo7QWVyKks+JWgwYCZbTjI/LWUlcjEhXCsnKzpXZlVoOTJnPy0zJgovMXViUTZIOi1MYmE1TEYzQDlQOUxQdG5yJiQocCVhMF4jOUgrTDVXJ0hsaXFTb0U+Z0RYWUA9YkA6bVM/Y00lOD8/c0JhNiYqSDBENS9JIwpNM1NVOFlKOGpIalMmJVxyaktDOmJQPz0vTjwkUzpHQUg4JWBlVmQrMD1MPSZcJC5iVT4oKGFDVlgiXkhZWyQiIycmL2NOVDNDJD89TmpKbwpNQj0qRjYiPD5mSzstP1FUXnJcJGgwZiJWbGM4O3U7akc/cT1kUztiOyw4JlwmKlwxI140ISxULWgyKjRtIU8mTFUzRFFqSE8uZ0ZtPEBgNgoqOi5hVUlMMV5aNz5kKGFbM1gtPjtfNXUkbTQkLmYxPidHPio2PF9EaTFgUWBtUSRCRHFlVCZCUVRwSzNnRTZNV1BKWTYmbGtIU0A3WlBcXAphM0NUNE0wUldhaVcyS1E6YChGVidiTUVJImAnNWBcVWwxQ0c7TmpEJlA+bGZLMmltNVdrZUg3JlA2VG1iVEovQEpXOlQxa2IlPCUqSFwicApyTUc0Iis0PkQ/PDs/SmUqbiQ2WGElcGxMJVVTPWpsOHEuR2E2cSJULjFyO29iXUIkJzRfKUUwb200XksybGw3W2teOXVebitZTDQ5anA2VgpGJlVgSjo6QEQtVC1sSD1gK1AkQiY1SCJbTHVacEZoWWVkYDM5LGUwOFs6LjotN1taYissczduYiRJS0ZJIWAsJ2JqISZjMXBKL1thTGlTRApjT2NWJyViWiVbOC5gR29dRz4oOHAqNVA7YmMuWkNxZUFVNG5yJWcoQHAwYjU/KDdBO0NsbUEqZlRRKGYkJDgocyFlNVZVZ1VydUM7bEVFYgo9OlpRPkw/WWdgNXVVLyMiTCc+dG1BX0lZOyIwRWgyLlRRQFFyOUVUJkw8N0AsWlZAT1RQPSI7LzdYPVAvZy0kQU5ccHI+XDUpJmYyaFw3XAphcDc0O1srblhASDNNLjJIKTlNJkhxXTFCWyVJY1guN2hcQG8kYEMxJl1xSlVUdU02Tzg+c1UqMz9QITZWUCI6SikwSS1VajtIQiRya11hLwo1byRQJCY9VCdMUDVINGtGZmsvOUVQNnM3VFBQNWZNc2okVkY+XjVNN3FgJFhiPWZmJmwxJktARD9BSEJNRnEpPmQ1MzFiKy5KdVM/dFk5NwoqPSVxJj46bWlgNERbU01gVXNSMWgnRWBlODI5PlxQWi5hczdJXnBmVyl0RzpKU0AwRl9ZKmEzSzRPOHRnL0A0dFFvUz81QzEoXEFBKykwTApIPkhgY2VYMD0pVSswUVsuITEnYitIXzpRQkdMKEVAJzlTYzsraiprMSFZWyxjL3BoYGxqWDtXIWA3MSMrOUtgIjhpanJhbEp0WW9YKWY+TwosQXAvU0pcPSppMCNON1hNTGZdM00kaGlkI2hiaTpiMUhmO1QmZ2xSLlVdRy5aRENBWjFjVlUpJG5ZPTZZaClnXFJvIUNMYG43X20nM01HLQpDcy4oXVoyOnVOWlh1QSNKXDt0dU5TRUlzWnBbcDBoQz8/PmF0dCQsI3EySWtPSm1gRCJxOS48ViE8ZSJNPiNyYCJoYi02KURIK2opWHV1JgonIlR0SVNgNHM8X0RYUTo8YlUwYjMxQVVoWVFmOS9pXENgUDRRbkksMnNZX3Vsbm9tSWBmTSg+VU5BXUomcCszQCdiYkdAP0dbVkMvQGxeRwoyNl46IVFbTG88V0ppJU1ac0FDTydTTFxSSTBOInNAIi9rbydDdUAyMUVgZF07RTwyTEBMMVY+Mis6TlxER2E6aUhgU2ZCUVImW1czcyJbXwpBXXRfL2QzZTNQVlVaKWo+XEUwKUwnRixQYyQ2PSJCSyFhNz91SmxvaDQ0VERGRk1LPmwpPlRSQ0hoKCxRQjBfWClfQFszV1dJQCVQLzNCWApaRiQxLGMlXDFZbG50SGoqVkZJJmRAaSJyOSUhakg9IkI2LjNKJ1VeMTVycGJsOD5lSS8kSS4pMDQ5XlZwb15TciVJRFdmcW0sWXVoTkpkOQpeRj8vYXA/JVcxJC04JDknLzEiV1VTPld1bEJMX007STUpI0JXQWU7PEFoIzQ7YWIzVyM2T1Q3UEM/RzAibWN1Q10la1kqOGYpMnM/XFJoPQonO0dRJ1YyQC0+VjBVP2ZqMTVDO3JVV1hQYDsjIlQuVTZtVyJCL2MyZCxJJSVXXCRlIlloKU5WRzYnJ1Y3VlVKTCRKMj1XXGQtQy8jRDokMgo+Q24+MFk9OFJQVmwoLXBaVk05ayRKLTQsJmtoJj5rc2JrdUBvTGAnWTFJY18pWThXNDdZIWhTZ19lVlA/SU09bTJuQlRqJ3MrJ05WR2xORApLKD1VKC8qIyo0JS8wVVtEZ3MyRy1XXj1oXC4yVDxUPUh0cmpRWVQ1UkdvMiZsZUQqVzVAMjlybWQ1cFlBNSVyXUMtTVByaUlsY1soX0MmZApgbEkuVmhYXDFzWC9bY1hIJD9BSzc/dGImNCRBRVFUK2Ama2A6X0M4aGtiaU45XyprLTtESSslQnRRQlsnbEMsak8iXSJRSihZPydiaSxeJgpeL3JAaVNHTXNnKUBraycuJWotVCcySitaUi5GL3VIMEFsbScnNy8wT1QrZEpuXVVeaHBXanJdcGQ2V19TLEdLaUA6VWZscSZiLCZsVUddagpvJD4sZEA4dEVJSjloaDFFW2Moc0JaOi44ZVMnJG9rVGNLUVVqR11NIzBPIyJCYytKYC4xXGpNbXJhTWo5X3RyQklmQWxIVDBETyxcaGIwdApoZTs8Nm5UPi9rX1tZW2wmTmxEJWBNKFArcm5RMm9zLVwsPWwyfj4KZW5kc3RyZWFtCmVuZG9iagoyMCAwIG9iago8PCAvVHlwZSAvWE9iamVjdAovU3VidHlwZSAvSW1hZ2UKL1dpZHRoIDExOAovSGVpZ2h0IDQ5Ci9Db2xvclNwYWNlIC9EZXZpY2VHcmF5Ci9CaXRzUGVyQ29tcG9uZW50IDgKL0xlbmd0aCA0NjEKL0ZpbHRlciBbL0FTQ0lJODVEZWNvZGUgL0ZsYXRlRGVjb2RlXQo+PnN0cmVhbQpHYiIvZUpJXVI/I1huWGtUNkE+WEtuRGJXQiJNWkVhalBwZDRdJyheQFJsdCJrQiJTMCRmJT89bT00Qzs7LiROKGpSY1lSJXNkJmw5JE90XgopJjc9TCg3LWVxcWVALigvU0M5ODQtZkxYZUxaNXFjWjVsQUVCNTU+M0AwPWsiO1JoMmhCY1FMMyZKPzVvW2NIMGJTRk5ePDs7QDQxU1k5bQpjIlpJPVlsI2M0KWBfIllsbU4zJS5BLmxOU2BWZS9ZPCU/LjcoKCkvLmRCWztrIUpbJSclREpcST8rYTc6NW9Oa1lccUVTPjM8STViWm0oSQolZDxAQik4RGJ0M3BLR2NsYlFrMSdpWlZzN05NMFxvJlIqcVU+Z0h1LUZyQ2toPGtIRkcqXCRNPV9zVi8tJFxKRjplLz8+ZlhBK0NDbXBEZQpkU1A2R2N1LFxYJ0FMPWE1SkNbNDZHLmhwMj1VNGVeJGVvXFEjYiptN0M4JC1KQShjWj9ZYCdDOzZKcEhlUGxcJEhFQyF1XipRYSs2Z0VNawpbZkVWKmIuIz5wcj4tV1NmIz5oJlc/dWtrVHNoWWA9L1guNjZBKjtiaXMvZGdAUVhYc3I4bTt+PgplbmRzdHJlYW0KZW5kb2JqCjIxIDAgb2JqCjw8IC9UeXBlIC9YT2JqZWN0Ci9TdWJ0eXBlIC9JbWFnZQovV2lkdGggNTQKL0hlaWdodCA1NAovQ29sb3JTcGFjZSAvRGV2aWNlR3JheQovQml0c1BlckNvbXBvbmVudCA4Ci9MZW5ndGggNzcKL0ZpbHRlciBbL0FTQ0lJODVEZWNvZGUgL0ZsYXRlRGVjb2RlXQo+PnN0cmVhbQpHYiIwSmQwVGRxJGo0b0ZeVSwiSFRzOUVJRTswQVQsX0UqTFolb0A3Smw1VjtIJ0NzPVRycURhSC40QmYjYzRPVlQ7KGQjZjxHRTl+PgplbmRzdHJlYW0KZW5kb2JqCjIyIDAgb2JqCjw8IC9UeXBlIC9YT2JqZWN0Ci9TdWJ0eXBlIC9JbWFnZQovV2lkdGggMjk0Ci9IZWlnaHQgNzAKL0NvbG9yU3BhY2UgL0RldmljZUdyYXkKL0JpdHNQZXJDb21wb25lbnQgOAovTGVuZ3RoIDE0MDkKL0ZpbHRlciBbL0FTQ0lJODVEZWNvZGUgL0ZsYXRlRGVjb2RlXQo+PnN0cmVhbQpHYiIvYzk6Ij9vJHElPCI5ZDsja2AoLXVxQS8nLmpvUiJWcWI3WShjVkZeLV9mM1VCaGJmLzFgP09RUSFxW1wxW2ksc0F1cGw8dSNcYG0lQApxYDghWmNAW1UlZDplKGEoSnNAIW89TXBZPkdWNUNQS1FWdEtDc0V0VWQzM1dWNTxlcC5BPiRqI2BvU2xtWHMjLDlVYDRvOHVTLVQ3VD0wSQpVXEdRPCkvJmJmOlNzXkFjIytAbnFPU19qNUR1QUZQXHNELCtUOGZNM3ImV0khPjlLLFJbUllNKWBVbl9DLD8iRGQ4SltwQSM8OmdLZD9XQgozWVFdZC9aJTNkQ2Q1OCM3WSxLWDtaZ0wlZzgzI1g/LkFCcUI+RzMmRnBPIS5wImhhYyFZQFZvaiw+PUldJXMtWFskMzFAYXEkW0olJDM4Ngo+XzxvKFkyOmw+VlRfNyJmWzE9bDpGZG5YXz9fYV5XSElRaFcwO1dmTDZQcTg5QmVKYFgyZWUzPXQiQVNwbVZMVm1YVFJKRF1iMm5aPUQqTwpOLz9uL2RGKzMyQiZLV2VpUDU5TVAiVEw8aDUhRlQ5ZCUnLzQxUCxIWkU8bVROXzhJUTMvWVlXKHIlYDoqRlk5YF9RKWVkZSY/P2ozKTNgZwo/Om1sVCtzaCpDK1wuY2tSRDshN0ApPTcyTFJBOjZddSZcRGFEYTtpYWtTbl8oL15CP1VIQ0FtbUhAUXUvdT5FOjFSKjQ2ISciXlRUbkFbOgpGR08kaVEhZS5gUkdwOW9aQ1hHay0+ZiVwRG1vMy5pRCZzSENiTVxkOTUsajJVU0wrPEM5T209XDQwXkojT2JHVTsncHJqZGY5XF0+cSRcJAohOXA6R21MNT4jPixbUjZfRmw5K2dnKk5Ga3JwQ29CaismKFUzNnMlMHA+XzhuYDgiTmM2MHQ6MjxsMCxIdV0mS19uPFFyYmgxbmU9QVklVwpBN008PzhrXEQsLTJpJz87VW8oMDdIIXRTWGEoSShBW0ouVjo4WE9zUz5aVl5MdVFtMEdHIUI8RFIxTXBPUCRFOG4+RStpUGNkcmouREVRYwo8aWVKRD0pTSc8IWNxJXMuQmRYUVNrYyg0TmFOQGEjMmhVSVkoYis1W1AkSiVvMjhhYXBGKWpQbzNhNjMoI0cjVS5FQUlMTTskR1glNkVdRwo1MmVCUDhraW1lKixGOTBQPUkiXVdnXS9ZVlNsQTk5KHNiLCUtVVJLLF49LFIpWU1uals1OGYuTyZHWUU6Yz9VODZfMjVhUjFQLGFRaTNbWAomUC0qbz1cOz9PMkMzJCEwVUNkdFU9bVtLVjkwY1Q5NUpGPWNOW0prZmlZWidbMU02cGBfJmlDOj5MUC86bjBCImRxXkJhViZ1QzE1P1xSOApCXkVzczBqVWtHQSdwSDtyM20nVV1UZWAxY1ZVcDk3WTVgXDpVO2YwZGFUOCIxJ11Bb3MiL21ET1FnKVBpP0l1V1x1SkorKHA+UzFBbixsVgpea0FUTydLUjc/OGtcRCQsbyVAWkRdW1oxLWY4dTVBTzs0dFA1UCNFQTYxdCokKjlZKl8oTHErY3JKZi5cWUg2bUNYc15sYj5NTTlHOkJNNQpHNHFGZShDXGxlJyZCLyUoVEtldClMRU5lYExudT9WUTNoOWFcKFNqajtfXWo3dSo0XFY2bEtUOzZpWGo7QGZnY0EhSCg+bmUvMztWMz1bLwo3YS1NbipaSU1xPjBcJk8hZjZIO1JdaGQrOjQzLygnTUUtaGg1MTxUWF8wJjxHJG1paStUYDNlJ0YqRl81cFxDbyRPLnVCSkZNMFxBNiw5PwpAVzslOG1tUFVAbmszW0dyRFE9OHJWY1FyLic0Nzh+PgplbmRzdHJlYW0KZW5kb2JqCnhyZWYKMCAyMwowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMDkgMDAwMDAgbiAKMDAwMDAwMDA1OCAwMDAwMCBuIAowMDAwMDAwMTA0IDAwMDAwIG4gCjAwMDAwMDAxNjIgMDAwMDAgbiAKMDAwMDAwMDIxNCAwMDAwMCBuIAowMDAwMDAwMzEyIDAwMDAwIG4gCjAwMDAwMDA0MTUgMDAwMDAgbiAKMDAwMDAwMDUyMSAwMDAwMCBuIAowMDAwMDAwNjMxIDAwMDAwIG4gCjAwMDAwMDA3MjcgMDAwMDAgbiAKMDAwMDAwMDgyOSAwMDAwMCBuIAowMDAwMDAwOTM0IDAwMDAwIG4gCjAwMDAwMDEwNDMgMDAwMDAgbiAKMDAwMDAwMTE0NCAwMDAwMCBuIAowMDAwMDAxMjQ0IDAwMDAwIG4gCjAwMDAwMDEzNDYgMDAwMDAgbiAKMDAwMDAwMTQ1MiAwMDAwMCBuIAowMDAwMDAxNjIyIDAwMDAwIG4gCjAwMDAwMDIwMDEgMDAwMDAgbiAKMDAwMDAwNDY0MyAwMDAwMCBuIAowMDAwMDA1MjkwIDAwMDAwIG4gCjAwMDAwMDU1NTEgMDAwMDAgbiAKdHJhaWxlcgo8PAovSW5mbyAxNyAwIFIKL1NpemUgMjMKL1Jvb3QgMSAwIFIKPj4Kc3RhcnR4cmVmCjcxNDcKJSVFT0YK",
-  //               "TrackingNumber":"781517756130"};
   stepper: MatStepper;
-  editable                  = true;
+  editable = true;
+  @ViewChild('stepper') step: MatStepper;
+  @ViewChild('nextStepButton') nextButton: ElementRef;
 
   constructor(
-    private _formBuilder   : FormBuilder,
+    private _formBuilder: FormBuilder,
     private locationService: LocationService,
-    private pakkeService   : PakkeService,
-    private iconRegistry   : MatIconRegistry,
-    private sanitizer      : DomSanitizer,
-    private etomin         : EtominService,
+    private pakkeService: PakkeService,
+    private iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer,
+    private etomin: EtominService,
+    private activatedRoute: ActivatedRoute
   ) {
-
     this.iconRegistry
-    .addSvgIcon('mastercard', sanitizer.bypassSecurityTrustResourceUrl('./assets/mastercard.svg'))
-    .addSvgIcon('visa', sanitizer.bypassSecurityTrustResourceUrl('./assets/visa.svg'))
-    .addSvgIcon('amex', sanitizer.bypassSecurityTrustResourceUrl('./assets/amex.svg'))
-    .addSvgIcon('box', sanitizer.bypassSecurityTrustResourceUrl('./assets/icn_box.svg'))
-    .addSvgIcon('company', sanitizer.bypassSecurityTrustResourceUrl('./assets/icn_building.svg'))
-    .addSvgIcon('calendar', sanitizer.bypassSecurityTrustResourceUrl('./assets/calendar.svg'))
-    .addSvgIcon('mexico', sanitizer.bypassSecurityTrustResourceUrl('./assets/mexico.svg'))
-    .addSvgIcon('one', sanitizer.bypassSecurityTrustResourceUrl('./assets/one.svg'))
-    .addSvgIcon('two', sanitizer.bypassSecurityTrustResourceUrl('./assets/two.svg'))
-    .addSvgIcon('three', sanitizer.bypassSecurityTrustResourceUrl('./assets/three.svg'))
-    .addSvgIcon('four', sanitizer.bypassSecurityTrustResourceUrl('./assets/four.svg'))
-    .addSvgIcon('one-active', sanitizer.bypassSecurityTrustResourceUrl('./assets/one-active.svg'))
-    .addSvgIcon('two-active', sanitizer.bypassSecurityTrustResourceUrl('./assets/two-active.svg'))
-    .addSvgIcon('three-active', sanitizer.bypassSecurityTrustResourceUrl('./assets/three-active.svg'))
-    .addSvgIcon('four-active', sanitizer.bypassSecurityTrustResourceUrl('./assets/four-active.svg'))
+      .addSvgIcon(
+        'mastercard',
+        sanitizer.bypassSecurityTrustResourceUrl('./assets/mastercard.svg')
+      )
+      .addSvgIcon(
+        'visa',
+        sanitizer.bypassSecurityTrustResourceUrl('./assets/visa.svg')
+      )
+      .addSvgIcon(
+        'amex',
+        sanitizer.bypassSecurityTrustResourceUrl('./assets/amex.svg')
+      )
+      .addSvgIcon(
+        'box',
+        sanitizer.bypassSecurityTrustResourceUrl('./assets/icn_box.svg')
+      )
+      .addSvgIcon(
+        'company',
+        sanitizer.bypassSecurityTrustResourceUrl('./assets/icn_building.svg')
+      )
+      .addSvgIcon(
+        'calendar',
+        sanitizer.bypassSecurityTrustResourceUrl('./assets/calendar.svg')
+      )
+      .addSvgIcon(
+        'mexico',
+        sanitizer.bypassSecurityTrustResourceUrl('./assets/mexico.svg')
+      )
+      .addSvgIcon(
+        'one',
+        sanitizer.bypassSecurityTrustResourceUrl('./assets/one.svg')
+      )
+      .addSvgIcon(
+        'two',
+        sanitizer.bypassSecurityTrustResourceUrl('./assets/two.svg')
+      )
+      .addSvgIcon(
+        'three',
+        sanitizer.bypassSecurityTrustResourceUrl('./assets/three.svg')
+      )
+      .addSvgIcon(
+        'four',
+        sanitizer.bypassSecurityTrustResourceUrl('./assets/four.svg')
+      )
+      .addSvgIcon(
+        'one-active',
+        sanitizer.bypassSecurityTrustResourceUrl('./assets/one-active.svg')
+      )
+      .addSvgIcon(
+        'two-active',
+        sanitizer.bypassSecurityTrustResourceUrl('./assets/two-active.svg')
+      )
+      .addSvgIcon(
+        'three-active',
+        sanitizer.bypassSecurityTrustResourceUrl('./assets/three-active.svg')
+      )
+      .addSvgIcon(
+        'four-active',
+        sanitizer.bypassSecurityTrustResourceUrl('./assets/four-active.svg')
+      );
   }
 
   ngOnInit() {
-
     // months options for the credit card expiration
-    this.months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+    this.months = [
+      '01',
+      '02',
+      '03',
+      '04',
+      '05',
+      '06',
+      '07',
+      '08',
+      '09',
+      '10',
+      '11',
+      '12'
+    ];
 
     // generates the next 8 years from now for the credit card  expiration
     var today = new Date();
     var todayYear = today.getFullYear() - 2000;
     this.years = [];
-    for (var i = 0; i < 8; i++ ){
+    for (var i = 0; i < 8; i++) {
       this.years.push(String(todayYear));
       todayYear++;
     }
 
     // guide data form
     this.guide = this._formBuilder.group({
-      origin : ['', Validators.compose([Validators.required]), this.validPostalCode(this.locationService)],
-      destiny: ['', Validators.compose([Validators.required]), this.validPostalCode(this.locationService)],
-      weight : ['', [Validators.required, this.validateMeasure]],
-      width  : ['', [Validators.required, this.validateMeasure]],
-      height : ['', [Validators.required, this.validateMeasure]],
-      deep   : ['', [Validators.required, this.validateMeasure]],
-      valid : ['', Validators.required]
+      origin: [
+        '',
+        Validators.compose([Validators.required]),
+        this.validPostalCode(this.locationService)
+      ],
+      destiny: [
+        '',
+        Validators.compose([Validators.required]),
+        this.validPostalCode(this.locationService)
+      ],
+      weight: ['', [Validators.required, this.validateMeasure]],
+      width: ['', [Validators.required, this.validateMeasure]],
+      height: ['', [Validators.required, this.validateMeasure]],
+      deep: ['', [Validators.required, this.validateMeasure]],
+      valid: ['', Validators.required]
     });
 
     // service form
@@ -148,59 +160,102 @@ export class ShipmentFormComponent implements OnInit {
       service: ['', Validators.required]
     });
 
-    this.data = this._formBuilder.group({
-      name             : ['', Validators.required],
-      lastName         : ['', Validators.required],
-      email            : ['', [Validators.required, Validators.email]],
-      package          : ['', Validators.required],
-      register         : [''],
-      password         : ['', [Validators.minLength(8), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
-      confirmPassword  : [''],
-      originName       : ['', Validators.required],
-      originCompany    : [''],
-      originPhone      : ['', [Validators.required, Validators.pattern("[0-9]{10}")]],
-      originEmail      : ['', [Validators.required, Validators.email]],
-      originZipCode    : [{disabled: true}, Validators.required],
-      originState      : [{disabled: true}, Validators.required],
-      originCity       : [{disabled: true}, Validators.required],
-      originColony     : [{disabled: true}, Validators.required],
-      originStreet     : ['', Validators.required],
-      originReferences : ['', Validators.required],
-      destinyName      : ['', Validators.required],
-      destinyCompany   : [''],
-      destinyPhone     : ['', [Validators.required, Validators.pattern("[0-9]{10}")]],
-      destinyEmail     : ['', [Validators.required, Validators.email]],
-      destinyZipCode   : [{disabled: true}, Validators.required],
-      destinyState     : [{disabled: true}, Validators.required],
-      destinyCity      : [{disabled: true}, Validators.required],
-      destinyColony    : [{disabled: true}, Validators.required],
-      destinyStreet    : ['', Validators.required],
-      destinyReferences: ['', Validators.required],
-      confirm          : ['', Validators.required],
-      conditions       : ['', Validators.required],
-    }, {
-      validator: PasswordValidation.MatchPassword
-    });
+    this.data = this._formBuilder.group(
+      {
+        name: ['', Validators.required],
+        lastName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        package: ['', Validators.required],
+        register: [''],
+        password: [
+          '',
+          [
+            Validators.minLength(8),
+            Validators.pattern(
+              '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}'
+            )
+          ]
+        ],
+        confirmPassword: [''],
+        originName: ['', Validators.required],
+        originCompany: [''],
+        originPhone: [
+          '',
+          [Validators.required, Validators.pattern('[0-9]{10}')]
+        ],
+        originEmail: ['', [Validators.required, Validators.email]],
+        originZipCode: [{ disabled: true }, Validators.required],
+        originState: [{ disabled: true }, Validators.required],
+        originCity: [{ disabled: true }, Validators.required],
+        originColony: [{ disabled: true }, Validators.required],
+        originStreet: ['', Validators.required],
+        originReferences: ['', Validators.required],
+        destinyName: ['', Validators.required],
+        destinyCompany: [''],
+        destinyPhone: [
+          '',
+          [Validators.required, Validators.pattern('[0-9]{10}')]
+        ],
+        destinyEmail: ['', [Validators.required, Validators.email]],
+        destinyZipCode: [{ disabled: true }, Validators.required],
+        destinyState: [{ disabled: true }, Validators.required],
+        destinyCity: [{ disabled: true }, Validators.required],
+        destinyColony: [{ disabled: true }, Validators.required],
+        destinyStreet: ['', Validators.required],
+        destinyReferences: ['', Validators.required],
+        confirm: ['', Validators.required],
+        conditions: ['', Validators.required]
+      },
+      {
+        validator: PasswordValidation.MatchPassword
+      }
+    );
 
-    this.payment = this._formBuilder.group({
-      name         : ['', Validators.required],
-      zipCode      : ['', [Validators.required, Validators.pattern("[0-9]{5}")]],
-      number       : ['', [Validators.required, CreditCardValidator.validateCardNumber]],
-      cvv          : ['', [Validators.required, CreditCardValidator.validateCardCvc]],
-      month        : ['', [Validators.required, Validators.pattern("[0-9]{2}")]],
-      year         : ['', [Validators.required, Validators.pattern("[0-9]{2}")]],
-      type         : ['', [Validators.required]],
-      session      : [''],
-      reference    : [''],
-      merchant     : [''],
-      order        : [''],
-      transaction  : [''],
-      token        : [''],
-      authorization: ['']
-    }, {
+    this.payment = this._formBuilder.group(
+      {
+        name: ['', Validators.required],
+        zipCode: ['', [Validators.required, Validators.pattern('[0-9]{5}')]],
+        number: [
+          '',
+          [Validators.required, CreditCardValidator.validateCardNumber]
+        ],
+        cvv: ['', [Validators.required, CreditCardValidator.validateCardCvc]],
+        month: ['', [Validators.required, Validators.pattern('[0-9]{2}')]],
+        year: ['', [Validators.required, Validators.pattern('[0-9]{2}')]],
+        type: ['', [Validators.required]],
+        session: [''],
+        reference: [''],
+        merchant: [''],
+        order: [''],
+        transaction: [''],
+        token: [''],
+        authorization: ['']
+      },
+      {}
+    );
 
-    });
+    if (this.activatedRoute.snapshot.params['data']) {
+      this.isLinear = false;
+      const data = JSON.parse(this.activatedRoute.snapshot.params['data']);
+      console.log(data);
+      this.guide.controls.origin.setValue(data.origin);
+      this.guide.controls.destiny.setValue(data.destiny);
+      this.guide.controls.weight.setValue(data.weight);
+      this.guide.controls.height.setValue(data.height);
+      this.guide.controls.width.setValue(data.width);
+      this.guide.controls.deep.setValue(data.deep);
+    } else {
+      this.isLinear = true;
+    }
+  }
 
+  ngAfterViewInit() {
+    if (this.activatedRoute.snapshot.params['data']) {
+      this.guide.controls.valid.setValue(true);
+      this.getRatesWithoutValidation(this.step);
+      this.step.selectedIndex = 2;
+      this.isLinear = true;
+    }
   }
 
   getCardType() {
@@ -223,48 +278,89 @@ export class ShipmentFormComponent implements OnInit {
   }
 
   validPostalCode(httpService: LocationService) {
-    return control => new Promise((resolve, reject) => {
-      return httpService.getLocations(control.value.substring(0,5)).subscribe(res => {
-        return res.postalcodes.length ? resolve(null) : resolve({ valid : { valid: true}});;
+    return control =>
+      new Promise((resolve, reject) => {
+        return httpService
+          .getLocations(control.value.substring(0, 5))
+          .subscribe(res => {
+            return res.postalcodes.length
+              ? resolve(null)
+              : resolve({ valid: { valid: true } });
+          });
       });
-    });
   }
 
   validateMeasure(formControl: FormControl) {
     let number = /^[.\d]+$/.test(formControl.value) ? +formControl.value : NaN;
     if (number !== number) {
-      return { 'value': true };
+      return { value: true };
     }
-    if (number <= 0){
-      return { 'value': true };
+    if (number <= 0) {
+      return { value: true };
     }
     return null;
   }
 
   autocompleteLocations(inputValue) {
     var self = this;
-    return this.locationService.getLocations(inputValue).subscribe(locations => {
-      if (locations.postalcodes.length)
-        self.locations = locations.postalcodes;
-    });
+    return this.locationService
+      .getLocations(inputValue)
+      .subscribe(locations => {
+        if (locations.postalcodes.length)
+          self.locations = locations.postalcodes;
+      });
   }
 
-  selectService(service, stepper: MatStepper){
+  selectService(service, stepper: MatStepper) {
     this.service.controls.service.setValue(service);
-    this.data.controls.originZipCode.reset({value : this.guide.controls.origin.value.substring(0,5), disabled: true});
-    this.data.controls.originState.reset({value   : this.guide.controls.origin.value.split("(")[this.guide.controls.origin.value.split("(").length - 1].substring(0,3), disabled: true});
-    this.data.controls.originCity.reset({value    : this.guide.controls.origin.value.split(" - ")[2], disabled: true});
-    this.data.controls.originColony.reset({value  : this.guide.controls.origin.value.split(" - ")[1], disabled: true});
-    this.data.controls.destinyZipCode.reset({value: this.guide.controls.destiny.value.substring(0,5), disabled: true});
-    this.data.controls.destinyState.reset({value  : this.guide.controls.destiny.value.split("(")[this.guide.controls.destiny.value.split("(").length - 1].substring(0,3), disabled: true});
-    this.data.controls.destinyCity.reset({value   : this.guide.controls.destiny.value.split(" - ")[2], disabled: true});
-    this.data.controls.destinyColony.reset({value : this.guide.controls.destiny.value.split(" - ")[1], disabled: true});
+    this.data.controls.originZipCode.reset({
+      value: this.guide.controls.origin.value.substring(0, 5),
+      disabled: true
+    });
+    this.data.controls.originState.reset({
+      value: this.guide.controls.origin.value
+        .split('(')
+        [this.guide.controls.origin.value.split('(').length - 1].substring(
+          0,
+          3
+        ),
+      disabled: true
+    });
+    this.data.controls.originCity.reset({
+      value: this.guide.controls.origin.value.split(' - ')[2],
+      disabled: true
+    });
+    this.data.controls.originColony.reset({
+      value: this.guide.controls.origin.value.split(' - ')[1],
+      disabled: true
+    });
+    this.data.controls.destinyZipCode.reset({
+      value: this.guide.controls.destiny.value.substring(0, 5),
+      disabled: true
+    });
+    this.data.controls.destinyState.reset({
+      value: this.guide.controls.destiny.value
+        .split('(')
+        [this.guide.controls.destiny.value.split('(').length - 1].substring(
+          0,
+          3
+        ),
+      disabled: true
+    });
+    this.data.controls.destinyCity.reset({
+      value: this.guide.controls.destiny.value.split(' - ')[2],
+      disabled: true
+    });
+    this.data.controls.destinyColony.reset({
+      value: this.guide.controls.destiny.value.split(' - ')[1],
+      disabled: true
+    });
     stepper.next();
   }
 
-  getRates(stepper: MatStepper){
+  getRates(stepper: MatStepper) {
     this.guide.controls.valid.setValue(true);
-    if (this.guide.valid){
+    if (this.guide.valid) {
       this.calculatingRates = true;
       var data = {
         Parcel: {
@@ -273,8 +369,9 @@ export class ShipmentFormComponent implements OnInit {
           Weight: this.guide.controls.weight.value,
           Width: this.guide.controls.width.value
         },
-        ZipCode: this.guide.controls.destiny.value.substring(0,5)
-      }
+        ZipCode: this.guide.controls.destiny.value.substring(0, 5),
+        InsuredAmount: ''
+      };
       this.pakkeService.getRates(data).subscribe(res => {
         this.rates = res;
         this.calculatingRates = false;
@@ -285,41 +382,66 @@ export class ShipmentFormComponent implements OnInit {
     }
   }
 
-  setEstimatedDate(days){
+  getRatesWithoutValidation(stepper: MatStepper) {
+    this.guide.controls.valid.setValue(true);
+    const params = JSON.parse(this.activatedRoute.snapshot.params['data']);
+    var data = {
+      Parcel: {
+        Height: this.guide.controls.height.value,
+        Length: this.guide.controls.deep.value,
+        Weight: this.guide.controls.weight.value,
+        Width: this.guide.controls.width.value
+      },
+      ZipCode: this.guide.controls.destiny.value.substring(0, 5),
+      InsuredAmount: ''
+    };
+    this.pakkeService.getRates(data).subscribe(res => {
+      this.rates = res;
+      const ser = res.filter(el => {
+        // console.log(el);
+        // console.log(data);
+        return el.CourierServiceId === params.service.CourierServiceId;
+      });
+      this.service.controls.service.setValue(ser[0]);
+    });
+  }
+
+  setEstimatedDate(days) {
     var now = new Date();
-    now.setDate(now.getDate() + Number(days) );
+    now.setDate(now.getDate() + Number(days));
     return now;
   }
 
   generateSession(stepper) {
     this.stepper = stepper;
     var self = this;
-    if (this.payment.valid){
+    if (this.payment.valid) {
       this.loading = true;
       this.error = false;
       this.registerUser();
       this.etomin.getSessionId().subscribe(
-      res => {
-        self.payment.controls.session.setValue(res.session_id);
-        self.payment.controls.merchant.setValue(res.merchant_id);
-        self.payment.controls.reference.setValue(self.generateReference());
-      },
-      error => console.log(error),
-      function() {
-        self.makePayment()
-      })
+        res => {
+          self.payment.controls.session.setValue(res.session_id);
+          self.payment.controls.merchant.setValue(res.merchant_id);
+          self.payment.controls.reference.setValue(self.generateReference());
+        },
+        error => console.log(error),
+        function() {
+          self.makePayment();
+        }
+      );
     }
   }
 
   generateReference() {
-    var text = "";
-    var possible = "0123456789";
+    var text = '';
+    var possible = '0123456789';
     var today = new Date();
 
     for (var i = 0; i < 3; i++)
       text += possible.charAt(Math.floor(Math.random() * possible.length));
 
-    return Number(today)+text;
+    return Number(today) + text;
   }
 
   makePayment() {
@@ -329,64 +451,69 @@ export class ShipmentFormComponent implements OnInit {
       transaction: {
         device_session_id: this.payment.controls.session.value,
         order: {
-            description       : "Generacion de guia en Pakke",
-            external_reference: this.payment.controls.reference.value,
+          description: 'Generacion de guia en Pakke',
+          external_reference: this.payment.controls.reference.value
         },
         payer: {
-            firstName  : this.data.controls.name.value,
-            lastName   : this.data.controls.lastName.value,
-            email      : this.data.controls.email.value,
-            shippingAddress: {
-                description     : "Direccion de envio de paquetes",
-                street_name     : this.data.controls.destinyStreet.value,
-                street_number   : this.data.controls.destinyReferences.value,
-                neighbour       : this.data.controls.destinyColony.value,
-                city            : this.data.controls.destinyCity.value,
-                state           : this.data.controls.destinyState.value,
-                zipcode         : this.data.controls.destinyZipCode.value,
-                address_type    : 1,
-                country         : "MX"
-            },
-            billingAddress: {
-              description     : "Direccion de envio de paquetes",
-              street_name     : this.data.controls.originStreet.value,
-              street_number   : this.data.controls.originReferences.value,
-              neighbour       : this.data.controls.originColony.value,
-              city            : this.data.controls.originCity.value,
-              state           : this.data.controls.originState.value,
-              zipcode         : this.data.controls.originZipCode.value,
-              address_type    : 1,
-              country         : "MX"
-            }
+          firstName: this.data.controls.name.value,
+          lastName: this.data.controls.lastName.value,
+          email: this.data.controls.email.value,
+          shippingAddress: {
+            description: 'Direccion de envio de paquetes',
+            street_name: this.data.controls.destinyStreet.value,
+            street_number: this.data.controls.destinyReferences.value,
+            neighbour: this.data.controls.destinyColony.value,
+            city: this.data.controls.destinyCity.value,
+            state: this.data.controls.destinyState.value,
+            zipcode: this.data.controls.destinyZipCode.value,
+            address_type: 1,
+            country: 'MX'
+          },
+          billingAddress: {
+            description: 'Direccion de envio de paquetes',
+            street_name: this.data.controls.originStreet.value,
+            street_number: this.data.controls.originReferences.value,
+            neighbour: this.data.controls.originColony.value,
+            city: this.data.controls.originCity.value,
+            state: this.data.controls.originState.value,
+            zipcode: this.data.controls.originZipCode.value,
+            address_type: 1,
+            country: 'MX'
+          }
         },
         payment: {
-          amount         : this.service.controls.service.value.TotalPrice,
-          currency       : "MXN",
-          payment_country: "MEX",
-          payment_method : this.payment.controls.type.value,
+          amount: this.service.controls.service.value.TotalPrice,
+          currency: 'MXN',
+          payment_country: 'MEX',
+          payment_method: this.payment.controls.type.value,
           number: this.payment.controls.number.value,
           securityCode: this.payment.controls.cvv.value,
-          expirationDate: this.payment.controls.month.value +'/'+this.payment.controls.year.value,
+          expirationDate:
+            this.payment.controls.month.value +
+            '/' +
+            this.payment.controls.year.value,
           name: this.payment.controls.name.value
         }
       }
     };
-    this.etomin.makePayment(paymentData).subscribe(res=>{
-      if (Number(res.error) == 0){
-        this.payment.controls.order.setValue(res.order);
-        this.payment.controls.transaction.setValue(res.transaction);
-        this.payment.controls.authorization.setValue(res.authorization_code);
-        this.payment.controls.token.setValue(res.card_token);
-        this.generateShipment();
-
-      } else {
+    this.etomin.makePayment(paymentData).subscribe(
+      res => {
+        if (Number(res.error) == 0) {
+          this.payment.controls.order.setValue(res.order);
+          this.payment.controls.transaction.setValue(res.transaction);
+          this.payment.controls.authorization.setValue(res.authorization_code);
+          this.payment.controls.token.setValue(res.card_token);
+          this.generateShipment();
+        } else {
+          this.error = true;
+          this.loading = false;
+        }
+      },
+      error => {
         this.error = true;
         this.loading = false;
       }
-    }, error => {
-      this.error = true;
-      this.loading = false;
-    })
+    );
   }
 
   generateShipment() {
@@ -397,18 +524,18 @@ export class ShipmentFormComponent implements OnInit {
       ResellerReference: this.payment.controls.reference.value,
       AddressFrom: {
         ZipCode: this.data.controls.originZipCode.value,
-        State: "MX-"+this.data.controls.originState.value,
+        State: 'MX-' + this.data.controls.originState.value,
         City: this.data.controls.originCity.value,
-        Neighborhood: this.data.controls.originColony.value.substr(0,34),
+        Neighborhood: this.data.controls.originColony.value.substr(0, 34),
         Address1: this.data.controls.originStreet.value,
         Address2: this.data.controls.originReferences.value,
         Residential: this.data.controls.originCompany.value ? false : true
       },
       AddressTo: {
         ZipCode: this.data.controls.destinyZipCode.value,
-        State: "MX-"+this.data.controls.destinyState.value,
+        State: 'MX-' + this.data.controls.destinyState.value,
         City: this.data.controls.destinyCity.value,
-        Neighborhood: this.data.controls.destinyColony.value.substr(0,34),
+        Neighborhood: this.data.controls.destinyColony.value.substr(0, 34),
         Address1: this.data.controls.destinyStreet.value,
         Address2: this.data.controls.destinyReferences.value,
         Residential: this.data.controls.destinyCompany.value ? false : true
@@ -419,12 +546,11 @@ export class ShipmentFormComponent implements OnInit {
         Height: this.guide.controls.height.value,
         Weight: this.guide.controls.weight.value
       },
-      Sender : {
+      Sender: {
         Name: this.data.controls.originName.value,
         CompanyName: this.data.controls.originCompany.value,
         Phone1: this.data.controls.originPhone.value,
         Email: this.data.controls.originEmail.value
-
       },
       Recipient: {
         Name: this.data.controls.destinyName.value,
@@ -432,23 +558,30 @@ export class ShipmentFormComponent implements OnInit {
         Phone1: this.data.controls.destinyPhone.value,
         Email: this.data.controls.destinyEmail.value
       }
-    }
+    };
     var self = this;
-    this.pakkeService.makeShipment(shipmentData).subscribe(res=>{
+    this.pakkeService.makeShipment(shipmentData).subscribe(res => {
       self.loading = false;
       self.pakkeResponse = res;
       self.editable = false;
       self.error = false;
       self.stepper.next();
-    })
+    });
   }
 
-  registerUser(){
-    if (this.data.controls.register.value){
-      this.pakkeService.signUpUser(this.data.controls.email.value, this.data.controls.name.value + " " + this.data.controls.lastName.value, this.data.controls.password.value ).subscribe(res => {});
+  registerUser() {
+    if (this.data.controls.register.value) {
+      this.pakkeService
+        .signUpUser(
+          this.data.controls.email.value,
+          this.data.controls.name.value +
+            ' ' +
+            this.data.controls.lastName.value,
+          this.data.controls.password.value
+        )
+        .subscribe(res => {});
     }
   }
-
 }
 
 //

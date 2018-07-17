@@ -36,6 +36,7 @@ import { CheckComponent } from './check/check.component';
 
 const appRoutes: Routes = [
   { path: '', component: ShipmentFormComponent },
+  { path: ':data', component: ShipmentFormComponent },
   { path: '**', component: ShipmentFormComponent }
 ];
 

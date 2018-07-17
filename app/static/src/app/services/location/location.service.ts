@@ -8,7 +8,7 @@ export class LocationService {
   constructor(private http: HttpClient) { }
 
   getLocations(inputValue): Observable<any>{
-    return this.http.get('https://secure.geonames.org/postalCodeLookupJSON?placename='+inputValue+'&country=MX&username=alexpakke');
+    return this.http.get('https://secure.geonames.org/postalCodeLookupJSON?placename='+inputValue+'&country=MX&username=joseprom');
   }
 
 }

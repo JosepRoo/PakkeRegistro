@@ -58,7 +58,7 @@
 
       <div class="row" *ngIf="!pakkeResponse">
         <div style="margin-top:15px;" class="col-12 col-sm-12 col-md-8 order-2 order-md-1">
-          <mat-horizontal-stepper [hidden]="loading" [linear]="isLinear" #stepper>
+          <mat-horizontal-stepper [hidden]="loading" [linear]="isLinear" id="stepper" #stepper>
             <!-- start guide data -->
             <mat-step [stepControl]="guide" [editable]="editable">
               <form [formGroup]="guide">
@@ -136,6 +136,7 @@
                 <div class="row space2x justify-content-start block" style="padding-bottom: 0px;">
                   <div class="col-12 col-sm-6 col-md-3">
                     <button mat-raised-button color="primary" class="btn btn-block" (click)="getRates(stepper);" mat-button>Continuar</button>
+                    <button #nextStepButton (click)="getRatesWithoutValidation(stepper);" hidden></button>
                   </div>
                 </div>
               </form>
