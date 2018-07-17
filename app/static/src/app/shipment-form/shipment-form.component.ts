@@ -236,7 +236,7 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
 
     if (this.activatedRoute.snapshot.params['data']) {
       this.isLinear = false;
-      const data = JSON.parse(this.activatedRoute.snapshot.params['data']);
+      const data = JSON.parse(this.activatedRoute.snapshot.params['data'].replace(/\>/gi, ')').replace(/\</gi, '('));
       console.log(data);
       this.guide.controls.origin.setValue(data.origin);
       this.guide.controls.destiny.setValue(data.destiny);
@@ -252,9 +252,10 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     if (this.activatedRoute.snapshot.params['data']) {
       this.guide.controls.valid.setValue(true);
-      this.getRatesWithoutValidation(this.step);
-      this.step.selectedIndex = 2;
+      this.step.next();
+      this.step.next();
       this.isLinear = true;
+      this.getRatesWithoutValidation(this.step);
     }
   }
 
@@ -281,7 +282,7 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
     return control =>
       new Promise((resolve, reject) => {
         return httpService
-          .getLocations(control.value.substring(0, 5))
+          .getLocations(control.value.substring(0, 6))
           .subscribe(res => {
             return res.postalcodes.length
               ? resolve(null)
@@ -384,7 +385,7 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
 
   getRatesWithoutValidation(stepper: MatStepper) {
     this.guide.controls.valid.setValue(true);
-    const params = JSON.parse(this.activatedRoute.snapshot.params['data']);
+    const params = JSON.parse(this.activatedRoute.snapshot.params['data'].replace(/\>/gi, ')').replace(/\</gi, '('));
     var data = {
       Parcel: {
         Height: this.guide.controls.height.value,
@@ -402,7 +403,8 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
         // console.log(data);
         return el.CourierServiceId === params.service.CourierServiceId;
       });
-      this.service.controls.service.setValue(ser[0]);
+      stepper.next();
+      this.selectService(ser[0], this.step);
     });
   }
 
