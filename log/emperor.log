@@ -1,0 +1,1085 @@
+*** Starting uWSGI 2.0.17 (64bit) on [Thu May 24 03:35:10 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 1
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 3896
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** starting uWSGI Emperor ***
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:35:10 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22887)
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x17b4810
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 22885)
+Thu May 24 03:35:13 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:35:16 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22888)
+Thu May 24 03:35:19 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:35:22 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22891)
+Thu May 24 03:35:25 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+Thu May 24 03:35:25 2018 - [emperor] unloyal bad behaving vassal found: /var/www/html/PakkeRegistro/uwsgi.ini throttling it...
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:35:28 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22892)
+Thu May 24 03:35:31 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:35:34 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22893)
+Thu May 24 03:35:37 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:35:43 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22898)
+Thu May 24 03:35:46 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:35:52 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22921)
+Thu May 24 03:35:55 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:36:01 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22922)
+Thu May 24 03:36:04 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:36:13 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22923)
+Thu May 24 03:36:16 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:36:25 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22924)
+Thu May 24 03:36:28 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:36:37 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22925)
+Thu May 24 03:36:40 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:36:52 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22928)
+Thu May 24 03:36:55 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:37:07 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22931)
+Thu May 24 03:37:10 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:37:22 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22932)
+Thu May 24 03:37:25 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:37:40 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22933)
+Thu May 24 03:37:43 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:37:58 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22934)
+Thu May 24 03:38:01 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:38:16 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22966)
+Thu May 24 03:38:19 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:38:37 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22969)
+Thu May 24 03:38:40 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:38:58 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22974)
+Thu May 24 03:39:01 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:39:19 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22975)
+Thu May 24 03:39:22 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:39:43 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 22978)
+Thu May 24 03:39:46 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:40:07 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23003)
+Thu May 24 03:40:10 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:40:31 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23012)
+Thu May 24 03:40:34 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:40:58 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23018)
+Thu May 24 03:41:01 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:41:25 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23021)
+Thu May 24 03:41:28 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+[emperor] *** RAGNAROK EVOKED ***
+Thu May 24 03:41:52 2018 - The Emperor is buried.
+SIGINT/SIGQUIT received...killing workers...
+The Emperor has been buried (pid: 22886)
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.17 (64bit) on [Thu May 24 03:41:52 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 1
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 3896
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** starting uWSGI Emperor ***
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:41:52 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23078)
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x1a95810
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 23076)
+Thu May 24 03:41:55 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:41:58 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23079)
+Thu May 24 03:42:01 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:42:04 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23080)
+Thu May 24 03:42:07 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+Thu May 24 03:42:07 2018 - [emperor] unloyal bad behaving vassal found: /var/www/html/PakkeRegistro/uwsgi.ini throttling it...
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:42:10 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23081)
+Thu May 24 03:42:13 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:42:16 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23082)
+Thu May 24 03:42:19 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:42:25 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23083)
+Thu May 24 03:42:28 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:42:34 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23084)
+Thu May 24 03:42:37 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:42:43 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23091)
+Thu May 24 03:42:46 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:42:55 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23092)
+Thu May 24 03:42:58 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:43:07 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23103)
+Thu May 24 03:43:10 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:43:19 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23104)
+Thu May 24 03:43:22 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:43:34 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23105)
+Thu May 24 03:43:37 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:43:49 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23106)
+Thu May 24 03:43:52 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:44:04 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23109)
+Thu May 24 03:44:07 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:44:22 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23114)
+Thu May 24 03:44:25 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:44:40 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23115)
+Thu May 24 03:44:43 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:44:58 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23116)
+Thu May 24 03:45:01 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:45:19 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23117)
+Thu May 24 03:45:22 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:45:40 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23121)
+Thu May 24 03:45:43 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:46:01 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23124)
+Thu May 24 03:46:04 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:46:25 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23127)
+Thu May 24 03:46:28 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:46:49 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23130)
+Thu May 24 03:46:52 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+[emperor] *** RAGNAROK EVOKED ***
+Thu May 24 03:47:11 2018 - The Emperor is buried.
+SIGINT/SIGQUIT received...killing workers...
+The Emperor has been buried (pid: 23077)
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.17 (64bit) on [Thu May 24 03:47:11 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 1
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 3896
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** starting uWSGI Emperor ***
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:47:11 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23137)
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x1d20810
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 23135)
+Thu May 24 03:47:14 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:47:17 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23140)
+Thu May 24 03:47:20 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:47:23 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23176)
+Thu May 24 03:47:26 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+Thu May 24 03:47:26 2018 - [emperor] unloyal bad behaving vassal found: /var/www/html/PakkeRegistro/uwsgi.ini throttling it...
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:47:29 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23177)
+Thu May 24 03:47:32 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:47:35 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23180)
+Thu May 24 03:47:38 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:47:44 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23181)
+Thu May 24 03:47:47 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:47:53 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23183)
+Thu May 24 03:47:56 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:48:02 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23185)
+Thu May 24 03:48:05 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:48:14 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23188)
+Thu May 24 03:48:17 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:48:26 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23191)
+Thu May 24 03:48:29 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:48:38 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23192)
+Thu May 24 03:48:41 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:48:53 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23193)
+Thu May 24 03:48:56 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:49:08 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23194)
+Thu May 24 03:49:11 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:49:23 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23195)
+Thu May 24 03:49:26 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:49:41 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23196)
+Thu May 24 03:49:44 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:49:59 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23201)
+Thu May 24 03:50:02 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:50:17 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23202)
+Thu May 24 03:50:20 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:50:38 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23203)
+Thu May 24 03:50:41 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:50:59 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23241)
+Thu May 24 03:51:02 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:51:20 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23279)
+Thu May 24 03:51:23 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:51:44 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23280)
+Thu May 24 03:51:47 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:52:08 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23285)
+Thu May 24 03:52:11 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:52:32 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23289)
+Thu May 24 03:52:35 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+[emperor] *** RAGNAROK EVOKED ***
+Thu May 24 03:52:57 2018 - The Emperor is buried.
+SIGINT/SIGQUIT received...killing workers...
+The Emperor has been buried (pid: 23136)
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.17 (64bit) on [Thu May 24 03:52:57 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 1
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 3896
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** starting uWSGI Emperor ***
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:52:57 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23331)
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x1277810
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 23329)
+Thu May 24 03:53:00 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:53:03 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23332)
+Thu May 24 03:53:06 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:53:09 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23333)
+Thu May 24 03:53:12 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+Thu May 24 03:53:12 2018 - [emperor] unloyal bad behaving vassal found: /var/www/html/PakkeRegistro/uwsgi.ini throttling it...
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:53:15 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23334)
+Thu May 24 03:53:18 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:53:21 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23335)
+Thu May 24 03:53:24 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:53:30 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23338)
+Thu May 24 03:53:33 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:53:39 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23341)
+Thu May 24 03:53:42 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:53:48 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23342)
+Thu May 24 03:53:51 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:54:00 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23343)
+Thu May 24 03:54:03 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:54:12 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23344)
+Thu May 24 03:54:15 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:54:24 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23345)
+Thu May 24 03:54:27 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+open("/var/www/html/PakkeRegistro/log/uwsgi.log"): Permission denied [core/logging.c line 288]
+Thu May 24 03:54:39 2018 - [emperor] curse the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini (pid: 23348)
+Thu May 24 03:54:42 2018 - [emperor] removed uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+Thu May 24 03:54:54 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini has been spawned
+Thu May 24 03:54:54 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+[emperor] *** RAGNAROK EVOKED ***
+Thu May 24 03:54:55 2018 - [emperor] stop the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+SIGINT/SIGQUIT received...killing workers...
+waiting for Emperor death...
+[emperor] *** RAGNAROK ALREADY EVOKED (mercyless in 30 seconds)***
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+*** Starting uWSGI 2.0.17 (64bit) on [Thu May 24 03:55:00 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 1
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 3896
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** starting uWSGI Emperor ***
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x2092810
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 23485)
+Thu May 24 03:55:00 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini has been spawned
+Thu May 24 03:55:01 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+Thu May 24 03:55:09 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu May 24 03:57:36 2018 - [emperor] reload the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+Thu May 24 03:57:37 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+Thu May 24 03:57:46 2018 - [emperor] reload the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+Thu May 24 03:57:48 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+[emperor] *** RAGNAROK EVOKED ***
+Thu May 24 03:57:58 2018 - [emperor] stop the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+SIGINT/SIGQUIT received...killing workers...
+waiting for Emperor death...
+[emperor] *** RAGNAROK ALREADY EVOKED (mercyless in 30 seconds)***
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+*** Starting uWSGI 2.0.17 (64bit) on [Thu May 24 03:58:03 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 1
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 3896
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** starting uWSGI Emperor ***
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x2133810
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 23845)
+Thu May 24 03:58:04 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini has been spawned
+Thu May 24 03:58:04 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+Thu May 24 03:58:05 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu May 24 03:58:05 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu May 24 04:00:17 2018 - [emperor] reload the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+Thu May 24 04:00:19 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+[emperor] *** RAGNAROK EVOKED ***
+Thu May 24 04:00:25 2018 - [emperor] stop the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+SIGINT/SIGQUIT received...killing workers...
+waiting for Emperor death...
+[emperor] *** RAGNAROK ALREADY EVOKED (mercyless in 30 seconds)***
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+*** Starting uWSGI 2.0.17 (64bit) on [Thu May 24 04:00:30 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 1
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 3896
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** starting uWSGI Emperor ***
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x18c6810
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 24098)
+Thu May 24 04:00:30 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini has been spawned
+Thu May 24 04:00:30 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+Thu May 24 04:00:35 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+[emperor] *** RAGNAROK EVOKED ***
+Thu May 24 04:04:01 2018 - [emperor] stop the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+SIGINT/SIGQUIT received...killing workers...
+waiting for Emperor death...
+[emperor] *** RAGNAROK ALREADY EVOKED (mercyless in 30 seconds)***
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+*** Starting uWSGI 2.0.17 (64bit) on [Thu May 24 04:04:06 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 1
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 3896
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** starting uWSGI Emperor ***
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x1b1b810
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 24296)
+Thu May 24 04:04:06 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini has been spawned
+Thu May 24 04:04:06 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+Thu May 24 04:04:19 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+[emperor] *** RAGNAROK EVOKED ***
+Thu May 24 04:06:06 2018 - [emperor] stop the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+SIGINT/SIGQUIT received...killing workers...
+waiting for Emperor death...
+[emperor] *** RAGNAROK ALREADY EVOKED (mercyless in 30 seconds)***
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+The Emperor has been buried (pid: 24297)
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.17 (64bit) on [Thu May 24 04:06:11 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 1
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 3896
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** starting uWSGI Emperor ***
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x90d810
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 24455)
+Thu May 24 04:06:11 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini has been spawned
+Thu May 24 04:06:11 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+Thu May 24 04:06:19 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu May 24 04:06:22 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu May 24 09:35:10 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu May 24 16:49:59 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu May 24 16:56:08 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu May 24 16:56:08 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu May 24 17:34:19 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Fri May 25 05:48:48 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+[emperor] *** RAGNAROK EVOKED ***
+Wed Jun 27 23:31:28 2018 - [emperor] stop the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+SIGINT/SIGQUIT received...killing workers...
+waiting for Emperor death...
+[emperor] *** RAGNAROK ALREADY EVOKED (mercyless in 30 seconds)***
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+[emperor] *** RAGNAROK ALREADY EVOKED (mercyless in 26 seconds)***
+*** Starting uWSGI 2.0.17 (64bit) on [Wed Jun 27 23:34:24 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 7419
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+*** starting uWSGI Emperor ***
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0xe098b0
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 778)
+Wed Jun 27 23:34:25 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini has been spawned
+Wed Jun 27 23:34:25 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+Wed Jun 27 23:34:58 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Wed Jun 27 23:34:58 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Wed Jun 27 23:34:59 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Wed Jun 27 23:34:59 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Wed Jun 27 23:35:45 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Wed Jun 27 23:36:04 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Wed Jun 27 23:36:53 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Wed Jun 27 23:36:53 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+[emperor] *** RAGNAROK EVOKED ***
+Wed Jul  4 23:58:49 2018 - [emperor] stop the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+SIGINT/SIGQUIT received...killing workers...
+waiting for Emperor death...
+[emperor] *** RAGNAROK ALREADY EVOKED (mercyless in 30 seconds)***
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+*** Starting uWSGI 2.0.17 (64bit) on [Wed Jul  4 23:58:54 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 7419
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+*** starting uWSGI Emperor ***
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x1ced810
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 29210)
+Wed Jul  4 23:58:54 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini has been spawned
+Wed Jul  4 23:58:54 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+Thu Jul  5 00:00:33 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:00:33 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:00:44 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:00:49 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:00:49 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+[emperor] *** RAGNAROK EVOKED ***
+Thu Jul  5 00:03:42 2018 - [emperor] stop the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+SIGINT/SIGQUIT received...killing workers...
+waiting for Emperor death...
+[emperor] *** RAGNAROK ALREADY EVOKED (mercyless in 30 seconds)***
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+*** Starting uWSGI 2.0.17 (64bit) on [Thu Jul  5 00:03:47 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 7419
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+*** starting uWSGI Emperor ***
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x1c73810
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 29430)
+Thu Jul  5 00:03:48 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini has been spawned
+Thu Jul  5 00:03:48 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+Thu Jul  5 00:04:54 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:04:55 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:05:06 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:05:06 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:05:06 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:10:01 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:10:08 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:20:29 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+[emperor] *** RAGNAROK EVOKED ***
+Thu Jul  5 00:22:44 2018 - [emperor] stop the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+SIGINT/SIGQUIT received...killing workers...
+waiting for Emperor death...
+[emperor] *** RAGNAROK ALREADY EVOKED (mercyless in 30 seconds)***
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+The Emperor has been buried (pid: 29431)
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.17 (64bit) on [Thu Jul  5 00:22:49 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 7419
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+*** starting uWSGI Emperor ***
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x1613810
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 29647)
+Thu Jul  5 00:22:49 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini has been spawned
+Thu Jul  5 00:22:49 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+Thu Jul  5 00:23:03 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:23:03 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:23:07 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:29:07 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+[emperor] *** RAGNAROK EVOKED ***
+Thu Jul  5 00:29:13 2018 - [emperor] stop the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+SIGINT/SIGQUIT received...killing workers...
+waiting for Emperor death...
+[emperor] *** RAGNAROK ALREADY EVOKED (mercyless in 30 seconds)***
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+*** Starting uWSGI 2.0.17 (64bit) on [Thu Jul  5 00:29:18 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 7419
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+*** starting uWSGI Emperor ***
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x7a0810
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 29837)
+Thu Jul  5 00:29:19 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini has been spawned
+Thu Jul  5 00:29:19 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+Thu Jul  5 00:29:25 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:29:25 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:29:25 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:29:28 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+[emperor] *** RAGNAROK EVOKED ***
+Thu Jul  5 00:32:03 2018 - [emperor] stop the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+SIGINT/SIGQUIT received...killing workers...
+waiting for Emperor death...
+[emperor] *** RAGNAROK ALREADY EVOKED (mercyless in 30 seconds)***
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+*** Starting uWSGI 2.0.17 (64bit) on [Thu Jul  5 00:32:08 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 7419
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+*** starting uWSGI Emperor ***
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0xeaf810
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 30059)
+Thu Jul  5 00:32:08 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini has been spawned
+Thu Jul  5 00:32:08 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+Thu Jul  5 00:33:16 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:33:17 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:33:17 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:37:08 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+[emperor] *** RAGNAROK EVOKED ***
+Thu Jul  5 00:38:17 2018 - [emperor] stop the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+SIGINT/SIGQUIT received...killing workers...
+waiting for Emperor death...
+[emperor] *** RAGNAROK ALREADY EVOKED (mercyless in 30 seconds)***
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+*** Starting uWSGI 2.0.17 (64bit) on [Thu Jul  5 00:38:22 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 7419
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+*** starting uWSGI Emperor ***
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x937810
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 30247)
+Thu Jul  5 00:38:22 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini has been spawned
+Thu Jul  5 00:38:22 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+Thu Jul  5 00:38:29 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:38:29 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:38:29 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 00:38:53 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 05:06:35 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 16:54:36 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 17:32:19 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Thu Jul  5 18:15:22 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+[emperor] *** RAGNAROK EVOKED ***
+Tue Jul 17 19:48:38 2018 - [emperor] stop the uwsgi instance /var/www/html/PakkeRegistro/uwsgi.ini
+SIGINT/SIGQUIT received...killing workers...
+waiting for Emperor death...
+[emperor] *** RAGNAROK ALREADY EVOKED (mercyless in 30 seconds)***
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+waiting for Emperor death...
+The Emperor has been buried (pid: 30248)
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.17 (64bit) on [Tue Jul 17 19:48:43 2018] ***
+compiled with version: 4.4.7 20120313 (Red Hat 4.4.7-18) on 24 May 2018 03:21:08
+os: Linux-2.6.32-696.30.1.el6.x86_64 #1 SMP Tue May 22 03:28:18 UTC 2018
+nodename: Pakke-Registro
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /
+detected binary path: /var/www/html/PakkeRegistro/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+setgid() to 500
+setuid() to 500
+your processes number limit is 7419
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+Python version: 3.6.5 (default, May 24 2018, 02:54:34)  [GCC 4.4.7 20120313 (Red Hat 4.4.7-18)]
+*** starting uWSGI Emperor ***
+*** has_emperor mode detected (fd: 5) ***
+[uWSGI] getting INI configuration from /var/www/html/PakkeRegistro/uwsgi.ini
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0xe8e810
+your mercy for graceful operations on workers is 60 seconds
+*** Operational MODE: no-workers ***
+spawned uWSGI master process (pid: 30799)
+Tue Jul 17 19:48:43 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini has been spawned
+Tue Jul 17 19:48:43 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is ready to accept requests
+Tue Jul 17 19:48:48 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Tue Jul 17 19:48:50 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Tue Jul 17 19:48:50 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Tue Jul 17 20:47:39 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Tue Jul 17 20:47:49 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Tue Jul 17 20:47:55 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Tue Jul 17 20:48:30 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal
+Tue Jul 17 20:48:33 2018 - [emperor] vassal /var/www/html/PakkeRegistro/uwsgi.ini is now loyal

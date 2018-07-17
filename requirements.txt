@@ -13,5 +13,5 @@ passlib==1.7.1
 requests==2.18.4
 Flask-RESTful
 Flask-JWT-Extended==3.9.1
-Flask-Compress=1.4.0
+Flask-Compress==1.4.0
 uwsgi
