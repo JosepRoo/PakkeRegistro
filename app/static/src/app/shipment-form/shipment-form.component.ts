@@ -152,7 +152,8 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
       width: ['', [Validators.required, this.validateMeasure]],
       height: ['', [Validators.required, this.validateMeasure]],
       deep: ['', [Validators.required, this.validateMeasure]],
-      valid: ['', Validators.required]
+      valid: ['', Validators.required],
+      insuredAmount: ['', Validators.pattern('^[0-9]*')]
     });
 
     // service form
@@ -244,6 +245,7 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
       this.guide.controls.height.setValue(data.height);
       this.guide.controls.width.setValue(data.width);
       this.guide.controls.deep.setValue(data.deep);
+      this.guide.controls.insuredAmount.setValue(data.InsuredAmount);
     } else {
       this.isLinear = true;
     }
@@ -371,7 +373,7 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
           Width: this.guide.controls.width.value
         },
         ZipCode: this.guide.controls.destiny.value.substring(0, 5),
-        InsuredAmount: ''
+        InsuredAmount: this.guide.controls.insuredAmount.value
       };
       this.pakkeService.getRates(data).subscribe(res => {
         this.rates = res;
@@ -394,7 +396,7 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
         Width: this.guide.controls.width.value
       },
       ZipCode: this.guide.controls.destiny.value.substring(0, 5),
-      InsuredAmount: ''
+      InsuredAmount: this.guide.controls.insuredAmount.value
     };
     this.pakkeService.getRates(data).subscribe(res => {
       this.rates = res;

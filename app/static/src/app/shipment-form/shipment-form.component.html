@@ -130,6 +130,20 @@
                           </mat-form-field>
                         </div>
                       </div>
+                      <div class="row space block">
+                        <div class="col-12 col-sm-6">
+                          <mat-checkbox color="primary" class="registerCheck" [ngModelOptions]="{standalone: true}" [(ngModel)]="isInsured">
+                            <span class="registerCheck" style="color: gray !important;">¿Asegurar envío?</span>
+                          </mat-checkbox>
+                        </div>
+                        <div class="col-12 col-sm-6" *ngIf="isInsured">
+                          <mat-form-field>
+                            <input matInput placeholder="Valor del contenido" formControlName="insuredAmount">                            
+                            <span matSuffix>MXN</span>
+                            <mat-error *ngIf="guide.controls.insuredAmount.hasError('pattern')">Solo se permite insertar números.</mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
                     </mat-card-content>
                   </mat-card>
                 </div>
