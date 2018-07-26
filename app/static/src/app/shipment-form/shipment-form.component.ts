@@ -321,7 +321,7 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
   selectService(service, stepper: MatStepper) {
     this.service.controls.service.setValue(service);
     this.data.controls.originZipCode.reset({
-      value: this.guide.controls.origin.value.substring(0, 5),
+      value: this.guide.controls.origin.value.replace(/\s/g, '').substring(0, 5),
       disabled: true
     });
     this.data.controls.originState.reset({
@@ -342,7 +342,9 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
       disabled: true
     });
     this.data.controls.destinyZipCode.reset({
-      value: this.guide.controls.destiny.value.substring(0, 5),
+      value: this.guide.controls.destiny.value
+        .replace(/\s/g, '')
+        .substring(0, 5),
       disabled: true
     });
     this.data.controls.destinyState.reset({
@@ -525,6 +527,8 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
   }
 
   generateShipment() {
+    console.log(this.data.controls.originZipCode.value);
+    console.log(this.data.controls.originZipCode.value.replace(/\s/g, ''));
     var shipmentData = {
       CourierCode: this.service.controls.service.value.CourierCode,
       CourierServiceId: this.service.controls.service.value.CourierServiceId,
