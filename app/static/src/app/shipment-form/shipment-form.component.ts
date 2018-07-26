@@ -531,7 +531,7 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
       ServiceTypeCode: this.service.controls.service.value.PakkeServiceCode,
       ResellerReference: this.payment.controls.reference.value,
       AddressFrom: {
-        ZipCode: this.data.controls.originZipCode.value,
+        ZipCode: this.data.controls.originZipCode.value.replace(/\s/g, ''),
         State: 'MX-' + this.data.controls.originState.value,
         City: this.data.controls.originCity.value,
         Neighborhood: this.data.controls.originColony.value.substr(0, 34),
@@ -540,7 +540,7 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
         Residential: this.data.controls.originCompany.value ? false : true
       },
       AddressTo: {
-        ZipCode: this.data.controls.destinyZipCode.value,
+        ZipCode: this.data.controls.destinyZipCode.value.replace(/\s/g, ''),
         State: 'MX-' + this.data.controls.destinyState.value,
         City: this.data.controls.destinyCity.value,
         Neighborhood: this.data.controls.destinyColony.value.substr(0, 34),
