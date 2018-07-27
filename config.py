@@ -22,13 +22,13 @@ class Config:
     JWT_BLACKLIST_ENABLED = True
     JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
     COMPRESS_MIMETYPES = ['text/html',
-                         'text/css',
-                         'text/xml',
-                         'application/json',
-                         'application/javascript',
-                         'text/javascript',
-                         'text/javascript; charset=utf-8'
-                         ]
+                          'text/css',
+                          'text/xml',
+                          'application/json',
+                          'application/javascript',
+                          'text/javascript',
+                          'text/javascript; charset=utf-8'
+                          ]
 
 
 class DevelopmentConfig(Config):

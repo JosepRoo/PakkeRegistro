@@ -1,0 +1,1 @@
+COURRIERS = frozenset({"DHL", "ESTAFETA", "AEROFLASH"})

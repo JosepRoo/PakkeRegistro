@@ -8,7 +8,7 @@ __author__ = 'richogtz'
 class Database(object):
     # URI = "mongodb://richogtz:cloudstrifeFF7!@127.0.0.1:27017"
 
-    URI = os.environ.get('MONGOLAB_URI') or "mongodb://127.0.0.1:27017/pakke"
+    URI = os.environ.get('MONGODB_URI') or "mongodb://127.0.0.1:27017/pakke"
 
     DATABASE = None
 
@@ -28,8 +28,8 @@ class Database(object):
         Database.DATABASE[collection].insert(data)
 
     @staticmethod
-    def find(collection, query):
-        return Database.DATABASE[collection].find(query)
+    def find(collection, query, project=None):
+        return Database.DATABASE[collection].find(query, project)
 
     @staticmethod
     def find_one(collection, query):

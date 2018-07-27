@@ -5,6 +5,7 @@ from flask_restful import Api
 
 from app.common.database import Database
 from app.common.response import Response
+from app.resources.courrier import Courrier
 from config import config
 
 
@@ -18,7 +19,9 @@ def create_app(config_name):
     from .default import default as default_blueprint, registro as registro_blueprint
     app.register_blueprint(default_blueprint)
     app.register_blueprint(registro_blueprint, url_prefix='/registro')
-    print(app.config['COMPRESS_MIMETYPES'])
+
+    api.add_resource(Courrier, '/courrier/price')
+
     @app.after_request
     def after_request(response):
         response.headers.add('Access-Control-Allow-Origin', '*')
