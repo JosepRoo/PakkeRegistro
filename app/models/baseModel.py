@@ -4,7 +4,7 @@ from app.common.database import Database
 
 
 class BaseModel:
-    def __init__(self, _id:str=None):
+    def __init__(self, _id: str = None):
         self._id = uuid.uuid4().hex if _id is None else _id
 
     def json(self, exclude: list = None, date_to_string: bool = True) -> dict:

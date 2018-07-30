@@ -67,9 +67,9 @@ class Courrier(Resource):
         package = PackageModel(**data)
         result = list()
         for courrier_service in courrier_services:
-            if courrier_service.get('service_name') is None:
+            if courrier_service.get('name') is None:
                 result.append(Response(message={
-                    "courrier_services.service_name": "This field cannot be blank."
+                    "courrier_services.name": "This field cannot be blank."
                 }).json())
             try:
                 courrier = CourrierModel.find_courrier(courrier_service)

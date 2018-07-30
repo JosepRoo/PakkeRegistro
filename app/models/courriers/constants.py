@@ -1,1 +1,1 @@
-COURRIERS = frozenset({"DHL", "ESTAFETA", "AEROFLASH"})
+COURRIERS = frozenset({"DHL", "Estafeta", "Aeroflash"})
