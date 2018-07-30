@@ -321,7 +321,7 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
   selectService(service, stepper: MatStepper) {
     this.service.controls.service.setValue(service);
     this.data.controls.originZipCode.reset({
-      value: this.guide.controls.origin.value.substring(0, 5),
+      value: this.guide.controls.origin.value.replace(/\s/g, '').substring(0, 5),
       disabled: true
     });
     this.data.controls.originState.reset({
@@ -342,7 +342,9 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
       disabled: true
     });
     this.data.controls.destinyZipCode.reset({
-      value: this.guide.controls.destiny.value.substring(0, 5),
+      value: this.guide.controls.destiny.value
+        .replace(/\s/g, '')
+        .substring(0, 5),
       disabled: true
     });
     this.data.controls.destinyState.reset({
@@ -525,13 +527,15 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
   }
 
   generateShipment() {
+    console.log(this.data.controls.originZipCode.value);
+    console.log(this.data.controls.originZipCode.value.replace(/\s/g, ''));
     var shipmentData = {
       CourierCode: this.service.controls.service.value.CourierCode,
       CourierServiceId: this.service.controls.service.value.CourierServiceId,
       ServiceTypeCode: this.service.controls.service.value.PakkeServiceCode,
       ResellerReference: this.payment.controls.reference.value,
       AddressFrom: {
-        ZipCode: this.data.controls.originZipCode.value,
+        ZipCode: this.data.controls.originZipCode.value.replace(/\s/g, ''),
         State: 'MX-' + this.data.controls.originState.value,
         City: this.data.controls.originCity.value,
         Neighborhood: this.data.controls.originColony.value.substr(0, 34),
@@ -540,7 +544,7 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
         Residential: this.data.controls.originCompany.value ? false : true
       },
       AddressTo: {
-        ZipCode: this.data.controls.destinyZipCode.value,
+        ZipCode: this.data.controls.destinyZipCode.value.replace(/\s/g, ''),
         State: 'MX-' + this.data.controls.destinyState.value,
         City: this.data.controls.destinyCity.value,
         Neighborhood: this.data.controls.destinyColony.value.substr(0, 34),
