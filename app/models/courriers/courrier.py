@@ -19,13 +19,14 @@ class Courrier(BaseModel):
         """
         from app.models.courriers.aeroflash.aeroflash import Aeroflash
         from app.models.courriers.dhl.dhl import DHL
+        from app.models.courriers.estafeta.estafeta import Estafeta
         name = data.get('name')
         courrier: Courrier = None
         if name in COURRIERS:
             if name == "Aeroflash":
                 courrier = Aeroflash(**data)
             elif name == "Estafeta":
-                pass
+                courrier = Estafeta(**data)
             elif name == "DHL":
                 courrier = DHL(**data)
         else:

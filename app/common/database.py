@@ -1,6 +1,7 @@
 import os
 
 import pymongo
+from pymongo.cursor import Cursor
 
 __author__ = 'richogtz'
 
@@ -28,7 +29,7 @@ class Database(object):
         Database.DATABASE[collection].insert(data)
 
     @staticmethod
-    def find(collection, query, project=None):
+    def find(collection, query, project=None)->Cursor:
         return Database.DATABASE[collection].find(query, project)
 
     @staticmethod

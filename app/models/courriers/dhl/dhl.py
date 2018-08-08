@@ -52,7 +52,6 @@ class DHL(Courrier):
             exceeded_price = exceeded_rate * exceeded_weight
 
         query = {'type': self.type, 'rates.kg': package_weight}
-        print(query)
         project = {'_id': 0, 'rates': {'$elemMatch': {'kg': package_weight}},
                    'rates.rate': 1}
         rate = Database.find(ZONE_TO_RATE, query, project).next()['rates'][0]['rate']
