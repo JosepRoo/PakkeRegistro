@@ -245,8 +245,8 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
       this.guide.controls.height.setValue(data.height);
       this.guide.controls.width.setValue(data.width);
       this.guide.controls.deep.setValue(data.deep);
-      if (data.InsuredAmount) {
-        this.guide.controls.insuredAmount.setValue(data.InsuredAmount);
+      if (data.insuredAmount) {
+        this.guide.controls.insuredAmount.setValue(data.insuredAmount);
       } else {
         this.guide.controls.insuredAmount.setValue('');
       }

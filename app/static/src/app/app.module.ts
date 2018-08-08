@@ -37,6 +37,7 @@ import { CheckComponent } from './check/check.component';
 const appRoutes: Routes = [
   { path: '', component: ShipmentFormComponent },
   { path: 'registro/:data', component: ShipmentFormComponent },
+  { path: 'registro', component: ShipmentFormComponent },
   { path: '**', component: ShipmentFormComponent }
 ];
 
