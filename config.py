@@ -18,17 +18,18 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     STATIC_FOLDER = os.path.join(os.pardir, 'static/dist')
+    QUOTE_FOLDER = os.path.join(os.pardir, 'quote/dist')
     JWT_SECRET_KEY = SECRET_KEY
     JWT_BLACKLIST_ENABLED = True
     JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
     COMPRESS_MIMETYPES = ['text/html',
-                         'text/css',
-                         'text/xml',
-                         'application/json',
-                         'application/javascript',
-                         'text/javascript',
-                         'text/javascript; charset=utf-8'
-                         ]
+                          'text/css',
+                          'text/xml',
+                          'application/json',
+                          'application/javascript',
+                          'text/javascript',
+                          'text/javascript; charset=utf-8'
+                          ]
 
 
 class DevelopmentConfig(Config):
