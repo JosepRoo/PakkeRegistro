@@ -8,9 +8,9 @@ def home(json=None):
 
 @registro.route('/<string:json>')
 def home_pre(json=None):
-    return default.send_static_file('index.html')
+    return registro.send_static_file('index.html')
 
 
 @quote.route('/')
-def quote():
+def quotes():
     return quote.send_static_file('index.html')
