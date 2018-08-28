@@ -57,7 +57,7 @@ class Estafeta(Courrier):
             package_weight = int(package.weight) + 1  # if it has more than an int weight it must add 1
         else:
             package_weight = int(package.weight)
-        if package_weight >= TYPE_KG_LIMIT:
+        if package_weight >= TYPE_KG_LIMIT and service_type == SPECIAL_TYPE:
             service_type = "5522411"
         if service_type == SPECIAL_TYPE:
             price, descriptions = cls.Graph.dijkstra(0, package_weight)
