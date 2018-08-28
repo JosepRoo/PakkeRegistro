@@ -4,7 +4,7 @@ from app import Database
 from app.models.courriers.aeroflash.constants import AREAS_COLLECTION, AREA_TO_ZONE_COLLECTION, ZONE_TO_RATE, \
     TYPE_KG_LIMIT, DELIVERY_TIME
 from app.models.courriers.courrier import Courrier
-from app.models.courriers.dhl.constants import TYPES
+from app.models.courriers.aeroflash.constants import TYPES
 from app.models.courriers.errors import ZipCodesNotFound, CourrierServiceTypeUnkown
 from app.models.packages.package import Package
 

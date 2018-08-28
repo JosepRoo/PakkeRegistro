@@ -66,3 +66,5 @@ class DHL(Courrier):
     def set_type(self) -> None:
         if self.type is None:
             self.type = TYPES
+        elif isinstance(self.type, list):
+            self.type = self.type[0]

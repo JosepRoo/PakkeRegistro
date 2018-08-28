@@ -1,4 +1,4 @@
-TYPES = 'next_day'
+TYPES = ('next_day',)
 AREAS_COLLECTION = 'DHL_cities'
 ZONE_TO_RATE = 'DHL_rates'
 DELIVERY_TIME = {'days': 1}
