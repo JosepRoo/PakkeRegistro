@@ -2,19 +2,19 @@ from app import Database
 from app.common.dijkstra import GraphUndirectedWeighted
 
 RATES_COLLECTION = 'Estafeta_rates'
-
+TYPES_STR_TO_ID = {"next_day": "8619166", "terrestre": "1377731"}
 TYPES = {"8619166",
-         "8646029",
-         "8608731",
+         # "8646029",
+         # "8608731",
          "8668532",
          "8622603",
          "4000613",
          "5056308",
          "5522411"
          }
-SPECIAL_TYPE = {"1377731"}
-NON_OPTIMIZABLE_TYPES = {"8619166", "8646029", "8608731"}
-OPTIMIZABLE_TYPES = {"8668532", "8622603", "4000613", "5056308", "5522411"}
+SPECIAL_TYPE = "1377731"
+# NON_OPTIMIZABLE_TYPES = {"8619166", "8646029", "8608731"}
+# OPTIMIZABLE_TYPES = {"8668532", "8622603", "4000613", "5056308", "5522411"}
 EXTRA_FEE = 25.0
 TYPE_KG_LIMIT = 20
 

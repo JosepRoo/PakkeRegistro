@@ -2,8 +2,9 @@ import datetime
 
 from app import Database
 from app.models.courriers.courrier import Courrier
-from app.models.courriers.estafeta.constants import TYPES, create_graph, EXTRA_FEE, NON_OPTIMIZABLE_TYPES, \
-    OPTIMIZABLE_TYPES, SPECIAL_TYPE, TYPE_KG_LIMIT
+from app.models.courriers.errors import CourrierServiceTypeUnkown
+from app.models.courriers.estafeta.constants import TYPES, create_graph, EXTRA_FEE, SPECIAL_TYPE, TYPE_KG_LIMIT, \
+    TYPES_STR_TO_ID
 from app.models.packages.package import Package
 
 
@@ -12,13 +13,29 @@ class Estafeta(Courrier):
 
     def set_type(self) -> None:
         if self.type is None:
-            self.type = TYPES
+            self.type = [v for k, v in TYPES_STR_TO_ID.items()]
+        elif isinstance(self.type, list):
+            try:
+                temp_list = list()
+                for serv_type in self.type:
+                    temp = serv_type
+                    temp_list.append(TYPES_STR_TO_ID[temp])
+                self.type = temp_list
+            except KeyError:
+                raise CourrierServiceTypeUnkown(
+                    f'El tipo ({temp}) de servicio seleccionado para {self.__class__.__name__} no existe')
+        else:
+            try:
+                temp = self.type
+                self.type = TYPES_STR_TO_ID[self.type]
+            except KeyError:
+                raise CourrierServiceTypeUnkown(
+                    f'El tipo ({temp}) de servicio seleccionado para {self.__class__.__name__} no existe')
 
     def find_prices(self, package: Package) -> dict:
         self.set_type()
         result = dict()
         if isinstance(self.type, list):
-            self.determine_searches()
             for service_type in self.type:
                 result[service_type] = self.find_type_price(service_type, package)
         else:
@@ -45,11 +62,11 @@ class Estafeta(Courrier):
     def find_delivery_data(package: Package) -> dict:
         return Database.find("Estafeta_cities", {"zip_code": package.destiny_zipcode}).next()
 
-    def determine_searches(self) -> None:
-        non_optimizable_types = {service_type for service_type in self.type if service_type in NON_OPTIMIZABLE_TYPES}
-        optimizable_types = {service_type for service_type in self.type if service_type in OPTIMIZABLE_TYPES}
-        if len(optimizable_types) >= 5:
-            self.type = list(non_optimizable_types | SPECIAL_TYPE)
+    # def determine_searches(self) -> None:
+    #     non_optimizable_types = {service_type for service_type in self.type if service_type in NON_OPTIMIZABLE_TYPES}
+    #     optimizable_types = {service_type for service_type in self.type if service_type in OPTIMIZABLE_TYPES}
+    #     if len(optimizable_types) >= 5:
+    #         self.type = list(non_optimizable_types | SPECIAL_TYPE)
 
     @classmethod
     def find_rate(cls, service_type: str, package: Package) -> dict:
@@ -64,8 +81,9 @@ class Estafeta(Courrier):
             result_descriptions = dict()
             for description in descriptions:
                 if result_descriptions.get(description) is None:
-                    result_descriptions[description] = 0
+                    result_descriptions[description] = 1
                 else:
+                    print("lol")
                     result_descriptions[description] += 1
 
             return {"price": price, "options": result_descriptions}
@@ -89,7 +107,7 @@ class Estafeta(Courrier):
             delivery_day = today + datetime.timedelta(days=days)
         else:
             days = 5 - weekday if weekday <= 5 else 6
-            for day in delivery_data['availability'][weekday:]+delivery_data['availability'][:weekday]:
+            for day in delivery_data['availability'][weekday:] + delivery_data['availability'][:weekday]:
                 days += 1
                 if day == 1:
                     break
