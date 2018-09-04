@@ -41,40 +41,19 @@ export class AppComponent implements OnInit {
         break;
       case 'Aeroflash':
         this.services = [
-          { name: 'Aereo', value: 'aereo' },
           { name: 'Terrestre', value: 'terrestre' }
         ];
         break;
       case 'Estafeta':
         this.services = [
           {
-            name: 'Día Siguiente 1 kilo',
-            value: '8619166'
+            name: 'Día Siguiente',
+            value: 'next_day'
           },
           {
-            name: 'Dos días 1 kilo',
-            value: '8646029'
+            name: 'Terrestre',
+            value: 'terrestre'
           },
-          {
-            name: 'Metropolitano 5 kilos',
-            value: '8608731'
-          },
-          {
-            name: 'Terrestre 2 kilos',
-            value: '8668532'
-          },
-          {
-            name: 'Terrestre 5 kilos',
-            value: '8622603'
-          },
-          {
-            name: 'Terrestre 10 kilos',
-            value: '5056308'
-          },
-          {
-            name: 'Terrestre 20 kilos',
-            value: '5522411'
-          }
         ];
         break;
     }
@@ -102,32 +81,12 @@ export class AppComponent implements OnInit {
   returnService(data) {
     const arr = [
       {
-        name: 'Día Siguiente 1 kilo',
+        name: 'Día Siguiente',
+        value: '1377731'
+      },
+      {
+        name: 'Terrestre',
         value: '8619166'
-      },
-      {
-        name: 'Dos días 1 kilo',
-        value: '8646029'
-      },
-      {
-        name: 'Metropolitano 5 kilos',
-        value: '8608731'
-      },
-      {
-        name: 'Terrestre 2 kilos',
-        value: '8668532'
-      },
-      {
-        name: 'Terrestre 5 kilos',
-        value: '8622603'
-      },
-      {
-        name: 'Terrestre 10 kilos',
-        value: '5056308'
-      },
-      {
-        name: 'Terrestre 20 kilos',
-        value: '5522411'
       }
     ];
 
