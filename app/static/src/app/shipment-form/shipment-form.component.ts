@@ -32,6 +32,9 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
   years: any;
   loading: boolean = false;
   error: boolean = false;
+  shipmentError = false;
+  shipmentSaved = false;
+  shipment:any;
   pakkeResponse: any;
   stepper: MatStepper;
   editable = true;
@@ -219,7 +222,7 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
         number: [
           '',
           [Validators.required, CreditCardValidator.validateCardNumber]
-        ],
+      ],
         cvv: ['', [Validators.required, CreditCardValidator.validateCardCvc]],
         month: ['', [Validators.required, Validators.pattern('[0-9]{2}')]],
         year: ['', [Validators.required, Validators.pattern('[0-9]{2}')]],
@@ -437,7 +440,7 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
         },
         error => console.log(error),
         function() {
-          self.makePayment();
+          self.generateShipment();
         }
       );
     }
@@ -508,12 +511,14 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
     };
     this.etomin.makePayment(paymentData).subscribe(
       res => {
-        if (Number(res.error) == 0) {
+        if (Number(res.error) === 0) {
           this.payment.controls.order.setValue(res.order);
           this.payment.controls.transaction.setValue(res.transaction);
           this.payment.controls.authorization.setValue(res.authorization_code);
           this.payment.controls.token.setValue(res.card_token);
-          this.generateShipment();
+          this.shipmentSaved = false;
+          this.pakkeResponse = this.shipment;
+          this.stepper.next();
         } else {
           this.error = true;
           this.loading = false;
@@ -529,56 +534,67 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
   generateShipment() {
     console.log(this.data.controls.originZipCode.value);
     console.log(this.data.controls.originZipCode.value.replace(/\s/g, ''));
-    var shipmentData = {
-      CourierCode: this.service.controls.service.value.CourierCode,
-      CourierServiceId: this.service.controls.service.value.CourierServiceId,
-      ServiceTypeCode: this.service.controls.service.value.PakkeServiceCode,
-      ResellerReference: this.payment.controls.reference.value,
-      AddressFrom: {
-        ZipCode: this.data.controls.originZipCode.value.replace(/\s/g, ''),
-        State: 'MX-' + this.data.controls.originState.value,
-        City: this.data.controls.originCity.value,
-        Neighborhood: this.data.controls.originColony.value.substr(0, 34),
-        Address1: this.data.controls.originStreet.value,
-        Address2: this.data.controls.originReferences.value,
-        Residential: this.data.controls.originCompany.value ? false : true
+    this.error = false;
+    this.shipmentError = false;
+    if (!this.shipmentSaved) {
+      var shipmentData = {
+        CourierCode: this.service.controls.service.value.CourierCode,
+        CourierServiceId: this.service.controls.service.value.CourierServiceId,
+        ServiceTypeCode: this.service.controls.service.value.PakkeServiceCode,
+        ResellerReference: this.payment.controls.reference.value,
+        AddressFrom: {
+          ZipCode: this.data.controls.originZipCode.value.replace(/\s/g, ''),
+          State: 'MX-' + this.data.controls.originState.value,
+          City: this.data.controls.originCity.value,
+          Neighborhood: this.data.controls.originColony.value.substr(0, 34),
+          Address1: this.data.controls.originStreet.value,
+          Address2: this.data.controls.originReferences.value,
+          Residential: this.data.controls.originCompany.value ? false : true
+        },
+        AddressTo: {
+          ZipCode: this.data.controls.destinyZipCode.value.replace(/\s/g, ''),
+          State: 'MX-' + this.data.controls.destinyState.value,
+          City: this.data.controls.destinyCity.value,
+          Neighborhood: this.data.controls.destinyColony.value.substr(0, 34),
+          Address1: this.data.controls.destinyStreet.value,
+          Address2: this.data.controls.destinyReferences.value,
+          Residential: this.data.controls.destinyCompany.value ? false : true
+        },
+        Parcel: {
+          Length: this.guide.controls.deep.value,
+          Width: this.guide.controls.width.value,
+          Height: this.guide.controls.height.value,
+          Weight: this.guide.controls.weight.value
+        },
+        Sender: {
+          Name: this.data.controls.originName.value,
+          CompanyName: this.data.controls.originCompany.value,
+          Phone1: this.data.controls.originPhone.value,
+          Email: this.data.controls.originEmail.value
+        },
+        Recipient: {
+          Name: this.data.controls.destinyName.value,
+          CompanyName: this.data.controls.destinyCompany.value,
+          Phone1: this.data.controls.destinyPhone.value,
+          Email: this.data.controls.destinyEmail.value
+        }
+      };
+      var self = this;
+      this.pakkeService.makeShipment(shipmentData).subscribe(res => {
+        self.loading = false;
+        self.shipment = res;
+        self.editable = false;
+        self.error = false;
+        self.shipmentSaved = true;
+        self.makePayment();
       },
-      AddressTo: {
-        ZipCode: this.data.controls.destinyZipCode.value.replace(/\s/g, ''),
-        State: 'MX-' + this.data.controls.destinyState.value,
-        City: this.data.controls.destinyCity.value,
-        Neighborhood: this.data.controls.destinyColony.value.substr(0, 34),
-        Address1: this.data.controls.destinyStreet.value,
-        Address2: this.data.controls.destinyReferences.value,
-        Residential: this.data.controls.destinyCompany.value ? false : true
-      },
-      Parcel: {
-        Length: this.guide.controls.deep.value,
-        Width: this.guide.controls.width.value,
-        Height: this.guide.controls.height.value,
-        Weight: this.guide.controls.weight.value
-      },
-      Sender: {
-        Name: this.data.controls.originName.value,
-        CompanyName: this.data.controls.originCompany.value,
-        Phone1: this.data.controls.originPhone.value,
-        Email: this.data.controls.originEmail.value
-      },
-      Recipient: {
-        Name: this.data.controls.destinyName.value,
-        CompanyName: this.data.controls.destinyCompany.value,
-        Phone1: this.data.controls.destinyPhone.value,
-        Email: this.data.controls.destinyEmail.value
-      }
-    };
-    var self = this;
-    this.pakkeService.makeShipment(shipmentData).subscribe(res => {
-      self.loading = false;
-      self.pakkeResponse = res;
-      self.editable = false;
-      self.error = false;
-      self.stepper.next();
-    });
+      err =>{
+        self.shipmentError = err.error.error.details[0];
+        self.loading = false;
+      });
+    } else {
+      this.makePayment();
+    }
   }
 
   registerUser() {
