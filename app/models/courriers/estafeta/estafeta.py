@@ -4,7 +4,7 @@ from app import Database
 from app.models.courriers.courrier import Courrier
 from app.models.courriers.errors import CourrierServiceTypeUnkown
 from app.models.courriers.estafeta.constants import create_graph, EXTRA_FEE, SPECIAL_TYPE, TYPE_KG_LIMIT, \
-    TYPES_STR_TO_ID
+    TYPES_STR_TO_ID, TYPES_ID_TO_STR
 from app.models.packages.package import Package
 
 
@@ -37,9 +37,9 @@ class Estafeta(Courrier):
         result = dict()
         if isinstance(self.type, list):
             for service_type in self.type:
-                result[service_type] = self.find_type_price(service_type, package)
+                result[TYPES_ID_TO_STR[service_type]] = self.find_type_price(service_type, package)
         else:
-            result[self.type] = self.find_type_price(self.type, package)
+            result[TYPES_ID_TO_STR[self.type]] = self.find_type_price(self.type, package)
         return result
 
     @classmethod

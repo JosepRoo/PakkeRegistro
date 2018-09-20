@@ -1,5 +1,5 @@
-TYPES = 'next_day'
+TYPES = 'DHL_DIA_SIGUIENTE / N'
 AREAS_COLLECTION = 'DHL_cities'
 ZONE_TO_RATE = 'DHL_rates'
 DELIVERY_TIME = {'days': 1}
-TYPE_KG_LIMIT = {'next_day': 20}
+TYPE_KG_LIMIT = {'DHL_DIA_SIGUIENTE / N': 20}

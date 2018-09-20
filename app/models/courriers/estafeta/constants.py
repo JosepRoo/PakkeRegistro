@@ -2,7 +2,8 @@ from app import Database
 from app.common.dijkstra import GraphUndirectedWeighted
 
 RATES_COLLECTION = 'Estafeta_rates'
-TYPES_STR_TO_ID = {"next_day": "8619166", "terrestre": "1377731"}
+TYPES_STR_TO_ID = {"ESTAFETA_DIA_SIGUIENTE / 60": "8619166", "ESTAFETA_TERRESTRE_CONSUMO / 70": "1377731"}
+TYPES_ID_TO_STR = {"8619166": "ESTAFETA_DIA_SIGUIENTE / 60", "1377731": "ESTAFETA_TERRESTRE_CONSUMO / 70"}
 TYPES = {"8619166",
          # "8646029",
          # "8608731",
