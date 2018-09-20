@@ -3,7 +3,7 @@ import datetime
 from app import Database
 from app.models.courriers.courrier import Courrier
 from app.models.courriers.errors import CourrierServiceTypeUnkown
-from app.models.courriers.estafeta.constants import TYPES, create_graph, EXTRA_FEE, SPECIAL_TYPE, TYPE_KG_LIMIT, \
+from app.models.courriers.estafeta.constants import create_graph, EXTRA_FEE, SPECIAL_TYPE, TYPE_KG_LIMIT, \
     TYPES_STR_TO_ID
 from app.models.packages.package import Package
 
