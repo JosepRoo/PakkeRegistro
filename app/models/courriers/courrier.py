@@ -24,9 +24,9 @@ class Courrier(BaseModel):
         name = data.get('name')
         courrier: Courrier = None
         if name in COURRIERS:
-            if name == "Aeroflash":
+            if name == "AEF":
                 courrier = Aeroflash(**data)
-            elif name == "Estafeta":
+            elif name == "STF":
                 courrier = Estafeta(**data)
             elif name == "DHL":
                 courrier = DHL(**data)
