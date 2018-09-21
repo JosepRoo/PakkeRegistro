@@ -563,6 +563,13 @@
                           <label style="color:#D7244C; font-weight:700;">Tuvimos problemas para procesar el pago, revisa de nuevo tu información e intenta de nuevo, de lo contrario ingresa un nuevo método de pago.</label>
                         </div>
                       </div>
+                      <div class="row" *ngIf="shipmentError">
+                        <div class="col-12">
+                          <br />
+                          <label style="color:#D7244C; font-weight:700;">Tuvimos problemas para procesar la petición, revisa de nuevo tu información de envío e intenta de nuevo.</label>
+                          <label style="color: #D7244C; font-weight: 700"> Error: {{shipmentError}}</label>
+                        </div>
+                      </div>
                       <br />
                     </mat-card-content>
                   </mat-card>
