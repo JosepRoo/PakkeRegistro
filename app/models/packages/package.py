@@ -1,3 +1,4 @@
+from pyserial import serial
 from app.models.baseModel import BaseModel
 
 
@@ -11,3 +12,9 @@ class Package(BaseModel):
         self.height = height
         self.width = width
         self.length = length
+
+    @staticmethod
+    def get_weight():
+        ser = serial.Serial('COM7')
+        s = ser.read(100)
+        return float(s.strip())
