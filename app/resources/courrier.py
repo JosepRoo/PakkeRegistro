@@ -92,12 +92,12 @@ class Courrier(Resource):
 
 class CourrierWieghted(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('pakke_key',
-                        type=str,
-                        required=True,
-                        help="This field cannot be blank.",
-                        location='json'
-                        )
+    # parser.add_argument('pakke_key',
+    #                     type=str,
+    #                     required=True,
+    #                     help="This field cannot be blank.",
+    #                     location='json'
+    #                     )
     parser.add_argument('origin_zipcode',
                         type=str,
                         required=True,
@@ -112,12 +112,12 @@ class CourrierWieghted(Resource):
                         )
 
     def post(self) -> tuple:
-        data = Courrier.parser.parse_args()
+        data = CourrierWieghted.parser.parse_args()
         data['width'] = 10
         data['height'] = 10
         data['length'] = 10
-        if not Utils.validate_entry(data.pop('pakke_key')):
-            return Response(message="La llave de pakke es incorrecta, verificar e intentar de nuevo").json(), 401
+        # if not Utils.validate_entry(data.pop('pakke_key')):
+        #     return Response(message="La llave de pakke es incorrecta, verificar e intentar de nuevo").json(), 401
         courrier_services = COURRIERS
         data['weight'] = PackageModel.get_weight()
         package = PackageModel(**data)
@@ -126,7 +126,7 @@ class CourrierWieghted(Resource):
             try:
                 courrier = CourrierModel.find_courrier({'name': courrier_service})
                 price = courrier.find_prices(package)
-                day = courrier.find_delivery_day(package) if courrier_service['name'] == "STF" \
+                day = courrier.find_delivery_day(package) if courrier_service == "STF" \
                     else courrier.find_delivery_day()
                 result.append({
                     'success': True,
@@ -136,6 +136,6 @@ class CourrierWieghted(Resource):
                 })
             except CourrierErrors as e:
                 result.append(Response(message=e.message).json())
-        result = sorted(result, key=itemgetter('price'))
+        # result = sorted(result, key=itemgetter('price'))
         return {'result': result,
                 "weigth": data['weight']}, 200

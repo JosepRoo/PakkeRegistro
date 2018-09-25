@@ -19,6 +19,7 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     STATIC_FOLDER = os.path.join(os.pardir, 'static/dist')
     QUOTE_FOLDER = os.path.join(os.pardir, 'quote/dist')
+    WEIGHT_FOLDER = os.path.join(os.pardir, 'weight/dist')
     JWT_SECRET_KEY = SECRET_KEY
     JWT_BLACKLIST_ENABLED = True
     JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
