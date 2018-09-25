@@ -1,0 +1,86 @@
+.background {
+   
+}
+
+.header {
+  padding-top: 40px;
+}
+
+.title {
+  color: white;
+  font-size: 3rem;
+  font-weight: 500 !important;
+}
+
+.title-place {
+  color: white;
+  font-size: 2rem;
+  font-weight: 400 !important;
+}
+
+.title-big {
+  color: white;
+  font-size: 4.7rem;
+  font-weight: 400 !important;
+}
+
+.title-big-x3 {
+  color: white;
+  font-size: 6.7rem;
+  font-weight: 800 !important;
+  border-bottom: 2px solid white;
+  width: 65%;
+}
+
+.label {
+  line-height: 10px;
+  margin-top: 10px;
+}
+
+.box {
+  border-radius: 20px;
+  border-top: 6px dashed white;
+  border-left: 6px dashed white;
+  border-bottom: 6px dashed white;
+  padding-top: 70px;
+  padding-left: 50px;
+  padding-bottom: 25px;
+}
+
+.boxes {
+  position: absolute;
+  padding-bottom: 0px;
+  padding-left: 30px;
+  top: -80px !important;
+  width: 90%;
+}
+
+.quantity {
+  font-size: 8rem;
+}
+
+.content {
+  margin-top: 10px;
+}
+
+.value {
+  color: white;
+  font-size: 3.1rem;
+  font-weight: 800 !important;
+}
+
+.places {
+  padding: 60px !important; 
+  padding-top: 60px !important;
+}
+
+.data-row {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.column {
+  line-height: 20px;
+  border-bottom: solid 2px white;
+  padding: 0px;
+}
