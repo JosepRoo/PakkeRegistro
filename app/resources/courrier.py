@@ -137,4 +137,5 @@ class CourrierWieghted(Resource):
             except CourrierErrors as e:
                 result.append(Response(message=e.message).json())
         result = sorted(result, key=itemgetter('price'))
-        return {'result': result}, 200
+        return {'result': result,
+                "weigth": data['weight']}, 200

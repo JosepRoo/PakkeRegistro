@@ -5,6 +5,7 @@ from zplgrf import GRF
 from PIL import Image
 from io import BytesIO
 from app.models.baseModel import BaseModel
+from app.models.courriers.constants import set_html
 
 
 class Package(BaseModel):
@@ -20,9 +21,9 @@ class Package(BaseModel):
 
     @staticmethod
     def get_weight():
-        ser = serial.Serial('COM7')
+        ser = serial.Serial('/dev/ttyUSB0')
         s = ser.read(100)
-        return float(s.strip())
+        return float(s.strip()[:-2])
 
     @staticmethod
     def print(weight, public_price, price_pakke):
@@ -47,7 +48,6 @@ class Package(BaseModel):
             image.save(temp_buff, format='PNG')
             grf = GRF.from_image(temp_buff.getvalue(), 'ZPL')
             grf.optimise_barcodes()
-            print(grf.to_zpl(compression=3, quantity=1))
             import socket
             mysocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             host = "127.0.0.1"
