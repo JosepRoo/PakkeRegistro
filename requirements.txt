@@ -7,4 +7,7 @@ Flask-JWT-Extended==3.13.0
 Flask-Compress==1.4.0
 Zeep==3.1.0
 pyserial==3.4
+Pillow
+pdfcrowd
+zplgrf
 uwsgi

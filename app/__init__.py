@@ -5,7 +5,8 @@ from flask_restful import Api
 
 from app.common.database import Database
 from app.common.response import Response
-from app.resources.courrier import Courrier
+from app.resources.Package import PackagePrint
+from app.resources.courrier import Courrier, CourrierWieghted
 from config import config
 
 
@@ -22,6 +23,8 @@ def create_app(config_name):
     app.register_blueprint(quote, url_prefix='/quote')
 
     api.add_resource(Courrier, '/courrier/price')
+    api.add_resource(CourrierWieghted, '/courrier/weight')
+    api.add_resource(PackagePrint, '/package/print')
 
     @app.after_request
     def after_request(response):

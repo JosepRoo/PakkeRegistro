@@ -98,31 +98,6 @@ class CourrierWieghted(Resource):
                         help="This field cannot be blank.",
                         location='json'
                         )
-    parser.add_argument('courrier_services',
-                        type=dict,
-                        required=True,
-                        help="This field cannot be blank.",
-                        action='append',
-                        location='json'
-                        )
-    parser.add_argument('width',
-                        type=float,
-                        required=True,
-                        help="This field cannot be blank.",
-                        location='json'
-                        )
-    parser.add_argument('length',
-                        type=float,
-                        required=True,
-                        help="This field cannot be blank.",
-                        location='json'
-                        )
-    parser.add_argument('height',
-                        type=float,
-                        required=True,
-                        help="This field cannot be blank.",
-                        location='json'
-                        )
     parser.add_argument('origin_zipcode',
                         type=str,
                         required=True,
@@ -138,6 +113,9 @@ class CourrierWieghted(Resource):
 
     def post(self) -> tuple:
         data = Courrier.parser.parse_args()
+        data['width'] = 10
+        data['height'] = 10
+        data['length'] = 10
         if not Utils.validate_entry(data.pop('pakke_key')):
             return Response(message="La llave de pakke es incorrecta, verificar e intentar de nuevo").json(), 401
         courrier_services = COURRIERS

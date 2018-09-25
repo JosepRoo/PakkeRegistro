@@ -1,5 +1,5 @@
 from app.models.baseModel import BaseModel
-from app.models.courriers.constants import COURRIERS
+from app.models.courriers.constants import COURRIERS, set_html
 from app.models.courriers.errors import CourrierNotFound
 from app.models.packages.package import Package
 
