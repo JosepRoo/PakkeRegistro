@@ -17,10 +17,11 @@ def create_app(config_name):
     api = Api(app)
     jwt = JWTManager(app)
     # Register our blueprints
-    from .default import default as default_blueprint, registro as registro_blueprint, quote
+    from .default import default as default_blueprint, registro as registro_blueprint, quote, weight
     app.register_blueprint(default_blueprint)
     app.register_blueprint(registro_blueprint, url_prefix='/registro')
     app.register_blueprint(quote, url_prefix='/quote')
+    app.register_blueprint(weight, url_prefix='/weight')
 
     api.add_resource(Courrier, '/courrier/price')
     api.add_resource(CourrierWieghted, '/courrier/weight')

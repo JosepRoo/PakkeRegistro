@@ -1,4 +1,4 @@
-from . import default, registro, quote
+from . import default, registro, quote, weight
 
 
 @default.route('/')
@@ -14,3 +14,8 @@ def home_pre(json=None):
 @quote.route('/')
 def quotes():
     return quote.send_static_file('index.html')
+
+
+@weight.route('/')
+def quotes():
+    return weight.send_static_file('index.html')
