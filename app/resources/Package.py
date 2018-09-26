@@ -7,12 +7,6 @@ from app.models.packages.package import Package as PackageModel
 
 class PackagePrint(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('pakke_key',
-                        type=str,
-                        required=True,
-                        help="This field cannot be blank.",
-                        location='json'
-                        )
     parser.add_argument('public_price',
                         type=str,
                         required=True,
