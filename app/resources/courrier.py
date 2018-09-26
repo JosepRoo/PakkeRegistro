@@ -116,11 +116,9 @@ class CourrierWieghted(Resource):
         data['width'] = 10
         data['height'] = 10
         data['length'] = 10
-        # if not Utils.validate_entry(data.pop('pakke_key')):
-        #     return Response(message="La llave de pakke es incorrecta, verificar e intentar de nuevo").json(), 401
-        courrier_services = COURRIERS
-        data['weight'] = 5 #PackageModel.get_weight()
-        package = PackageModel(**data)
+        data['weight'] = PackageModel.get_weight()
+        if data['weight'] % 1 != 0:
+            data['weight'] = int(data['weigth']) + 1
         result = list()
         if data['weight'] > 5:
             calc_price = 95 + ((data['weight'] - 5) * 7.5)
