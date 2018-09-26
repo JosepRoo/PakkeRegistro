@@ -119,23 +119,30 @@ class CourrierWieghted(Resource):
         # if not Utils.validate_entry(data.pop('pakke_key')):
         #     return Response(message="La llave de pakke es incorrecta, verificar e intentar de nuevo").json(), 401
         courrier_services = COURRIERS
-        data['weight'] = PackageModel.get_weight()
+        data['weight'] = 5 #PackageModel.get_weight()
         package = PackageModel(**data)
         result = list()
-        for courrier_service in courrier_services:
-            try:
-                courrier = CourrierModel.find_courrier({'name': courrier_service})
-                price = courrier.find_prices(package)
-                day = courrier.find_delivery_day(package) if courrier_service == "STF" \
-                    else courrier.find_delivery_day()
-                result.append({
-                    'success': True,
-                    'price': price,
-                    'delivery_day': day,
-                    'courrier': courrier.__class__.__name__
-                })
-            except CourrierErrors as e:
-                result.append(Response(message=e.message).json())
-        # result = sorted(result, key=itemgetter('price'))
+        if data['weight'] > 5:
+            calc_price = 95 + ((data['weight'] - 5) * 7.5)
+        else:
+            calc_price = 95
+        fake = {
+            "success": True,
+            "courrier": "Estafeta_barato",
+            "delivery_day": "2018-08-10",
+            "price": calc_price
+        }
+        result.append(fake)
+        if data['weight'] > 5:
+            calc_price = 249.51 + ((data['weight'] - 5) * 14.22)
+        else:
+            calc_price = 95
+        fake = {
+            "success": True,
+            "courrier": "Estafeta_caro",
+            "delivery_day": "2018-08-10",
+            "price": calc_price
+        }
+        result.append(fake)
         return {'result': result,
                 "weigth": data['weight']}, 200
