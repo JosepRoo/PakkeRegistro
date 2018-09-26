@@ -33,7 +33,11 @@ export class AppComponent implements OnInit {
             }
           }
         });
-        this.percent = Math.abs(((this.pakkePrice - this.price) * 100) / this.pakkePrice);
+        let percent = ((this.price - this.pakkePrice) * 100) / this.price;
+        if (percent < 0) {
+          percent = percent * (-1);
+        }
+        this.percent = percent;
       });
     });
   }
