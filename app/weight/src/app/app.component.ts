@@ -25,15 +25,15 @@ export class AppComponent implements OnInit {
       this.weightService.getData().subscribe(res => {
         this.weight = res.weight;
         res.result.forEach(courrier => {
-          if (courrier.price) {
-            if (courrier.price.ESTAFETA_TERRESTRE_CONSUMO) {
-              this.pakkePrice = courrier.price.ESTAFETA_TERRESTRE_CONSUMO.price;
-            } else if (courrier.price.AEROFLASH_TERRESTRE) {
-              this.price = courrier.price.AEROFLASH_TERRESTRE;
+          if (courrier.courrier) {
+            if (courrier.courrier === 'Estafeta_barato') {
+              this.pakkePrice = courrier.price;
+            } else if (courrier.courrier === 'Estafeta_caro') {
+              this.price = courrier.price;
             }
           }
         });
-        this.percent = ((this.pakkePrice - this.price) * 100) / this.pakkePrice;
+        this.percent = Math.abs(((this.pakkePrice - this.price) * 100) / this.pakkePrice);
       });
     });
   }
