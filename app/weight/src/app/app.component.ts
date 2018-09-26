@@ -1,6 +1,7 @@
 import { WeightService } from './weight.service';
 import { Component, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,13 @@ export class AppComponent implements OnInit {
   constructor(
     private weightService: WeightService
   ) {}
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.code === 'Space') {
+      this.print();
+    }
+  }
 
   ngOnInit() {
     this.sub = this.source.subscribe(_res => {
@@ -39,6 +47,17 @@ export class AppComponent implements OnInit {
         }
         this.percent = percent;
       });
+    });
+  }
+
+  print() {
+    const data = {
+     public_price: this.price,
+     pakke_price: this.pakkePrice,
+     weight: this.weight
+    };
+    this.weightService.print(data).subscribe(res => {
+      console.log(res);
     });
   }
 

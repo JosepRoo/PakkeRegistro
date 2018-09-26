@@ -61,6 +61,8 @@
 
 .content {
   margin-top: 10px;
+  overflow-x: hidden !important;
+  max-width: 100% !important;
 }
 
 .value {

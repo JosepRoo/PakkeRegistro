@@ -25,5 +25,15 @@ export class WeightService {
       return res;
     }));
   }
+
+  print(data): Observable<any> {
+    return this.http.post('/package/print', data, { headers: this.headers }).pipe(map(res => {
+      return res;
+    }));
+  }
 }
 // package/print
+
+// public_price
+// pakke_price
+// weight
