@@ -28,8 +28,6 @@ class PackagePrint(Resource):
 
     def post(self):
         data = PackagePrint.parser.parse_args()
-        if not Utils.validate_entry(data.pop('pakke_key')):
-            return Response(message="La llave de pakke es incorrecta, verificar e intentar de nuevo").json(), 401
         try:
             PackageModel.print(**data)
             return
