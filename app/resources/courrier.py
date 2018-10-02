@@ -83,7 +83,7 @@ class Courrier(Resource):
                     'success': True,
                     'price': price,
                     'delivery_day': day,
-                    'courrier': courrier.__class__.__name__
+                    'courrier': courrier_service.get("name")
                 })
             except CourrierErrors as e:
                 result.append(Response(message=e.message).json())
