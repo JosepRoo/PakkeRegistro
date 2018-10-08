@@ -50,8 +50,9 @@ class Package(BaseModel):
             grf.optimise_barcodes()
             import socket
             mysocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            host = "127.0.0.1"
-            port = 9100
+            host = "169.254.239.30"
+            port = 6101
+            print(grf.to_zpl(compression=3, quantity=1))
             try:
                 mysocket.connect((host, port))  # connecting to host
                 mysocket.send(bytes(grf.to_zpl(compression=3, quantity=1), "utf-8"))  # using bytes
