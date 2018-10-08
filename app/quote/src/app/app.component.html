@@ -15,12 +15,12 @@
       </div>
       <div class="col-12 col-sm-4">
         <mat-form-field class="full-width">
-          <input type="number" matInput placeholder="Origen" formControlName="origin_zipcode">
+          <input type="text" matInput placeholder="Origen" formControlName="origin_zipcode">
         </mat-form-field>
       </div>
       <div class="col-12 col-sm-4">
         <mat-form-field class="full-width">
-          <input type="number" matInput placeholder="Destino" formControlName="destiny_zipcode">
+          <input type="text" matInput placeholder="Destino" formControlName="destiny_zipcode">
         </mat-form-field>
       </div>
     </div>
@@ -28,30 +28,33 @@
       <div class="col-12 col-sm-6">
         <mat-form-field class="full-width">
           <mat-select placeholder="Servicio" formControlName="name" (selectionChange)="courrierChanged()">
-            <mat-option value="Estafeta">
+            <mat-option value="STF">
               Estafeta      
             </mat-option>
-            <mat-option value="Aeroflash">
+            <mat-option value="AEF">
               Aeroflash
             </mat-option>
             <mat-option value="DHL">
               DHL
             </mat-option>
+            <mat-option value="99Minutos">
+              99 Minutos
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="col-12 col-sm-6">
+      <!-- <div class="col-12 col-sm-6">
         <mat-form-field class="full-width">
           <mat-select placeholder="Courrier" formControlName="type" multiple>
             <mat-option *ngFor="let service of services" [value]="service.value">
               {{service?.name}}
             </mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
         <!-- <div class="text-right">
           <label style="color: gray; font-size: 1rem;">Dejar vació el servicio para cotizar todos</label>
         </div>         -->
-      </div>
+      <!-- </div> -->
     </div>
     <div class="row justify-content-end">
       <div class="col col-sm-4">
@@ -64,8 +67,8 @@
         <h6>Fecha de entrega: <b>{{response?.result[0]?.delivery_day | date}}</b></h6>
         <div class="row" *ngFor="let item of prices">
           <div class="col-12">
-             {{item | titlecase}} - <span *ngIf="response?.result[0]?.price[item] >= 0">{{response?.result[0]?.price[item]?.price | currency}}</span>
-            <span *ngIf="response?.result[0]?.price[item].price"> {{returnService(item)}} - {{response?.result[0]?.price[item].price | currency}}</span>
+             {{item | titlecase}} - <span *ngIf="response?.result[0]?.price[item] == 'Error, para los CPs dados no hay cobertura'">Error, para los CPs dados no hay cobertura</span> <span *ngIf="response?.result[0]?.price[item] >= 0">{{response?.result[0]?.price[item] | currency}}</span>
+            <span *ngIf="response?.result[0]?.price[item].price"> {{response?.result[0]?.price[item].price | currency}}</span>
           </div>
         </div>
       </div>

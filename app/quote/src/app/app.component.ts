@@ -19,15 +19,14 @@ export class AppComponent implements OnInit {
     this.guide = this.formBuilder.group({
       pakke_key: ['3Gb4HTCSRHFzqdgyY9HKmSCUhC5E'],
       courrier_services: this.formBuilder.group({
-        name: ['', Validators.required],
-        type: ['', Validators.required]
+        name: ['', Validators.required]
       }),
       weight: ['21', Validators.required],
       width: [1],
       height: [1],
       length: [1],
-      origin_zipcode: ['38078', Validators.required],
-      destiny_zipcode: ['96520', Validators.required]
+      origin_zipcode: ['01150', Validators.required],
+      destiny_zipcode: ['01140', Validators.required]
     });
   }
 
@@ -81,11 +80,11 @@ export class AppComponent implements OnInit {
   returnService(data) {
     const arr = [
       {
-        name: 'Día Siguiente',
+        name: 'ESTAFETA_DIA_SIGUIENTE',
         value: '1377731'
       },
       {
-        name: 'Terrestre',
+        name: 'ESTAFETA_TERRESTRE_CONSUMO',
         value: '8619166'
       }
     ];
