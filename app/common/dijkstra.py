@@ -50,15 +50,14 @@ class GraphUndirectedWeighted:
                     descs[e.vertex] = e.description
                     q.put(([distances[e.vertex], e.vertex]))
 
-        #shortest_path = []
+        # shortest_path = []
         result_path = []
         end = dest
         while end is not None:
-            #shortest_path.append(end)
+            # shortest_path.append(end)
             result_path.append(descs[end]) if descs[end] is not None else None
             end = parents[end]
 
-
-        #shortest_path.reverse()
+        # shortest_path.reverse()
 
         return distances[dest], result_path
