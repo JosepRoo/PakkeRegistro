@@ -81,7 +81,7 @@ class Estafeta(Courrier):
             result_descriptions = dict()
             for description in descriptions:
                 if result_descriptions.get(description) is None:
-                    result_descriptions[description] = 1    
+                    result_descriptions[description] = 1
                     if "TERRESTRE" in description:
                         result_descriptions["cuenta"] = list(Database.find("Estafeta_rates", {"type": description}))[0]['_id']
                 else:
