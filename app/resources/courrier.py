@@ -77,7 +77,8 @@ class Courrier(Resource):
             try:
                 courrier = CourrierModel.find_courrier(courrier_service)
                 price = courrier.find_prices(package)
-                day = courrier.find_delivery_day(package) if courrier_service['name'] == "STF" \
+                day = courrier.find_delivery_day(package)\
+                    if (courrier_service['name'] == "STF" or courrier_service['name'] == "FDX") \
                     else courrier.find_delivery_day()
                 result.append({
                     'success': True,
