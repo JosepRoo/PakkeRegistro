@@ -1,9 +1,14 @@
 import os
 from passlib.hash import pbkdf2_sha512
 import re
+from functools import wraps
 
 
 # utility class used thorughout other classes to perform common functions that dont fit in any other class
+from app import Response
+from app.models.courriers.fedex.constants import CONFIG_OBJ
+
+
 class Utils(object):
 
     @staticmethod
@@ -34,3 +39,13 @@ class Utils(object):
     @classmethod
     def validate_entry(cls, password):
         return cls.check_hashed_password(password, os.environ.get("PAKKE_KEY"))
+
+    @staticmethod
+    def validate_keys(f):
+        @wraps(f)
+        def wrap(*args, **kwargs):
+            if CONFIG_OBJ.account_number:
+                return f(*args, **kwargs)
+            else:
+                return Response(message="No credentials provided.").json(), 401
+        return wrap
