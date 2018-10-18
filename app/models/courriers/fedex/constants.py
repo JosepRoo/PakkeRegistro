@@ -11,4 +11,4 @@ CONFIG_OBJ = FedexConfig(key=os.environ.get('FEDEX_KEY'),
                          password=os.environ.get('FEDEX_PW'),
                          account_number=os.environ.get('FEDEX_ACC_NO'),
                          meter_number=os.environ.get('FEDEX_METER_NO'),
-                         use_test_server=True)
+                         use_test_server=False)
