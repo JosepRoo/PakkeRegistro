@@ -27,7 +27,7 @@ class Fedex(Courrier):
         # See page 355 in WS_ShipService.pdf for a full list. Here are the common ones:
         # STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND, FEDEX_EXPRESS_SAVER
         # To receive rates for multiple ServiceTypes set to None.
-        rate.RequestedShipment.ServiceType = None
+        rate.RequestedShipment.ServiceType = 'FEDEX_STANDARD_OVERNIGHT'
 
         # What kind of package this will be shipped in.
         # FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING
