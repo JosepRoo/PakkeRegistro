@@ -27,7 +27,7 @@ class Fedex(Courrier):
         # See page 355 in WS_ShipService.pdf for a full list. Here are the common ones:
         # STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND, FEDEX_EXPRESS_SAVER
         # To receive rates for multiple ServiceTypes set to None.
-        rate.RequestedShipment.ServiceType = 'FEDEX_STANDARD_OVERNIGHT'
+        rate.RequestedShipment.ServiceType = None
 
         # What kind of package this will be shipped in.
         # FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING
@@ -108,8 +108,11 @@ class Fedex(Courrier):
                         # print("{}: ODA rate_request charge {}".format(service.ServiceType, surcharge.Amount.Amount))
 
             for rate_detail in service.RatedShipmentDetails:
+                if service.ServiceType == 'STANDARD_OVERNIGHT':
+                    service.ServiceType = 'FEDEX_STANDARD_OVERNIGHT'
                 service_prices[service.ServiceType] =\
                     rate_detail.ShipmentRateDetail.TotalNetChargeWithDutiesAndTaxes.Amount
+
                 # print("{}: Net FedEx Charge {} {}".format(service.ServiceType,
                 #                                           rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Currency,
                 #                                           rate_detail.ShipmentRateDetail.TotalNetChargeWithDutiesAndTaxes.Amount))
