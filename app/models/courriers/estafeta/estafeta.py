@@ -82,8 +82,9 @@ class Estafeta(Courrier):
             for description in descriptions:
                 if result_descriptions.get(description) is None:
                     result_descriptions[description] = 1
+                    if "TERRESTRE" in description:
+                        result_descriptions["cuenta"] = list(Database.find("Estafeta_rates", {"type": description}))[0]['_id']
                 else:
-                    print("lol")
                     result_descriptions[description] += 1
 
             return {"price": price, "options": result_descriptions}
@@ -95,7 +96,7 @@ class Estafeta(Courrier):
             exceeded_price = rate['adicional'] * exceeded_weight
 
         final_rate = rate['total'] + exceeded_price
-        options = {rate['type']: 1, 'adicional': exceeded_weight}
+        options = {rate['type']: 1, 'adicional': exceeded_weight, "cuenta": service_type}
         return {'price': final_rate, "options": options}
 
     def find_delivery_day(self, package: Package) -> str:

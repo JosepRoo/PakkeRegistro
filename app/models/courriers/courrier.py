@@ -21,6 +21,8 @@ class Courrier(BaseModel):
         from app.models.courriers.dhl.dhl import DHL
         from app.models.courriers.estafeta.estafeta import Estafeta
         from app.models.courriers.noventaynueveminutos.noventaynueveminutos import NoventaYNueveMinutos
+        from app.models.courriers.fedex.Fedex import Fedex
+
         name = data.get('name')
         courrier: Courrier = None
         if name in COURRIERS:
@@ -32,6 +34,8 @@ class Courrier(BaseModel):
                 courrier = DHL(**data)
             elif name == "99Minutos":
                 courrier = NoventaYNueveMinutos(**data)
+            elif name == "FDX":
+                courrier = Fedex(**data)
         else:
             raise CourrierNotFound(
                 f"El courrier seleccionado no existe, confirme que mando que correcto, name: {name}")

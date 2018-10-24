@@ -13,7 +13,7 @@ class DHL(Courrier):
         if self.type not in TYPE_KG_LIMIT:
             raise CourrierServiceTypeUnkown(
                 f'El tipo ({self.type}) de servicio seleccionado para {self.__class__.__name__} no existe')
-        DHL.is_available(package)
+        # DHL.is_available(package)
         return {self.type: self.find_rate(package)}
 
     @staticmethod
