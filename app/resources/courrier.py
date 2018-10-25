@@ -77,15 +77,24 @@ class Courrier(Resource):
             try:
                 courrier = CourrierModel.find_courrier(courrier_service)
                 price = courrier.find_prices(package)
-                day = courrier.find_delivery_day(package)\
-                    if (courrier_service['name'] == "STF" or courrier_service['name'] == "FDX") \
-                    else courrier.find_delivery_day()
-                result.append({
-                    'success': True,
-                    'price': price,
-                    'delivery_day': day,
-                    'courrier': courrier_service.get("name")
-                })
+                if courrier_service['name'] != "STF":
+                    if courrier_service['name'] == "FDX":
+                        day = courrier.find_delivery_day(package)
+                    else:
+                        day = courrier.find_delivery_day()
+                    result.append({
+                        'success': True,
+                        'price': price,
+                        'delivery_day': day,
+                        'courrier': courrier_service.get("name")
+                    })
+                else:
+                    result.append({
+                        'success': True,
+                        'price': price,
+                        'courrier': courrier_service.get("name")
+                    })
+
             except CourrierErrors as e:
                 result.append(Response(message=e.message).json())
         return {'result': result}, 200
