@@ -60,7 +60,12 @@ export class AppComponent implements OnInit {
   }
 
   getProperty(item) {
-    return Object.keys(item)[0];
+    const arr = Object.keys(item);
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i][0] === 'T' || arr[i][0] === 'M') {
+        return Object.keys(item)[i];
+      }
+    }
   }
 
   sendGuide() {
