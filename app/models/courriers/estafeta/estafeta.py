@@ -2,7 +2,7 @@ import datetime
 
 from app import Database
 from app.models.courriers.courrier import Courrier
-from app.models.courriers.errors import CourrierServiceTypeUnkown
+from app.models.courriers.errors import CourrierServiceTypeUnkown, CourrierErrors
 from app.models.courriers.estafeta.constants import create_graph, EXTRA_FEE, SPECIAL_TYPE, TYPE_KG_LIMIT, \
     TYPES_STR_TO_ID, TYPES_ID_TO_STR, DF_ZIP_CODES
 from app.models.packages.package import Package
@@ -61,7 +61,10 @@ class Estafeta(Courrier):
 
     @staticmethod
     def find_delivery_data(package: Package) -> dict:
-        return Database.find("Estafeta_cities", {"zip_code": package.destiny_zipcode}).next()
+        try:
+            return Database.find("Estafeta_cities", {"zip_code": package.destiny_zipcode}).next()
+        except StopIteration:
+            raise CourrierErrors(f"El Codigo Postal {package.destiny_zipcode} no esta disponible para envios con este Courrier")
 
     # def determine_searches(self) -> None:
     #     non_optimizable_types = {service_type for service_type in self.type if service_type in NON_OPTIMIZABLE_TYPES}
