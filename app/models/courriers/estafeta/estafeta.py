@@ -4,7 +4,7 @@ from app import Database
 from app.models.courriers.courrier import Courrier
 from app.models.courriers.errors import CourrierServiceTypeUnkown
 from app.models.courriers.estafeta.constants import create_graph, EXTRA_FEE, SPECIAL_TYPE, TYPE_KG_LIMIT, \
-    TYPES_STR_TO_ID, TYPES_ID_TO_STR
+    TYPES_STR_TO_ID, TYPES_ID_TO_STR, DF_ZIP_CODES
 from app.models.packages.package import Package
 
 
@@ -38,6 +38,7 @@ class Estafeta(Courrier):
         if isinstance(self.type, list):
             for service_type in self.type:
                 result[TYPES_ID_TO_STR[service_type]] = self.find_type_price(service_type, package)
+                result[TYPES_ID_TO_STR[service_type]]['delivery_day'] = self.find_delivery_day(package)
         else:
             result[TYPES_ID_TO_STR[self.type]] = self.find_type_price(self.type, package)
         return result
@@ -76,6 +77,8 @@ class Estafeta(Courrier):
             package_weight = int(package.weight)
         if package_weight >= TYPE_KG_LIMIT and service_type == SPECIAL_TYPE:
             service_type = "5522411"
+        if (package.origin_zipcode not in DF_ZIP_CODES or package.destiny_zipcode not in DF_ZIP_CODES) and service_type != TYPES_STR_TO_ID['ESTAFETA_DIA_SIGUIENTE']:
+            service_type = "8608731"
         if service_type == SPECIAL_TYPE:
             price, descriptions = cls.Graph.dijkstra(0, package_weight)
             result_descriptions = dict()
