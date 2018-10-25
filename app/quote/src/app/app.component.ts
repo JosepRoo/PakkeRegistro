@@ -13,7 +13,10 @@ export class AppComponent implements OnInit {
   prices = [];
   response: any;
 
-  constructor(private formBuilder: FormBuilder, private quoteService: QuoteService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private quoteService: QuoteService
+  ) {}
 
   ngOnInit() {
     this.guide = this.formBuilder.group({
@@ -39,9 +42,7 @@ export class AppComponent implements OnInit {
         this.services = [{ name: 'Dia siguiente', value: 'next_day' }];
         break;
       case 'Aeroflash':
-        this.services = [
-          { name: 'Terrestre', value: 'terrestre' }
-        ];
+        this.services = [{ name: 'Terrestre', value: 'terrestre' }];
         break;
       case 'Estafeta':
         this.services = [
@@ -52,28 +53,30 @@ export class AppComponent implements OnInit {
           {
             name: 'Terrestre',
             value: 'terrestre'
-          },
+          }
         ];
         break;
     }
   }
 
+  getProperty(item) {
+    return Object.keys(item)[0];
+  }
+
   sendGuide() {
     if (this.guide.valid) {
-      this.quoteService
-        .getQuote(this.guide.getRawValue())
-        .subscribe(
-          res => {
-            this.response = res;
-            if (this.response.result[0].price) {
-              this.prices = Object.keys(this.response.result[0].price);
-            }
-            console.log(res);
-          },
-          error => {
-            console.log(error);
+      this.quoteService.getQuote(this.guide.getRawValue()).subscribe(
+        res => {
+          this.response = res;
+          if (this.response.result[0].price) {
+            this.prices = Object.keys(this.response.result[0].price);
           }
-        );
+          console.log(res);
+        },
+        error => {
+          console.log(error);
+        }
+      );
     }
   }
 
@@ -89,7 +92,7 @@ export class AppComponent implements OnInit {
       }
     ];
 
-    return arr.filter( service => {
+    return arr.filter(service => {
       if (service.value === data) {
         return service;
       }
