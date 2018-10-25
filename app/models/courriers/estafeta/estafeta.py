@@ -77,7 +77,7 @@ class Estafeta(Courrier):
             package_weight = int(package.weight)
         if package_weight >= TYPE_KG_LIMIT and service_type == SPECIAL_TYPE:
             service_type = "5522411"
-        if (package.origin_zipcode not in DF_ZIP_CODES or package.destiny_zipcode not in DF_ZIP_CODES) and service_type != TYPES_STR_TO_ID['ESTAFETA_DIA_SIGUIENTE']:
+        if (package.origin_zipcode in DF_ZIP_CODES and package.destiny_zipcode in DF_ZIP_CODES) and service_type != TYPES_STR_TO_ID['ESTAFETA_DIA_SIGUIENTE']:
             service_type = "8608731"
         if service_type == SPECIAL_TYPE:
             price, descriptions = cls.Graph.dijkstra(0, package_weight)
