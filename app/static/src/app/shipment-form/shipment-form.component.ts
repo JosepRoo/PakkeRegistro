@@ -405,8 +405,8 @@ export class ShipmentFormComponent implements OnInit, AfterViewInit {
         Weight: this.guide.controls.weight.value,
         Width: this.guide.controls.width.value
       },
-      ZipCodeFrom: this.guide.controls.origin.value.substring(0, 5),
-      ZipCodeTo: this.guide.controls.destiny.value.substring(0, 5),
+      ZipCodeFrom: this.guide.controls.origin.value.substring(1, 6),
+      ZipCodeTo: this.guide.controls.destiny.value.substring(1, 6),
       InsuredAmount: this.guide.controls.insuredAmount.value
     };
     this.pakkeService.getRates(data).subscribe(res => {
