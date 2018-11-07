@@ -96,7 +96,9 @@ class Courrier(Resource):
                     })
 
             except CourrierErrors as e:
-                result.append(Response(message=e.message).json())
+                res = Response(message=e.message).json()
+                res['courrier'] = courrier_service.get("name")
+                result.append(res)
         return {'result': result}, 200
 
 

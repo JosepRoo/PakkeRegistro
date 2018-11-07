@@ -2,6 +2,7 @@ from fedex.services.rate_service import FedexRateServiceRequest
 
 from app.common.utils import Utils
 from app.models.courriers.courrier import Courrier
+from app.models.courriers.errors import CourrierErrors
 from app.models.courriers.estafeta.estafeta import Estafeta
 from app.models.courriers.fedex.constants import CONFIG_OBJ
 from app.models.packages.package import Package
@@ -100,22 +101,22 @@ class Fedex(Courrier):
         # print(result)
 
         # RateReplyDetails can contain rates for multiple ServiceTypes if ServiceType was set to None
-        for service in rate.response.RateReplyDetails:
-            for detail in service.RatedShipmentDetails:
-                for surcharge in detail.ShipmentRateDetail.Surcharges:
-                    if surcharge.SurchargeType == 'OUT_OF_DELIVERY_AREA':
-                        pass
-                        # print("{}: ODA rate_request charge {}".format(service.ServiceType, surcharge.Amount.Amount))
+        try:
 
-            for rate_detail in service.RatedShipmentDetails:
-                if service.ServiceType == 'STANDARD_OVERNIGHT':
-                    service.ServiceType = 'FEDEX_STANDARD_OVERNIGHT'
-                service_prices[service.ServiceType] =\
-                    rate_detail.ShipmentRateDetail.TotalNetChargeWithDutiesAndTaxes.Amount
+            for service in rate.response.RateReplyDetails:
+                for detail in service.RatedShipmentDetails:
+                    for surcharge in detail.ShipmentRateDetail.Surcharges:
+                        if surcharge.SurchargeType == 'OUT_OF_DELIVERY_AREA':
+                            pass
+                            # print("{}: ODA rate_request charge {}".format(service.ServiceType, surcharge.Amount.Amount))
 
-                # print("{}: Net FedEx Charge {} {}".format(service.ServiceType,
-                #                                           rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Currency,
-                #                                           rate_detail.ShipmentRateDetail.TotalNetChargeWithDutiesAndTaxes.Amount))
+                for rate_detail in service.RatedShipmentDetails:
+                    if service.ServiceType == 'STANDARD_OVERNIGHT':
+                        service.ServiceType = 'FEDEX_STANDARD_OVERNIGHT'
+                    service_prices[service.ServiceType] =\
+                        rate_detail.ShipmentRateDetail.TotalNetChargeWithDutiesAndTaxes.Amount
+        except AttributeError:
+            raise CourrierErrors("Servicio no disponible segun los datos proporcionados")
 
         return service_prices
 
