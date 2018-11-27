@@ -1,4 +1,4 @@
-COURRIERS = frozenset({"DHL", "STF", "AEF", '99Minutos', "FDX"})
+COURRIERS = frozenset({"DHL", "STF", "AEF", '99M', "FDX"})
 
 
 def set_html(peso_declarado,precio_publico,precio_pakke):
