@@ -32,7 +32,7 @@ class Courrier(BaseModel):
                 courrier = Estafeta(**data)
             elif name == "DHL":
                 courrier = DHL(**data)
-            elif name == "99Minutos":
+            elif name == "99M":
                 courrier = NoventaYNueveMinutos(**data)
             elif name == "FDX":
                 courrier = Fedex(**data)
