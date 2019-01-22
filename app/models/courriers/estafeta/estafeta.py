@@ -46,8 +46,14 @@ class Estafeta(Courrier):
 
     def discard_types(self, package):
         option_types = list(Database.find("Estafeta_cities", {"zip_code": package.destiny_zipcode}))
-        if not option_types:
-            option_types = [{
+        print(option_types)
+        terrain_flag = False
+        for opt in option_types:
+            if opt['service_type'] == 'TERRESTRE':
+                terrain_flag = True
+                break
+        if not option_types or not terrain_flag:
+            option_types += [{
                 'zip_code': package.destiny_zipcode,
                 'periodicity': 'SEMANAL',
                 'extra': 1,
