@@ -2,7 +2,7 @@ import datetime
 import requests
 
 from app.models.courriers.courrier import Courrier
-from app.models.courriers.noventaynueveminutos.constants import TYPES, URL, USER_ID, API_KEY
+from app.models.courriers.noventaynueveminutos.constants import TYPES, URL, USER_ID, API_KEY, QRO_ZIP_CODE
 from app.models.courriers.noventaynueveminutos.errors import NoventaYNueveMinutosError
 from app.models.packages.package import Package
 
@@ -14,6 +14,8 @@ class NoventaYNueveMinutos(Courrier):
         :param package: Package detail
         :return: dict for each service to calculate with the price as value
         """
+        if package.destiny_zipcode in QRO_ZIP_CODE:
+            raise NoventaYNueveMinutosError("Queretaro no esta habilitado por el momento")
         self.set_type()
         result = dict()
         data = {
