@@ -4,7 +4,7 @@ from app import Database
 from app.models.courriers.courrier import Courrier
 from app.models.courriers.errors import CourrierServiceTypeUnkown, CourrierErrors
 from app.models.courriers.estafeta.constants import create_graph, EXTRA_FEE, SPECIAL_TYPE, TYPE_KG_LIMIT, \
-    TYPES_STR_TO_ID, TYPES_ID_TO_STR, DF_ZIP_CODES
+    TYPES_STR_TO_ID, TYPES_ID_TO_STR, DF_ZIP_CODES, TYPES_ID_TOSERVICE_TYPE
 from app.models.packages.package import Package
 
 
@@ -34,6 +34,7 @@ class Estafeta(Courrier):
 
     def find_prices(self, package: Package) -> dict:
         self.set_type()
+        self.discard_types(package)
         result = dict()
         if isinstance(self.type, list):
             for service_type in self.type:
@@ -42,6 +43,26 @@ class Estafeta(Courrier):
         else:
             result[TYPES_ID_TO_STR[self.type]] = self.find_type_price(self.type, package)
         return result
+
+    def discard_types(self, package):
+        option_types = list(Database.find("Estafeta_cities", {"zip_code": package.destiny_zipcode}))
+        if not option_types:
+            option_types = [{
+                'zip_code': package.destiny_zipcode,
+                'periodicity': 'SEMANAL',
+                'extra': 1,
+                'service_type': 'TERRESTRE',
+                'availability': [1, 1, 1, 1, 1, 0, 0]
+
+            }]
+        result = list()
+        if isinstance(self.type, list):
+            for type in self.type:
+                for opt_type in option_types:
+                    if TYPES_ID_TOSERVICE_TYPE.get(opt_type['service_type']) == type:
+                        result.append(type)
+                        continue
+        self.type = result
 
     @classmethod
     def find_type_price(cls, service_type: str, package: Package) -> dict:
