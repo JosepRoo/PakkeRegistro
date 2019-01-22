@@ -64,7 +64,17 @@ class Estafeta(Courrier):
         try:
             return Database.find("Estafeta_cities", {"zip_code": package.destiny_zipcode}).next()
         except StopIteration:
-            raise CourrierErrors(f"El Codigo Postal {package.destiny_zipcode} no esta disponible para envios con este Courrier")
+            not_found_dict = {
+                'zip_code': package.destiny_zipcode,
+                'periodicity': 'SEMANAL',
+                'extra': 1,
+                'service_type': 'TERRESTRE',
+                'availability': [1, 1, 1, 1, 1, 0, 0]
+
+            }
+            return not_found_dict
+            # raise CourrierErrors(
+            #     CourrierErrorsf"El Codigo Postal {package.destiny_zipcode} no esta disponible para envios con este Courrier")
 
     # def determine_searches(self) -> None:
     #     non_optimizable_types = {service_type for service_type in self.type if service_type in NON_OPTIMIZABLE_TYPES}
@@ -80,7 +90,8 @@ class Estafeta(Courrier):
             package_weight = int(package.weight)
         if package_weight >= TYPE_KG_LIMIT and service_type == SPECIAL_TYPE:
             service_type = "5522411"
-        if (package.origin_zipcode in DF_ZIP_CODES and package.destiny_zipcode in DF_ZIP_CODES) and service_type != TYPES_STR_TO_ID['ESTAFETA_DIA_SIGUIENTE']:
+        if (package.origin_zipcode in DF_ZIP_CODES and package.destiny_zipcode in DF_ZIP_CODES) and service_type != \
+                TYPES_STR_TO_ID['ESTAFETA_DIA_SIGUIENTE']:
             service_type = "8608731"
         if service_type == SPECIAL_TYPE:
             price, descriptions = cls.Graph.dijkstra(0, package_weight)
@@ -89,7 +100,8 @@ class Estafeta(Courrier):
                 if result_descriptions.get(description) is None:
                     result_descriptions[description] = 1
                     if "TERRESTRE" in description:
-                        result_descriptions["cuenta"] = list(Database.find("Estafeta_rates", {"type": description}))[0]['_id']
+                        result_descriptions["cuenta"] = list(Database.find("Estafeta_rates", {"type": description}))[0][
+                            '_id']
                 else:
                     result_descriptions[description] += 1
 
