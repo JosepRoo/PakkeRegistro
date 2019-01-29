@@ -4,12 +4,13 @@ from app import Database
 from app.models.courriers.courrier import Courrier
 from app.models.courriers.errors import CourrierServiceTypeUnkown, CourrierErrors
 from app.models.courriers.estafeta.constants import create_graph, EXTRA_FEE, SPECIAL_TYPE, TYPE_KG_LIMIT, \
-    TYPES_STR_TO_ID, TYPES_ID_TO_STR, DF_ZIP_CODES, TYPES_ID_TOSERVICE_TYPE
+    TYPES_STR_TO_ID, TYPES_ID_TO_STR, DF_ZIP_CODES, TYPES_ID_TOSERVICE_TYPE, MAX_WEIGHT
 from app.models.packages.package import Package
 
 
 class Estafeta(Courrier):
     Graph = create_graph()
+    max_weight = MAX_WEIGHT
 
     def set_type(self) -> None:
         if self.type is None:

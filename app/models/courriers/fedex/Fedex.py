@@ -4,11 +4,13 @@ from app.common.utils import Utils
 from app.models.courriers.courrier import Courrier
 from app.models.courriers.errors import CourrierErrors
 from app.models.courriers.estafeta.estafeta import Estafeta
-from app.models.courriers.fedex.constants import CONFIG_OBJ
+from app.models.courriers.fedex.constants import CONFIG_OBJ, MAX_WEIGHT
 from app.models.packages.package import Package
 
 
 class Fedex(Courrier):
+    max_weight = MAX_WEIGHT
+
     @Utils.validate_keys
     def find_prices(self, package: Package) -> dict:
         """

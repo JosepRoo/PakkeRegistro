@@ -2,7 +2,7 @@ import datetime
 
 from app import Database
 from app.models.courriers.aeroflash.constants import AREAS_COLLECTION, AREA_TO_ZONE_COLLECTION, ZONE_TO_RATE, \
-    TYPE_KG_LIMIT, DELIVERY_TIME
+    TYPE_KG_LIMIT, DELIVERY_TIME, MAX_WEIGHT
 from app.models.courriers.courrier import Courrier
 from app.models.courriers.aeroflash.constants import TYPES
 from app.models.courriers.errors import ZipCodesNotFound, CourrierServiceTypeUnkown
@@ -10,7 +10,7 @@ from app.models.packages.package import Package
 
 
 class Aeroflash(Courrier):
-
+    max_weight = MAX_WEIGHT
     def find_prices(self, package: Package) -> dict:
         self.set_type()
         result = dict()

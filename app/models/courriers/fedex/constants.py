@@ -1,6 +1,7 @@
 import os
 from fedex.config import FedexConfig
 
+MAX_WEIGHT = 68
 WS_URL = os.environ.get('FEDEX_URL')
 
 """

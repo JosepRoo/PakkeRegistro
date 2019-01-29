@@ -4,6 +4,7 @@ TYPES = {"bicycle99", "bicycle", "mini", "bike99", "bike"}
 URL = "https://deploy-dot-precise-line-76299minutos.appspot.com/2/delivery/shipping_rates"
 API_KEY = os.environ.get("99MINUTOS_KEY")
 USER_ID = int(os.environ.get("99MINUTOS_USER_ID"))
+MAX_WEIGHT = 68
 
 QRO_ZIP_CODE = {'76850', '76853', '76854', '76855', '76856', '76860', '76861', '76862', '76863', '76870', '76874',
                 '76875', '76876', '76877', '76878', '76879', '76880', '76883', '76884', '76885', '76886', '76887',

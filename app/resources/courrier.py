@@ -68,6 +68,7 @@ class Courrier(Resource):
             return Response(message="La llave de pakke es incorrecta, verificar e intentar de nuevo").json(), 401
         courrier_services = data.pop('courrier_services')
         package = PackageModel(**data)
+        package.calculate_weight()
         result = list()
         for courrier_service in courrier_services:
             if courrier_service.get('name') is None:
@@ -76,6 +77,8 @@ class Courrier(Resource):
                 }).json())
             try:
                 courrier = CourrierModel.find_courrier(courrier_service)
+                if package.weight > courrier.max_weight:
+                    return Resource("El peso del paquete es superios a lo permitido"), 400
                 price = courrier.find_prices(package)
                 if courrier_service['name'] != "STF":
                     if courrier_service['name'] == "FDX":

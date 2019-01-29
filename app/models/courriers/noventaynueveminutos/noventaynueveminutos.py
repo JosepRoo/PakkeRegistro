@@ -2,12 +2,14 @@ import datetime
 import requests
 
 from app.models.courriers.courrier import Courrier
-from app.models.courriers.noventaynueveminutos.constants import TYPES, URL, USER_ID, API_KEY, QRO_ZIP_CODE
+from app.models.courriers.noventaynueveminutos.constants import TYPES, URL, USER_ID, API_KEY, QRO_ZIP_CODE, MAX_WEIGHT
 from app.models.courriers.noventaynueveminutos.errors import NoventaYNueveMinutosError
 from app.models.packages.package import Package
 
 
 class NoventaYNueveMinutos(Courrier):
+    max_weight = MAX_WEIGHT
+
     def find_prices(self, package: Package) -> dict:
         """
         given a list or str of courrier types it will get the prices for each one

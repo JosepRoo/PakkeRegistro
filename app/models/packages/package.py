@@ -19,11 +19,21 @@ class Package(BaseModel):
         self.width = width
         self.length = length
 
+    def get_volumetric_weight(self):
+        return (self.height * self.length * self.width) / 5000
+
+    def calculate_weight(self):
+        vol_weight = self.get_volumetric_weight()
+        if vol_weight > self.weight:
+            self.weight = vol_weight
+
     @staticmethod
     def get_weight():
         ser = serial.Serial('/dev/ttyUSB0')
         s = ser.read(100)
         return float(s.strip()[:-2])
+
+
 
     @staticmethod
     def print(weight, public_price, price_pakke):

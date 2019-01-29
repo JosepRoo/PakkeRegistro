@@ -3,11 +3,14 @@ import datetime
 from app import Database
 from app.models.courriers.courrier import Courrier
 from app.models.courriers.dhl.constants import TYPE_KG_LIMIT, AREAS_COLLECTION, ZONE_TO_RATE, DELIVERY_TIME, TYPES
+from app.models.courriers.dhl.constants import MAX_WEIGHT, GAS_RATE
 from app.models.courriers.errors import CourrierServiceTypeUnkown, ZipCodesNotFound
 from app.models.packages.package import Package
 
 
 class DHL(Courrier):
+    max_weight = MAX_WEIGHT
+
     def find_prices(self, package: Package) -> dict:
         self.set_type()
         if self.type not in TYPE_KG_LIMIT:
@@ -55,7 +58,23 @@ class DHL(Courrier):
         project = {'_id': 0, 'rates': {'$elemMatch': {'kg': package_weight}},
                    'rates.rate': 1}
         rate = Database.find(ZONE_TO_RATE, query, project).next()['rates'][0]['rate']
-        return rate + exceeded_price
+        extra_fees = self._get_extra_fees(package)
+        return round((rate + exceeded_price + extra_fees) * GAS_RATE, 2)
+
+    def _get_extra_fees(self, package: Package) ->float:
+        ext_zone = list(Database.find('DHL_EXT', {"_id": package.destiny_zipcode}))
+        extra_fees = 0
+        if ext_zone:
+            extra_fees += 133.67
+
+        if package.weight > 70.0:
+            extra_fees += 244.90
+
+        if package.width > 120 or package.length > 120 or package.height > 120:
+            extra_fees += 244.90
+
+        return extra_fees
+
 
     def find_delivery_day(self) -> str:
         today = datetime.datetime.now()
