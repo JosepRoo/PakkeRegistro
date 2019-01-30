@@ -75,10 +75,12 @@ class Courrier(Resource):
                 result.append(Response(message={
                     "courrier_services.name": "This field cannot be blank."
                 }).json())
+                continue
             try:
                 courrier = CourrierModel.find_courrier(courrier_service)
                 if package.weight > courrier.max_weight:
-                    return Resource("El peso del paquete es superios a lo permitido"), 400
+                    result.append(Response(f"El peso del paquete es superior a lo permitido, peso: {package.weight}").json())
+                    continue
                 price = courrier.find_prices(package)
                 if courrier_service['name'] != "STF":
                     if courrier_service['name'] == "FDX":
