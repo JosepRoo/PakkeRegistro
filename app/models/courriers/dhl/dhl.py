@@ -57,7 +57,7 @@ class DHL(Courrier):
         query = {'type': self.type, 'rates.kg': package_weight}
         project = {'_id': 0, 'rates': {'$elemMatch': {'kg': package_weight}},
                    'rates.rate': 1}
-        rate = Database.find(ZONE_TO_RATE, query, project).next()['rates'][0]['rate'] * 1.04 #TODO update DB
+        rate = Database.find(ZONE_TO_RATE, query, project).next()['rates'][0]['rate']
         extra_fees = self._get_extra_fees(package)
         return round((rate + exceeded_price + extra_fees) * GAS_RATE, 2)
 
