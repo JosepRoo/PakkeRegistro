@@ -79,7 +79,9 @@ class Courrier(Resource):
             try:
                 courrier = CourrierModel.find_courrier(courrier_service)
                 if package.weight > courrier.max_weight:
-                    result.append(Response(f"El peso del paquete es superior a lo permitido, peso: {package.weight}").json())
+                    response = Response(False,
+                                        f"El peso del paquete es superior a lo permitido, peso: {package.weight}").json()
+                    result.append(response)
                     continue
                 price = courrier.find_prices(package)
                 if courrier_service['name'] != "STF":
