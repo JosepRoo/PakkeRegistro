@@ -37,6 +37,7 @@ class Estafeta(Courrier):
         self.set_type()
         self.discard_types(package)
         result = dict()
+        print(self.type)
         if isinstance(self.type, list):
             for service_type in self.type:
                 result[TYPES_ID_TO_STR[service_type]] = self.find_type_price(service_type, package)
@@ -68,7 +69,8 @@ class Estafeta(Courrier):
                     if TYPES_ID_TOSERVICE_TYPE.get(opt_type['service_type']) == type:
                         result.append(type)
                         continue
-        self.type = result
+        if result:
+            self.type = result
 
     @classmethod
     def find_type_price(cls, service_type: str, package: Package) -> dict:
