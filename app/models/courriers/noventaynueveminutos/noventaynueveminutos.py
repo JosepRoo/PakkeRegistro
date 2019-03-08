@@ -1,7 +1,9 @@
 import datetime
 import requests
+from requests import Timeout
 
 from app.models.courriers.courrier import Courrier
+from app.models.courriers.errors import CourrierErrors
 from app.models.courriers.noventaynueveminutos.constants import TYPES, URL, USER_ID, API_KEY, QRO_ZIP_CODE, MAX_WEIGHT
 from app.models.courriers.noventaynueveminutos.errors import NoventaYNueveMinutosError
 from app.models.packages.package import Package
@@ -31,7 +33,10 @@ class NoventaYNueveMinutos(Courrier):
             "origin": {"postalCode": package.origin_zipcode, "country": "Mexico"}
         }
         headers = {"Content-Type": "application/json"}
-        res = requests.post(URL, json=data, headers=headers)
+        try:
+            res = requests.post(URL, json=data, headers=headers, timeout=7)
+        except Timeout:
+            raise CourrierErrors("99m no respondió")
         res = res.json()
         if res['status'] == "Error":
             raise NoventaYNueveMinutosError(res['message'])
