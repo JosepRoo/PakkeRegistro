@@ -34,7 +34,7 @@ class NoventaYNueveMinutos(Courrier):
         }
         headers = {"Content-Type": "application/json"}
         try:
-            res = requests.post(URL, json=data, headers=headers, timeout=7)
+            res = requests.post(URL, json=data, headers=headers, timeout=5)
         except Timeout:
             raise CourrierErrors("99m no respondió")
         res = res.json()
