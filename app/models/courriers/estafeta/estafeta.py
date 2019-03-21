@@ -37,7 +37,6 @@ class Estafeta(Courrier):
         self.set_type()
         self.discard_types(package)
         result = dict()
-        print(self.type)
         if isinstance(self.type, list):
             for service_type in self.type:
                 result[TYPES_ID_TO_STR[service_type]] = self.find_type_price(service_type, package)
@@ -143,6 +142,10 @@ class Estafeta(Courrier):
             exceeded_price = rate['adicional'] * exceeded_weight
 
         final_rate = rate['total'] + exceeded_price
+
+        # TODO Delete THIS when needed
+        if service_type == '8646027':
+            service_type = '5056308'
         options = {rate['type']: 1, 'adicional': exceeded_weight, "cuenta": service_type}
         return {'price': final_rate, "options": options}
 
