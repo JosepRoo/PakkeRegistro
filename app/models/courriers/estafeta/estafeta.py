@@ -130,6 +130,9 @@ class Estafeta(Courrier):
                     if "TERRESTRE" in description:
                         result_descriptions["cuenta"] = list(Database.find("Estafeta_rates", {"type": description}))[0][
                             '_id']
+                        # TODO Delete THIS when needed
+                        if result_descriptions["cuenta"] == '8646027':
+                            result_descriptions["cuenta"] = '8622603'
                 else:
                     result_descriptions[description] += 1
 
