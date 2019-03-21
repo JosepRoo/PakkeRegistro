@@ -145,7 +145,7 @@ class Estafeta(Courrier):
 
         # TODO Delete THIS when needed
         if service_type == '8646027':
-            service_type = '5056308'
+            service_type = '8622603'
         options = {rate['type']: 1, 'adicional': exceeded_weight, "cuenta": service_type}
         return {'price': final_rate, "options": options}
 
