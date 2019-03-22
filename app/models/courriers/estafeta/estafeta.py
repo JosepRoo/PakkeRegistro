@@ -128,8 +128,10 @@ class Estafeta(Courrier):
                 if result_descriptions.get(description) is None:
                     result_descriptions[description] = 1
                     if "TERRESTRE" in description:
-                        result_descriptions["cuenta"] = list(Database.find("Estafeta_rates", {"type": description}))[0][
-                            '_id']
+                        rate_data = list(Database.find("Estafeta_rates", {"type": description}))[0]
+                        result_descriptions["cuenta"] = rate_data['_id']
+                        result_descriptions['covered_kg'] = rate_data['kg']
+                        result_descriptions['extra_kg_rate'] = rate_data['adicional']/0.8
                         # TODO Delete THIS when needed
                         if result_descriptions["cuenta"] == '8646027':
                             result_descriptions["cuenta"] = '8622603'
@@ -149,7 +151,8 @@ class Estafeta(Courrier):
         # TODO Delete THIS when needed
         if service_type == '8646027':
             service_type = '8622603'
-        options = {rate['type']: 1, 'adicional': exceeded_weight, "cuenta": service_type}
+        options = {rate['type']: 1, 'adicional': exceeded_weight, "cuenta": service_type,
+                   'extra_kg_rate': rate['adicional']/0.8, 'covered_kg': rate['kg']}
         return {'price': final_rate, "options": options}
 
     def find_delivery_day(self, package: Package) -> str:
