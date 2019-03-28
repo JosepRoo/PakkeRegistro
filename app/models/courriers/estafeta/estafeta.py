@@ -133,7 +133,7 @@ class Estafeta(Courrier):
                         result_descriptions['covered_kg'] = rate_data['kg']
                         result_descriptions['extra_kg_rate'] = rate_data['adicional']
                         # TODO Delete THIS when needed
-                        if result_descriptions["cuenta"] in ['8646027', "8668532"]:
+                        if result_descriptions["cuenta"] in ['8646027']:
                             result_descriptions["cuenta"] = '8622603'
                 else:
                     result_descriptions[description] += 1
@@ -149,7 +149,7 @@ class Estafeta(Courrier):
         final_rate = rate['total'] + exceeded_price
 
         # TODO Delete THIS when needed
-        if service_type in ['8646027', "8668532"]:
+        if service_type in ['8646027']:
             service_type = '8622603'
         options = {rate['type']: 1, 'adicional': exceeded_weight, "cuenta": service_type,
                    'extra_kg_rate': rate['adicional'], 'covered_kg': rate['kg']}
