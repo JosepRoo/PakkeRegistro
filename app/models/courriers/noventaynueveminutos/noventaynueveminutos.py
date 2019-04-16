@@ -38,7 +38,7 @@ class NoventaYNueveMinutos(Courrier):
         except Timeout:
             raise CourrierErrors("99m no respondió")
         res = res.json()
-        if res['status'] == "Error":
+        if res['status'] in ["Error", 'Block']:
             raise NoventaYNueveMinutosError(res['message'])
         res = res['rates']
         for service_type in self.type:
