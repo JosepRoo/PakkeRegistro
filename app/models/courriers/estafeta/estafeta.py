@@ -46,7 +46,7 @@ class Estafeta(Courrier):
         return result
 
     def discard_types(self, package):
-        option_types = list(Database.find("Estafeta_cities", {"zip_code": package.destiny_zipcode}))
+        option_types = list(Database.find("STF_ZP", {"zip_code": package.destiny_zipcode}))
         terrain_flag = False
         for opt in option_types:
             if opt['service_type'] == 'TERRESTRE':
@@ -90,7 +90,7 @@ class Estafeta(Courrier):
     @staticmethod
     def find_delivery_data(package: Package) -> dict:
         try:
-            return Database.find("Estafeta_cities", {"zip_code": package.destiny_zipcode}).next()
+            return Database.find("STF_ZP", {"zip_code": package.destiny_zipcode}).next()
         except StopIteration:
             not_found_dict = {
                 'zip_code': package.destiny_zipcode,
