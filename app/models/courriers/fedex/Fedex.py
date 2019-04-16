@@ -104,7 +104,7 @@ class Fedex(Courrier):
 
         # RateReplyDetails can contain rates for multiple ServiceTypes if ServiceType was set to None
         try:
-
+            # print(rate.response)
             for service in rate.response.RateReplyDetails:
                 for detail in service.RatedShipmentDetails:
                     for surcharge in detail.ShipmentRateDetail.Surcharges:
