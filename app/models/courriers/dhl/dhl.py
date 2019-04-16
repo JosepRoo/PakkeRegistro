@@ -29,7 +29,7 @@ class DHL(Courrier):
 
         return area_from, area_to
 
-    def find_rate(self, package) -> float:
+    def find_rate(self, package) -> dict:
         """
         After obtaining the zone, it finds the rate it needs and calculates the prices of the shipment
         even if it haves an exceeded weight it calculates it.
@@ -39,8 +39,10 @@ class DHL(Courrier):
         :return: float of shipment price
         """
         exceeded_price = 0
+        exceeded_weight = 0
         if package.weight % 1 > 0:
-            package_weight = int(package.weight) + 1  # if it has more than an int weight it must add 1
+            package_weight = int(package.weight) + 1  # if it has decimal weight it must add 1
+
         else:
             package_weight = int(package.weight)
         # finds the exceeded weight and rate, with that it calculates the exceeded price
@@ -59,7 +61,16 @@ class DHL(Courrier):
                    'rates.rate': 1}
         rate = Database.find(ZONE_TO_RATE, query, project).next()['rates'][0]['rate'] * 1.04 #TODO update DB
         extra_fees = self._get_extra_fees(package)
-        return round((rate + exceeded_price + extra_fees) * GAS_RATE, 2)
+        options = {
+            'exceeded_price': exceeded_price * GAS_RATE,
+            'extra_fees': extra_fees * GAS_RATE,
+            'rate': rate * GAS_RATE,
+            'exceeded_weight': exceeded_weight,
+            'covered_weight': package_weight
+
+        }
+        price = round((rate + exceeded_price + extra_fees) * GAS_RATE, 2)
+        return {"price": price, "options": options}
 
     def _get_extra_fees(self, package: Package) ->float:
         ext_zone = list(Database.find('DHL_EXT', {"_id": package.destiny_zipcode}))
@@ -74,7 +85,6 @@ class DHL(Courrier):
             extra_fees += 244.90
 
         return extra_fees
-
 
     def find_delivery_day(self) -> str:
         today = datetime.datetime.now()
