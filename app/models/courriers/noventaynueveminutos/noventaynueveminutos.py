@@ -1,4 +1,6 @@
 import datetime
+from json import JSONDecodeError
+
 import requests
 from requests import Timeout
 
@@ -35,9 +37,10 @@ class NoventaYNueveMinutos(Courrier):
         headers = {"Content-Type": "application/json"}
         try:
             res = requests.post(URL, json=data, headers=headers, timeout=5)
-        except Timeout:
+            res = res.json()
+        except (Timeout, JSONDecodeError):
             raise CourrierErrors("99m no respondió")
-        res = res.json()
+
         if res['status'] in ["Error", 'Block']:
             raise NoventaYNueveMinutosError(res['message'])
         res = res['rates']
