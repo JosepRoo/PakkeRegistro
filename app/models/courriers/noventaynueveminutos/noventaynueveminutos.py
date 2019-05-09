@@ -38,12 +38,14 @@ class NoventaYNueveMinutos(Courrier):
         try:
             res = requests.post(URL, json=data, headers=headers, timeout=5)
             res = res.json()
-        except (Timeout, JSONDecodeError):
+        except:  # (Timeout, JSONDecodeError):
             raise CourrierErrors("99m no respondió")
 
-        if res['status'] in ["Error", 'Block']:
+        if res.get('status') in ["Error", 'Block']:
             raise NoventaYNueveMinutosError(res['message'])
-        res = res['rates']
+        res = res.get('rates')
+        if not res:
+            raise CourrierErrors("99m no respondió")
         for service_type in self.type:
             if service_type not in TYPES:
                 result[service_type] = f"El servicio de tipo: {service_type} no es una opcion valida"

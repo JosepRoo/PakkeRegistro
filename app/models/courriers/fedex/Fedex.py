@@ -110,7 +110,6 @@ class Fedex(Courrier):
                     for surcharge in detail.ShipmentRateDetail.Surcharges:
                         if surcharge.SurchargeType == 'OUT_OF_DELIVERY_AREA':
                             pass
-                            # print("{}: ODA rate_request charge {}".format(service.ServiceType, surcharge.Amount.Amount))
 
                 for rate_detail in service.RatedShipmentDetails:
                     if service.ServiceType == 'STANDARD_OVERNIGHT':
@@ -119,6 +118,9 @@ class Fedex(Courrier):
                         rate_detail.ShipmentRateDetail.TotalNetChargeWithDutiesAndTaxes.Amount
         except AttributeError:
             raise CourrierErrors("Servicio no disponible segun los datos proporcionados")
+        except:
+            raise CourrierErrors("FDX No de respondió")
+
 
         return service_prices
 
