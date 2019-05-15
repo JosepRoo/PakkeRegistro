@@ -137,8 +137,12 @@ class Estafeta(Courrier):
                             result_descriptions["cuenta"] = '8622603'
                 else:
                     result_descriptions[description] += 1
+            extra_fee = 0
+            if package.height > 115 or package.width > 115 or package.length > 115:
+                extra_fee = 42
+            result_descriptions['exceeded_dimensions_fee'] = extra_fee
 
-            return {"price": price, "options": result_descriptions}
+            return {"price": price + extra_fee, "options": result_descriptions}
         rate = Database.find("Estafeta_rates", {"_id": service_type}).next()
         exceeded_price = 0
         exceeded_weight = 0
@@ -151,9 +155,12 @@ class Estafeta(Courrier):
         # TODO Delete THIS when needed
         if service_type in ['8646027']:
             service_type = '8622603'
+        extra_fee = 0
+        if package.height > 115 or package.width > 115 or package.length > 115:
+            extra_fee = 42
         options = {rate['type']: 1, 'adicional': exceeded_weight, "cuenta": service_type,
-                   'extra_kg_rate': rate['adicional'], 'covered_kg': rate['kg']}
-        return {'price': final_rate, "options": options}
+                   'extra_kg_rate': rate['adicional'], 'covered_kg': rate['kg'], 'exceeded_dimensions_fee': extra_fee}
+        return {'price': final_rate + extra_fee, "options": options}
 
     def find_delivery_day(self, package: Package) -> str:
         today = datetime.datetime.now()
