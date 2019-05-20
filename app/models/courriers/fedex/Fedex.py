@@ -90,7 +90,6 @@ class Fedex(Courrier):
         rate.add_package(package1)
 
         # Fires off the request, sets the 'response' attribute on the object.
-        rate.send_request()
 
         # This will convert the response to a python dict object. To
         # make it easier to work with.
@@ -104,6 +103,7 @@ class Fedex(Courrier):
 
         # RateReplyDetails can contain rates for multiple ServiceTypes if ServiceType was set to None
         try:
+            rate.send_request()
             # print(rate.response)
             for service in rate.response.RateReplyDetails:
                 for detail in service.RatedShipmentDetails:
