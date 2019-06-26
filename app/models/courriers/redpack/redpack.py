@@ -14,7 +14,7 @@ class RedPack(Courrier):
     max_weight = 150
 
     def find_prices(self, package: Package) -> dict:
-        guide_object = {
+        guide = {
             "remitente": {
                 "codigoPostal": package.origin_zipcode,
                 "pais": "Mexico"
@@ -41,8 +41,7 @@ class RedPack(Courrier):
             }
         }
         try:
-            result = self.client.service.cotizacionNacional(PIN=self.pin, idUsuario=self.user_id, guias=[guide_object])[
-                0]
+            result = self.client.service.cotizacionNacional(PIN=self.pin, idUsuario=self.user_id, guias=[guide])[0]
         except Exception as e:
             raise CourrierErrors("The RedPack Service answered with error:" + str(e))
         services = dict()

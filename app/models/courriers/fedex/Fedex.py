@@ -119,7 +119,7 @@ class Fedex(Courrier):
         except AttributeError:
             raise CourrierErrors("Servicio no disponible segun los datos proporcionados")
         except:
-            raise CourrierErrors("FDX No de respondió")
+            raise CourrierErrors("FDX No respondió")
 
 
         return service_prices
