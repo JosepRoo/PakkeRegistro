@@ -84,7 +84,7 @@ class Courrier(Resource):
                     result.append(response)
                     continue
                 price = courrier.find_prices(package)
-                if courrier_service['name'] != "STF":
+                if courrier_service['name'] not in ["STF", 'RPK']:
                     if courrier_service['name'] == "FDX":
                         day = courrier.find_delivery_day(package)
                     else:
