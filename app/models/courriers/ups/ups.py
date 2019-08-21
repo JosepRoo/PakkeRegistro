@@ -115,7 +115,7 @@ class UPS(Courrier):
             except Exception as e:
                 raise CourrierErrors("UPS answered with errors: " + str(e))
         amount_fields = result['RateResponse']["RatedShipment"]
-        service = {'EXPRESSS_SAVER': {"price": amount_fields['NegotiatedRateCharges']['TotalCharge']['MonetaryValue'],
+        service = {'EXPRESSS_SAVER': {"price": amount_fields['NegotiatedRateCharges']['TotalCharge']['CurrencyCode'],
                                       "options": {"transportation_charges": amount_fields["TransportationCharges"],
                                                   "service_options_charges": amount_fields["ServiceOptionsCharges"]}}}
         return service
