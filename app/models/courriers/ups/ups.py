@@ -94,6 +94,9 @@ class UPS(Courrier):
                             },
                             "Weight": str(round(package.weight))
                         }
+                    },
+                    "ShipmentRatingOptions": {
+                        "NegotiatedRatesIndicator": ""
                     }
                 }
             }
