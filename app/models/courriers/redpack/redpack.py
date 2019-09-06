@@ -35,7 +35,7 @@ class RedPack(Courrier):
                 "equivalencia": "DOM",
                 "descripcion": "Domicilio"
             },
-            "flag": 3,
+            "flag": 2,
             "tipoEnvio": {
                 "id": "2"
             }
