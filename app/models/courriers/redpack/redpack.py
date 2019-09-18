@@ -39,16 +39,20 @@ class RedPack(Courrier):
             "tipoEnvio": {
                 "id": "2"
             }
-        }
+        }   
         try:
             result = self.client.service.cotizacionNacional(PIN=self.pin, idUsuario=self.user_id, guias=[guide])[0]
         except Exception as e:
             raise CourrierErrors("The RedPack Service answered with error:" + str(e))
-        services = dict()
-        for rate in result.cotizaciones:
-            options = {det.descripcion: det.costoBase for det in rate.detallesCotizacion}
-            services[rate.tipoServicio.descripcion] = {"price": rate.tarifa,
-                                                       "options": options,
-                                                       'delivery_day': rate.tiempoEntrega.strftime("%Y-%m-%d")}
+            
+        try:
+            services = dict()
+            for rate in result.cotizaciones:
+                options = {det.descripcion: det.costoBase for det in rate.detallesCotizacion}
+                services[rate.tipoServicio.descripcion] = {"price": rate.tarifa,
+                                                        "options": options,
+                                                        'delivery_day': rate.tiempoEntrega.strftime("%Y-%m-%d")}
 
-        return services
+            return services
+        except Exception as e:
+            raise CourrierErrors("The RedPack Service answered with error:" + str(e))
