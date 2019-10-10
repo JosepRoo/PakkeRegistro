@@ -28,7 +28,7 @@ class UPS(Courrier):
                 "Request": {
                     "RequestOption": "Rate",
                     "TransactionReference": {
-                        "CustomerContext": "Test Transaction"
+                        "CustomerContext": "Rate Transaction"
                     }
                 },
                 "Shipment": {
