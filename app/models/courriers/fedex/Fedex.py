@@ -118,7 +118,7 @@ class Fedex(Courrier):
                         rate_detail.ShipmentRateDetail.TotalNetChargeWithDutiesAndTaxes.Amount
         except AttributeError:
             raise CourrierErrors("Servicio no disponible segun los datos proporcionados")
-        except Exception, e:
+        except:
             raise CourrierErrors("FDX No respondió")
 
 
